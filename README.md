@@ -4,8 +4,8 @@ A React + Vite web app that recommends a sport based on your personality, physic
 
 ## What it does
 
-- 12 questions covering speed, endurance, strength, coordination, teamwork, and more
-- Scores 10 sports (basketball, soccer, football, baseball, track, tennis, swimming, volleyball, wrestling, boxing)
+- 6 quick questions covering social preference, intensity, budget, and competition style
+- Matches against 35+ activities including team sports, solo fitness, martial arts, and outdoor pursuits
 - Shows a primary match with a match-quality badge and reason
 - Shows a runner-up pick when scores are close
 - Generates a sport-specific beginner guide: rules, drills, equipment, common mistakes, and a 4-week starter plan
@@ -86,19 +86,24 @@ quiz-app/
 ├── package.json
 └── src/
     ├── main.jsx
-    ├── App.jsx              # Screen state machine (home → quiz → results)
+    ├── App.jsx              # Screen state machine (home → quiz → results → detail)
     ├── index.css            # All styles
+    ├── tokens.js            # Design token constants
     ├── components/
     │   ├── HomeScreen.jsx
     │   ├── QuizScreen.jsx
     │   ├── ResultsScreen.jsx
-    │   ├── ProgressBar.jsx
-    │   ├── SportBadge.jsx
-    │   └── SportGuide.jsx
+    │   ├── SportDetail.jsx
+    │   ├── SpotlightSearch.jsx
+    │   ├── DiscoveryCard.jsx
+    │   ├── FloatingBackground.jsx
+    │   ├── BobRock.jsx
+    │   └── AboutModal.jsx
     ├── data/
-    │   ├── questions.js     # 12 questions with trait weights per sport
-    │   └── sports.js        # 10 sport profiles with guides
+    │   ├── questions.js     # 6 questions with tags
+    │   ├── sports.js        # 35+ sport/activity profiles with guides
+    │   └── sportMeta.js     # Gradient colors and action bridges
     └── logic/
-        ├── scoring.js       # Tallies answer weights into sport scores
-        └── recommendation.js # Picks top sport and generates match reason
+        ├── scoring.js       # Tag-based scoring and discovery categories
+        └── storage.js       # LocalStorage persistence
 ```
