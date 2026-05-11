@@ -159,7 +159,7 @@ export default function SportDetail({ sportId, tags, onBack, onRetake }) {
 
       <DetailCard title="Finding it near you" style={{ marginBottom:14 }}>
         <p style={{ fontSize:'1rem', color:T.textSec, lineHeight:1.7 }}>
-          Most cities have {sport.name.toLowerCase()} available through parks and recreation departments, YMCAs, or community centres.
+          Search for the most beginner-coded option you can find: intro, open play, trial class, learn-to, or no experience needed.
         </p>
         <a
           href={`https://www.google.com/search?q=${encodeURIComponent(sport.name + ' beginner class near me')}`}

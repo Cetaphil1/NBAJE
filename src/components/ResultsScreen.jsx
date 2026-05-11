@@ -16,11 +16,11 @@ const FILTER_CHIPS = [
 ]
 
 const DISC_CATS = [
-  { key:'bestFit',   label:'⭐ Best fit',    color:T.accent, dimColor:T.accentDim },
-  { key:'lowBudget', label:'💸 Best value',  color:T.green,  dimColor:T.greenDim  },
-  { key:'solo',      label:'🧍 Try it solo', color:T.amber,  dimColor:T.amberDim  },
-  { key:'social',    label:'👥 Meet people', color:T.accent, dimColor:T.accentDim },
-  { key:'wildcard',  label:'🎲 Wildcard',    color:T.pink,   dimColor:T.pinkDim   },
+  { key:'bestFit',   label:'Best fit',       color:T.accent, dimColor:T.accentDim },
+  { key:'lowBudget', label:'Low-cost win',   color:T.green,  dimColor:T.greenDim  },
+  { key:'solo',      label:'Solo lane',      color:T.amber,  dimColor:T.amberDim  },
+  { key:'social',    label:'People-friendly', color:T.accent, dimColor:T.accentDim },
+  { key:'wildcard',  label:'Wild card',      color:T.pink,   dimColor:T.pinkDim   },
 ]
 
 export default function ResultsPage({ initialTags, onSelect, onBack, onBobHint }) {
@@ -42,9 +42,9 @@ export default function ResultsPage({ initialTags, onSelect, onBack, onBobHint }
 
       <p style={{ fontSize:'0.8rem', fontWeight:700, letterSpacing:'0.12em', textTransform:'uppercase', color:T.accent, marginBottom:10 }}>Results</p>
       <h2 style={{ fontSize:'clamp(1.8rem, 5vw, 2.6rem)', fontWeight:800, letterSpacing:'-0.02em', color:T.textPri, marginBottom:6 }}>
-        Here are a few things<br/>worth trying.
+        Your shortlist for<br/>getting moving.
       </h2>
-      <p style={{ fontSize:'1rem', color:T.textMut, marginBottom:28 }}>Pick one and explore it. Not a final verdict — a good first experiment.</p>
+      <p style={{ fontSize:'1rem', color:T.textMut, marginBottom:28 }}>Pick the one that makes you curious enough to try once. This is a starting point, not a life sentence.</p>
 
       {/* Spotlight search */}
       <div style={{ marginBottom:28 }}>
