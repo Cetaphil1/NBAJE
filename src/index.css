@@ -14,8 +14,8 @@
   --text-pri:   oklch(95% 0.005 265);
   --text-sec:   oklch(65% 0.015 265);
   --text-mut:   oklch(42% 0.012 265);
-  --green:      oklch(72% 0.18 155);
-  --green-dim:  oklch(72% 0.18 155 / 0.12);
+  --blue:       oklch(66% 0.20 240);
+  --blue-dim:   oklch(66% 0.20 240 / 0.12);
   --amber:      oklch(78% 0.18 75);
   --amber-dim:  oklch(78% 0.18 75 / 0.12);
 }
@@ -30,18 +30,6 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Grid texture */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image:
-    linear-gradient(oklch(28% 0.025 265 / 0.25) 1px, transparent 1px),
-    linear-gradient(90deg, oklch(28% 0.025 265 / 0.25) 1px, transparent 1px);
-  background-size: 40px 40px;
-  pointer-events: none;
-  z-index: 0;
-}
 
 #root {
   position: relative;
@@ -89,6 +77,10 @@ body::before {
 @keyframes bgDrift3 {
   from { transform: translate(0,0) rotate(3deg) scale(0.98); }
   to   { transform: translate(-30px,-20px) rotate(-3deg) scale(1.02); }
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
 
 /* ── App shell ── */

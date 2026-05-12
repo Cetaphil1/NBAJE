@@ -1,24 +1,53 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useRef } from 'react'
 import QUIZ_QUESTIONS from './data/questions'
 import SPORTS from './data/sports'
 import { LS } from './logic/storage'
-import FloatingBackground from './components/FloatingBackground'
+import ShaderBackground from './components/ShaderBackground'
 import HomeScreen from './components/HomeScreen'
 import QuizScreen from './components/QuizScreen'
 import ResultsPage from './components/ResultsScreen'
 import SportDetail from './components/SportDetail'
 import BobRock from './components/BobRock'
 import AboutModal from './components/AboutModal'
+import GlobeLoader from './components/GlobeLoader'
+
+async function fetchPersonalised(answers, allTags) {
+  if (!window.claude?.complete) return null
+  const summary = QUIZ_QUESTIONS.map((q, i) => {
+    const a = answers[i]
+    if (!a) return null
+    const opt = a.choice === 'yes' ? q.yes : q.no
+    return `Q: "${q.text}" → "${opt.label}"`
+  }).filter(Boolean).join('\n')
+  const tagList = allTags.join(', ') || 'no strong preference'
+  try {
+    const text = await window.claude.complete({
+      messages: [{
+        role: 'user',
+        content: `A user just completed a sport/activity discovery quiz. Here are their answers:\n\n${summary}\n\nTheir fit tags: ${tagList}\n\nGenerate a short personalised insight. Return ONLY valid JSON, no markdown:\n{\n  "headline": "one punchy sentence (max 10 words) describing what kind of mover they are",\n  "nudge": "one short encouraging sentence to motivate them",\n  "likelyEnjoy": ["3 short phrases about what they'll likely enjoy"]\n}`
+      }]
+    })
+    const raw = text.replace(/```json|```/g, '').trim()
+    return JSON.parse(raw)
+  } catch (e) {
+    return null
+  }
+}
 
 export default function App() {
-  const [screen,     setScreen]    = useState('home')
-  const [qIndex,     setQIndex]    = useState(0)
-  const [answers,    setAnswers]   = useState([])   // [{choice, tags}]
-  const [tags,       setTags]      = useState([])
-  const [sportId,    setSportId]   = useState(null)
-  const [navDir,     setNavDir]    = useState('forward')
-  const [bobTrigger, setBobTrigger]= useState(null)
-  const [showAbout,  setShowAbout] = useState(false)
+  const [screen,       setScreen]      = useState('home')
+  const [qIndex,       setQIndex]      = useState(0)
+  const [answers,      setAnswers]     = useState([])
+  const [tags,         setTags]        = useState([])
+  const [sportId,      setSportId]     = useState(null)
+  const [navDir,       setNavDir]      = useState('forward')
+  const [bobTrigger,   setBobTrigger]  = useState(null)
+  const [showAbout,    setShowAbout]   = useState(false)
+  const [showGlobe,    setShowGlobe]   = useState(false)
+  const [personalised, setPersonalised]= useState(null)
+
+  const aiReadyRef  = useRef(false)
+  const aiResultRef = useRef(null)
 
   const savedResult = useMemo(() => LS.loadResult(), [])
 
@@ -28,6 +57,7 @@ export default function App() {
 
   function handleStart() {
     setScreen('quiz'); setQIndex(0); setAnswers([]); setNavDir('forward')
+    setPersonalised(null)
     window.scrollTo(0, 0)
   }
 
@@ -41,8 +71,15 @@ export default function App() {
       setAnswers(next)
       setTags(allTags)
       LS.saveResult({ tags: allTags })
-      setScreen('results')
+      setShowGlobe(true)
+      setScreen('loading')
       window.scrollTo(0, 0)
+      aiReadyRef.current = false
+      aiResultRef.current = null
+      fetchPersonalised(next, allTags).then(r => {
+        aiResultRef.current = r
+        aiReadyRef.current = true
+      })
     } else {
       setNavDir('forward')
       setAnswers(next)
@@ -86,9 +123,25 @@ export default function App() {
     }
   }
 
+  function handleGlobeDone() {
+    const finish = () => {
+      setPersonalised(aiResultRef.current)
+      setShowGlobe(false)
+      setScreen('results')
+      window.scrollTo(0, 0)
+    }
+    if (aiReadyRef.current) {
+      finish()
+    } else {
+      const check = setInterval(() => {
+        if (aiReadyRef.current) { clearInterval(check); finish() }
+      }, 100)
+    }
+  }
+
   return (
     <>
-      <FloatingBackground />
+      <ShaderBackground />
 
       <div className="screen-wrap" key={screen + qIndex + (sportId || '')}>
         {screen === 'home' && (
@@ -112,6 +165,7 @@ export default function App() {
         {screen === 'results' && (
           <ResultsPage
             initialTags={tags}
+            personalised={personalised}
             onSelect={handleSelect}
             onBack={handleBack}
             onBobHint={(val) => setBobTrigger({ type: 'spotlight', value: val, ts: Date.now() })}
@@ -127,6 +181,7 @@ export default function App() {
         )}
       </div>
 
+      <GlobeLoader visible={showGlobe} onDone={handleGlobeDone} />
       <BobRock screen={screen} qIndex={qIndex} bobTrigger={bobTrigger} />
       {showAbout && <AboutModal onClose={() => setShowAbout(false)} />}
       <footer className="app-footer">Presented by Sheldon</footer>

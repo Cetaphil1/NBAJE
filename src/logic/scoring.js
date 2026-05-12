@@ -25,11 +25,29 @@ export function parseSearch(query) {
 }
 
 export function scoreActivities(tags, directSport) {
-  return Object.values(SPORTS).map(sport => {
-    let score = sport.fitTags.filter(t => tags.includes(t)).length
-    if (sport.id === directSport) score += 10
-    return { sport: sport.id, score }
-  }).sort((a, b) => b.score - a.score)
+  return Object.values(SPORTS)
+    .filter(s => s.category !== 'niche')
+    .map(sport => {
+      let score = sport.fitTags.filter(t => tags.includes(t)).length
+      if (sport.id === directSport) score += 10
+      return { sport: sport.id, score }
+    })
+    .sort((a, b) => b.score - a.score)
+}
+
+export function getNicheSuggestions(tags, n = 4) {
+  const scored = Object.values(SPORTS)
+    .filter(s => s.category === 'niche')
+    .map(s => ({ sport: s, score: s.fitTags.filter(t => tags.includes(t)).length }))
+    .sort((a, b) => b.score - a.score)
+  const top = scored.slice(0, Math.max(8, n * 2))
+  const out = [], used = new Set()
+  while (out.length < n && top.length) {
+    const i = Math.floor(Math.random() * top.length)
+    const pick = top.splice(i, 1)[0]
+    if (!used.has(pick.sport.id)) { used.add(pick.sport.id); out.push(pick.sport) }
+  }
+  return out
 }
 
 export function getDiscovery(tags, directSport) {

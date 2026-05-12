@@ -85,7 +85,12 @@ export default function SpotlightSearch({ onSelect, onBobHint }) {
                   <p style={{ fontSize:'0.97rem', fontWeight:600, color:T.textPri, marginBottom:2 }}>{sport.name}</p>
                   <p style={{ fontSize:'0.8rem', color:T.textMut, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{sport.pitch}</p>
                 </div>
-                <div style={{ display:'flex', gap:4, flexShrink:0 }}>
+                <div style={{ display:'flex', gap:4, flexShrink:0, alignItems:'center' }}>
+                  {sport.category === 'niche' && (
+                    <span style={{ fontSize:'0.62rem', fontWeight:700, color:T.pink, background:T.pinkDim, border:`1px solid ${T.pink}30`, borderRadius:99, padding:'2px 8px', textTransform:'uppercase', letterSpacing:'0.05em', whiteSpace:'nowrap' }}>
+                      Niche
+                    </span>
+                  )}
                   {sport.fitTags.slice(0, 2).map(t => (
                     <span key={t} style={{ fontSize:'0.62rem', fontWeight:700, color:T.textMut, background:T.surface, borderRadius:99, padding:'2px 8px', textTransform:'uppercase', letterSpacing:'0.05em', whiteSpace:'nowrap' }}>
                       {t.replace(/_/g, ' ')}

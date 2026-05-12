@@ -5,18 +5,20 @@ const Q_HUES = [280, 220, 145, 25, 185, 330]
 
 function QuizBtn({ label, selected, accent, ghost, onClick }) {
   const [hov, setHov] = useState(false)
+  const fillSel  = ghost ? `color-mix(in oklch, ${accent} 35%, white)` : accent
+  const fillRest = ghost ? `color-mix(in oklch, ${accent} 22%, white)` : `color-mix(in oklch, ${accent} 78%, white)`
+  const fillHov  = ghost ? `color-mix(in oklch, ${accent} 30%, white)` : `color-mix(in oklch, ${accent} 88%, white)`
+  const bg = selected ? fillSel : hov ? fillHov : fillRest
   return (
     <button
       style={{
         flex: '0 0 auto', minWidth: 140, padding: '18px 28px',
         borderRadius: 14, fontSize: '1.05rem', fontWeight: 700,
         fontFamily: 'inherit', cursor: 'pointer', transition: 'all 0.15s ease',
-        background: ghost
-          ? (selected ? `${accent}20` : hov ? T.surface : 'transparent')
-          : (selected ? accent : hov ? `${accent}dd` : accent),
-        border: ghost ? `1.5px solid ${selected ? accent : hov ? T.borderHi : T.border}` : 'none',
-        color: ghost ? (selected || hov ? T.textPri : T.textSec) : '#fff',
-        boxShadow: (!ghost && (selected || hov)) ? `0 0 28px ${accent}50` : 'none',
+        background: bg,
+        border: `1.5px solid ${accent}60`,
+        color: '#0a0a0a',
+        boxShadow: (selected || hov) ? `0 0 28px ${accent}50` : 'none',
         transform: hov && !selected ? 'translateY(-2px)' : 'none',
       }}
       onClick={onClick}
