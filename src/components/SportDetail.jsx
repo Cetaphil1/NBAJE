@@ -19,33 +19,269 @@ function KeyCard({ icon, question, children, style: s = {} }) {
   )
 }
 
+const BEGINNER_PLAN_DETAILS = {
+  basketball: {
+    first:'Shoot around alone at a public court. Start with layups, close shots, and a few free throws before joining anything.',
+    practice:'Do a simple 20-minute court session: dribble both hands, take ten close shots, then ten free throws.',
+    connect:'When a casual game forms, ask if there is room for a beginner or if you can get next.',
+    checkpoint:'If you are less nervous asking for the ball, that is real progress.'
+  },
+  soccer: {
+    first:'Take a ball to a park and pass against a wall or fence. Keep the first session boring on purpose.',
+    practice:'Spend 20 minutes on touches: inside-foot passes, gentle dribbles, and stopping the ball cleanly.',
+    connect:'Look for a casual kickaround and tell them you are new before the game starts.',
+    checkpoint:'If your first touch feels calmer than week one, the sport is starting to open up.'
+  },
+  tennis: {
+    first:'Use a public court wall before booking a match. Your only goal is to make the ball come back.',
+    practice:'Rally against a wall for 20 minutes and count your longest streak, even if it is three.',
+    connect:'Ask a beginner clinic or a patient friend for a low-pressure rally, not a full match.',
+    checkpoint:'If you can rally a little longer without rushing your swing, keep going.'
+  },
+  volleyball: {
+    first:'Start with passing. A clean bump matters more than a hard spike in your first month.',
+    practice:'Do self-bumps, wall sets, and gentle serves for 20 minutes.',
+    connect:'Try an open gym and ask which court is best for new players.',
+    checkpoint:'If you are calling the ball and getting into position sooner, you are learning.'
+  },
+  baseball: {
+    first:'Use a batting cage or a wall with a tennis ball. Skip the full field fantasy for now.',
+    practice:'Take 20 to 30 relaxed swings and stop before your form falls apart.',
+    connect:'Ask about recreational softball if adult baseball feels too serious locally.',
+    checkpoint:'If you make cleaner contact more often, the session did its job.'
+  },
+  football: {
+    first:'Start with flag or touch football. Throw short spirals before thinking about plays.',
+    practice:'Do 20 minutes of easy throws, catches, and five-yard routes with a friend.',
+    connect:'Ask a local flag league whether they have pickup nights or beginner teams.',
+    checkpoint:'If catching and cutting feel less chaotic, you are ready for more game speed.'
+  },
+  track: {
+    first:'Begin with run-walk intervals. You do not need to run nonstop to count it.',
+    practice:'Alternate one minute easy running with one minute walking for 20 minutes.',
+    connect:'Try a beginner-paced running club or parkrun and stay at conversation pace.',
+    checkpoint:'If you finish feeling like you could come back, the plan is working.'
+  },
+  swimming: {
+    first:'Book lane swim at a quiet time and use plenty of rest. Breath control comes before distance.',
+    practice:'Swim 4 to 6 short lengths with breaks. Focus on relaxed exhale in the water.',
+    connect:'Ask the pool desk about adult beginner lessons or Masters lanes for new swimmers.',
+    checkpoint:'If breathing feels less panicky, that is a bigger win than extra laps.'
+  },
+  boxing: {
+    first:'Let a coach show you wraps, stance, jab, and cross. Do not make sparring the goal.',
+    practice:'Shadowbox three easy rounds and add bag work only if your form stays tidy.',
+    connect:'Ask the gym which class is fundamentals-only and beginner-safe.',
+    checkpoint:'If your stance and guard survive when you get tired, you are building the base.'
+  },
+  wrestling: {
+    first:'Find a coached club. Wrestling is not a YouTube-and-living-room sport.',
+    practice:'Focus on stance, movement, and safe falling before live wrestling.',
+    connect:'Introduce yourself to the coach and ask what new adults usually do first.',
+    checkpoint:'If you understand the room rules and feel safe drilling, that is a strong start.'
+  },
+  yoga: {
+    first:'Pick one beginner video or class and let it be easy. You are learning attention, not performing poses.',
+    practice:'Do two 15- to 20-minute sessions with breathing and basic shapes.',
+    connect:'If you want company, try a beginner or slow-flow class and choose a spot where you feel comfortable.',
+    checkpoint:'If you notice tension earlier and breathe through it better, yoga is doing its job.'
+  },
+  cycling: {
+    first:'Choose a flat route you already know. Comfort and traffic confidence come before distance.',
+    practice:'Ride a 20-minute loop at a pace where you can still look around.',
+    connect:'Ask a local shop or club about no-drop beginner rides.',
+    checkpoint:'If mounting, braking, and turning feel automatic, you can start exploring farther.'
+  },
+  climbing: {
+    first:'Rent shoes and try easy boulders. Stay low, downclimb when you can, and rest often.',
+    practice:'Attempt three to five easy routes and repeat one instead of chasing harder grades.',
+    connect:'Ask a staff member or friendly climber how they would read one route.',
+    checkpoint:'If you start noticing foot placements instead of just pulling with arms, you are learning.'
+  },
+  hiking: {
+    first:'Pick an easy, well-marked trail under 3 miles. Bring water and tell someone your plan.',
+    practice:'Walk the trail at a pace that lets you look around, not prove fitness.',
+    connect:'Join a beginner hike or invite one friend if solo trails feel intimidating.',
+    checkpoint:'If you finish wanting another trail, choose a slightly longer one next.'
+  },
+  dance: {
+    first:'Choose the style that makes you curious, not the one that sounds most impressive.',
+    practice:'Repeat one short beginner combo at home until it feels less mysterious.',
+    connect:'Take a beginner class and tell the teacher it is your first one.',
+    checkpoint:'If you recover from mistakes faster and keep moving, you are becoming a dancer.'
+  },
+  martial_arts: {
+    first:'Book a trial class and ask what beginners should wear. The etiquette matters as much as the moves.',
+    practice:'Review one stance, breakfall, or basic strike slowly between classes.',
+    connect:'Ask a coach which fundamentals class to repeat for your first month.',
+    checkpoint:'If the rituals and safety rules feel clearer, you have found your footing.'
+  },
+  skateboarding: {
+    first:'Find smooth flat ground. Learn pushing, turning, and stopping before the skate park.',
+    practice:'Do 20 minutes of balance, push, cruise, stop, then rest. Falls count as information.',
+    connect:'Visit a skate park just to watch lines and ask one gear or safety question.',
+    checkpoint:'If stopping feels reliable, you have unlocked the next layer.'
+  },
+  pickleball: {
+    first:'Go to open play and say you are new. That sentence makes the session easier for everyone.',
+    practice:'Learn the serve, dinks, and kitchen rule before worrying about spin.',
+    connect:'Rotate through a few games and thank people who explain the rules.',
+    checkpoint:'If the scoring makes sense and rallies last longer, you are in.'
+  },
+  badminton: {
+    first:'Try a drop-in night with a borrowed racket if possible. Learn the court lines slowly.',
+    practice:'Serve, clear, and rally for 20 minutes without chasing power.',
+    connect:'Ask the organizer to pair you with patient players for the first game.',
+    checkpoint:'If your feet start moving before the shuttle drops, the sport is clicking.'
+  },
+  ultimate_frisbee: {
+    first:'Start with throwing. A calm backhand and forehand matter more than sprinting hard.',
+    practice:'Throw with a friend or at a target for 20 minutes, then jog a few simple cuts.',
+    connect:'Find pickup and tell the captain you are new to ultimate.',
+    checkpoint:'If you understand stall counts and spirit of the game, you will feel less lost.'
+  },
+  rowing: {
+    first:'Try an erg before getting on the water. Learn legs, body, arms in that order.',
+    practice:'Row 10 to 20 easy minutes with technique breaks, not an all-out test.',
+    connect:'Ask a rowing club about learn-to-row dates and true beginner expectations.',
+    checkpoint:'If the stroke feels smoother and less like yanking, you are on track.'
+  },
+  golf: {
+    first:'Rent clubs at a range. Your first win is clean contact, not distance or score.',
+    practice:'Hit 25 balls slowly, resetting grip and stance before each swing.',
+    connect:'Ask the range or municipal course about beginner lessons or short-course times.',
+    checkpoint:'If a few shots leave the clubface cleanly, that is enough signal to continue.'
+  },
+  gym_training: {
+    first:'Choose a simple full-body session. Leave before you are wrecked enough to dread coming back.',
+    practice:'Do one squat, one push, one pull, and one hinge movement with easy weights.',
+    connect:'Ask staff to show you one machine or movement you are unsure about.',
+    checkpoint:'If you can repeat the same session with slightly more confidence, you are progressing.'
+  },
+  calisthenics: {
+    first:'Scale everything. Wall push-ups and assisted squats are not cheats; they are how you begin.',
+    practice:'Do a gentle circuit twice this week: squats, wall push-ups, dead bugs, and a short plank.',
+    connect:'If you want company, visit a calisthenics park and ask what beginner moves people started with.',
+    checkpoint:'If reps feel cleaner instead of just harder, you are getting stronger.'
+  },
+  table_tennis: {
+    first:'Rally before you compete. Keeping the ball on the table is the first game.',
+    practice:'Spend 15 to 20 minutes on serves and gentle rallies, switching partners if you can.',
+    connect:'Ask a community center or club which night is casual rather than league-only.',
+    checkpoint:'If you start reading spin instead of just reacting late, keep playing.'
+  },
+  lacrosse: {
+    first:'Ask about loaner gear and start with wall ball. Catching cleanly is the foundation.',
+    practice:'Do 15 minutes of wall ball on each side, then stop while your hands still feel sharp.',
+    connect:'Attend a beginner practice and let the coach place you somewhere simple.',
+    checkpoint:'If the ball stops feeling like a surprise in your stick, progress is happening.'
+  },
+  rugby: {
+    first:'Start with tag, touch, or a beginner session before full contact.',
+    practice:'Work on passing backward, support lines, and safe body position at low speed.',
+    connect:'Message a club and ask which session is best for a brand-new adult.',
+    checkpoint:'If the rules feel less upside-down and the team feels like a place you can learn, stay with it.'
+  },
+  fencing: {
+    first:'Book a beginner lesson. Let the club provide the mask, jacket, glove, and blade.',
+    practice:'Repeat footwork slowly: advance, retreat, lunge, recover.',
+    connect:'Ask your coach which weapon or class path fits new adults.',
+    checkpoint:'If distance and timing start to make sense, the chess-at-speed feeling is arriving.'
+  },
+  softball: {
+    first:'Register as a solo player or ask a league where beginners can land.',
+    practice:'Throw, catch, and take a few cage swings before your first game.',
+    connect:'Tell your captain where you are comfortable playing and that you are new.',
+    checkpoint:'If you know where to stand and what to do on a basic play, week one worked.'
+  },
+  gymnastics: {
+    first:'Book an adult beginner class. Start with rolls, shapes, and mobility, not flips.',
+    practice:'Practice hollow body, plank, and basic rolls only if a coach has shown them safely.',
+    connect:'Ask the coach what adults should repeat at home without equipment.',
+    checkpoint:'If body positions feel more controlled, the foundation is forming.'
+  },
+  skiing: {
+    first:'Take a lesson and rent gear. The first goal is stopping and turning on gentle terrain.',
+    practice:'Repeat easy runs or carpet laps until speed control feels boring.',
+    connect:'Ask the instructor what to practice before moving to a harder slope.',
+    checkpoint:'If you can stop when you choose, that is a successful first month.'
+  },
+  snowboarding: {
+    first:'Take a lesson, wear wrist guards, and expect the first day to be clumsy.',
+    practice:'Work on falling safely, skating one-footed, and linking gentle turns.',
+    connect:'Ask an instructor or rental shop which green run is best for repeats.',
+    checkpoint:'If you link a few turns without panic, the hard entry curve is starting to pay off.'
+  },
+  surfing: {
+    first:'Use a surf school. Wave choice, board choice, and safety are not beginner details.',
+    practice:'Practice pop-ups on sand, then take short attempts in whitewater with coaching.',
+    connect:'Ask the instructor which beginner break and tide window to use next time.',
+    checkpoint:'If you read the water a little better, even before standing, you are learning.'
+  },
+  archery: {
+    first:'Book a club intro and resist buying a bow early. Fit and form matter first.',
+    practice:'Repeat stance, anchor point, and release slowly for a short round.',
+    connect:'Ask the club when new archers usually move from intro sessions to regular nights.',
+    checkpoint:'If your arrows group closer together, even off-center, that is progress.'
+  },
+  cheer: {
+    first:'Ask a gym about true beginner teams or open gyms. You need the right level and schedule.',
+    practice:'Work on basic jumps, counts, and body tension without trying stunts alone.',
+    connect:'Attend a trial practice and ask how new athletes are placed on teams.',
+    checkpoint:'If timing and trust feel exciting instead of overwhelming, cheer may fit.'
+  },
+}
+
+function getBeginnerPlanDetails(sport) {
+  return BEGINNER_PLAN_DETAILS[sport.id] || {
+    first:`Try the lowest-pressure version of ${sport.name}: observe first, ask questions, and keep the first session short.`,
+    practice:`Practice one basic ${sport.name} skill for 15 to 20 minutes instead of trying to master the whole sport.`,
+    connect:'Ask a coach, organizer, or regular what they wish beginners knew before session two.',
+    checkpoint:'If the second session feels less confusing than the first, you are moving in the right direction.'
+  }
+}
+
+function getGearTask(sport) {
+  const basics = (sport.guide?.equipment || [])
+    .filter(eq => ['need', 'rent', 'club'].includes(eq.tier))
+    .slice(0, 2)
+    .map(eq => (eq.item || eq).replace(/\s*\([^)]*\)/g, ''))
+
+  if (basics.some(item => /nothing required/i.test(item))) {
+    return 'No special gear needed. Use the safest space you have and save upgrades until the habit is real.'
+  }
+  if (!basics.length) return 'Borrow, rent, or use what you already have before buying anything expensive.'
+  return `Sort the basics: ${basics.join(' and ')}. Borrow or rent first if that is an option.`
+}
+
 function buildWeeklyPlan(sport, level) {
   const sn = sport.name
+  const beginner = getBeginnerPlanDetails(sport)
   const plans = {
     beginner: [
-      { week:'Week 1', focus:'Get comfortable', tasks:[
-        { label:`Do a 15-min beginner ${sn} warm-up`,                ytQuery:`15 minute beginner ${sn} warm up` },
-        { label:`Watch a "${sn} basics" tutorial`,                    ytQuery:`${sn} basics for beginners 10 minutes` },
-        { label:`Practice 3 fundamental ${sn} drills for 20 min`,    ytQuery:`3 fundamental ${sn} drills beginner` },
-        { label:'Get or borrow any gear you need' },
+      { week:'Week 1', focus:'Make it easy to start', tasks:[
+        { label:beginner.first },
+        { label:getGearTask(sport) },
+        { label:`Watch one clear "${sn} for beginners" video, then pick a real first session`, ytQuery:`${sn} for beginners first session` },
+        { label:'Put the next session on your calendar before motivation fades' },
       ]},
-      { week:'Week 2', focus:'Build the habit', tasks:[
-        { label:`Run through a 20-min ${sn} skill drill`,            ytQuery:`${sn} skill drill 20 minutes` },
-        { label:`Watch a "${sn} mistakes to avoid" video`,           ytQuery:`top ${sn} mistakes beginners make` },
-        { label:'Find a local venue, club, or court near you' },
-        { label:'Go twice this week' },
+      { week:'Week 2', focus:'Repeat the basics', tasks:[
+        { label:beginner.practice },
+        { label:'Repeat the easiest version once more. Stop while you still want to come back.' },
+        { label:`Learn one safety rule, etiquette norm, or scoring detail for ${sn}`, ytQuery:`${sn} beginner rules etiquette safety` },
+        { label:'Write one note about what felt less awkward than last time' },
       ]},
-      { week:'Week 3', focus:'Level up', tasks:[
-        { label:`Drill one specific ${sn} technique for 15 min`,     ytQuery:`${sn} technique tutorial` },
-        { label:`Do a 30-min ${sn} workout follow-along`,            ytQuery:`30 minute ${sn} workout follow along` },
-        { label:'Introduce yourself to one other person at the venue' },
-        { label:'Track your sessions — even just a note in your phone' },
+      { week:'Week 3', focus:'Add one human', tasks:[
+        { label:beginner.connect },
+        { label:'Ask one beginner question instead of pretending you already know' },
+        { label:`Practice one specific ${sn} skill for 15 minutes`, ytQuery:`${sn} beginner technique drill` },
+        { label:'Save the venue, class, group, or route that felt easiest to repeat' },
       ]},
-      { week:'Week 4', focus:'Commit or pivot', tasks:[
-        { label:'Do 3 sessions this week' },
-        { label:`Watch a "${sn} progression roadmap" video`,         ytQuery:`${sn} progression roadmap beginner` },
-        { label:'Reflect — are you enjoying it? What needs to change?' },
-        { label:'Sign up for a class, league, or next step if yes' },
+      { week:'Week 4', focus:'Decide from evidence', tasks:[
+        { label:beginner.checkpoint },
+        { label:'Do two realistic sessions this week, not three heroic ones' },
+        { label:'Choose: keep going, adjust the format, or pivot without guilt' },
+        { label:'If it is a yes, book the next class, league, route, or practice slot now' },
       ]},
     ],
     intermediate: [
