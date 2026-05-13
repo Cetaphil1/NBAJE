@@ -9,7 +9,7 @@ import ResultsPage from './components/ResultsScreen'
 import SportDetail from './components/SportDetail'
 import BobRock from './components/BobRock'
 import AboutModal from './components/AboutModal'
-import GlobeLoader from './components/GlobeLoader'
+import GlobeLoader from './Components/GlobeLoader'
 
 async function fetchPersonalised(answers, allTags) {
   if (!window.claude?.complete) return null
