@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react'
 import SPORTS from '../data/sports'
-import { getDiscovery, getNicheSuggestions } from '../logic/scoring'
+import { getDiscovery, getNicheSuggestions, TAG_LABELS } from '../logic/scoring'
 import { SPORT_META } from '../data/sportMeta'
 import { T } from '../tokens'
 import SpotlightSearch from './SpotlightSearch'
@@ -14,6 +14,7 @@ const FILTER_CHIPS = [
   { label:'Competitive',  tag:'competitive' },
   { label:'Low pressure', tag:'low_impact' },
   { label:'No gear',      tag:'no_equipment' },
+  { label:'Quick',        tag:'limited_time' },
 ]
 
 const DISC_CATS = [
@@ -39,6 +40,66 @@ function PersonalisedInsight({ data }) {
         </div>
       )}
       {data.nudge && <p style={{ fontSize:'1rem', fontWeight:500, color:T.textSec, lineHeight:1.5 }}>{data.nudge}</p>}
+    </div>
+  )
+}
+
+function getMoverType(tags) {
+  const has = tag => tags.includes(tag)
+  if (has('social_team') && has('high_energy')) return 'group-sweat starter'
+  if (has('shy_solo') && has('low_budget')) return 'solo low-barrier explorer'
+  if (has('competitive') && has('high_energy')) return 'scoreboard-motivated mover'
+  if (has('low_impact')) return 'low-pressure momentum builder'
+  if (has('limited_time')) return 'quick-session realist'
+  return 'first-experiment person'
+}
+
+function ShareResultCard({ sport, hit, tags }) {
+  const [status, setStatus] = useState('')
+  if (!sport) return null
+
+  const meta = SPORT_META?.[sport.id] || {}
+  const reasons = (hit?.matchTags || tags).slice(0, 3).map(t => TAG_LABELS[t] || t.replace(/_/g, ' '))
+  const moverType = getMoverType(tags)
+  const shareText = `My Sport Fit Quiz result: ${sport.name}. I got ${moverType}${reasons.length ? ` (${reasons.join(', ')})` : ''}.`
+
+  async function share() {
+    try {
+      if (navigator.share) {
+        await navigator.share({ title:'Sport Fit Quiz result', text:shareText, url:window.location.href })
+        setStatus('Shared')
+      } else if (navigator.clipboard) {
+        await navigator.clipboard.writeText(`${shareText} ${window.location.href}`)
+        setStatus('Copied')
+      } else {
+        setStatus('Copy this result')
+      }
+    } catch (e) {
+      setStatus('')
+    }
+  }
+
+  return (
+    <div style={{ background:`linear-gradient(135deg, ${meta.gradient?.[0] || T.accent} 0%, ${meta.gradient?.[1] || T.surface} 100%)`, borderRadius:18, padding:'24px 24px 22px', marginBottom:24, position:'relative', overflow:'hidden', boxShadow:`0 18px 60px ${T.accentDim}` }}>
+      <div style={{ position:'absolute', right:-18, top:-22, fontSize:'8rem', opacity:0.12, filter:'blur(2px)', transform:'rotate(10deg)' }}>{sport.icon}</div>
+      <p style={{ fontSize:'0.68rem', fontWeight:800, letterSpacing:'0.12em', textTransform:'uppercase', color:'rgba(255,255,255,0.62)', marginBottom:10 }}>Shareable result</p>
+      <h3 style={{ fontSize:'clamp(1.7rem, 5vw, 2.35rem)', fontWeight:900, letterSpacing:'-0.035em', color:'#fff', lineHeight:1.05, maxWidth:420, marginBottom:10 }}>
+        You might be a<br/>{moverType}.
+      </h3>
+      <p style={{ fontSize:'1rem', color:'rgba(255,255,255,0.82)', lineHeight:1.5, maxWidth:460, marginBottom:16 }}>
+        Top experiment: <strong style={{ color:'#fff' }}>{sport.name}</strong>. Not your destiny, just the first thing worth trying.
+      </p>
+      {reasons.length > 0 && (
+        <div style={{ display:'flex', gap:8, flexWrap:'wrap', marginBottom:18 }}>
+          {reasons.map(reason => (
+            <span key={reason} style={{ fontSize:'0.78rem', fontWeight:800, color:'#fff', background:'rgba(255,255,255,0.14)', border:'1px solid rgba(255,255,255,0.18)', borderRadius:99, padding:'6px 12px' }}>{reason}</span>
+          ))}
+        </div>
+      )}
+      <button onClick={share}
+        style={{ background:'#fff', border:'none', borderRadius:12, padding:'11px 18px', fontFamily:'inherit', fontSize:'0.92rem', fontWeight:800, color:'oklch(20% 0.05 265)', cursor:'pointer', boxShadow:'0 8px 24px rgba(0,0,0,0.22)' }}>
+        {status || 'Share this result'}
+      </button>
     </div>
   )
 }
@@ -91,6 +152,7 @@ function NicheRail({ tags, onSelect }) {
 export default function ResultsPage({ initialTags, personalised, onSelect, onBack, onBobHint }) {
   const [tags, setTags] = useState(initialTags || [])
   const discovery = useMemo(() => getDiscovery(tags, null), [tags])
+  const topSport = discovery.bestFit ? SPORTS[discovery.bestFit.sport] : null
 
   function toggleTag(tag) {
     setTags(p => p.includes(tag) ? p.filter(t => t !== tag) : [...p, tag])
@@ -112,6 +174,7 @@ export default function ResultsPage({ initialTags, personalised, onSelect, onBac
       <p style={{ fontSize:'1rem', color:T.textMut, marginBottom: personalised ? 20 : 28 }}>Pick one and explore it. Not a final verdict — a good first experiment.</p>
 
       <PersonalisedInsight data={personalised} />
+      <ShareResultCard sport={topSport} hit={discovery.bestFit} tags={tags} />
 
       <div style={{ marginBottom:28 }}>
         <SpotlightSearch onSelect={onSelect} onBobHint={onBobHint} />
@@ -141,6 +204,7 @@ export default function ResultsPage({ initialTags, personalised, onSelect, onBac
               key={cat.key}
               cat={cat}
               sport={sport}
+              hit={hit}
               isTop={cat.key === 'bestFit'}
               onClick={() => onSelect(sport.id)}
             />

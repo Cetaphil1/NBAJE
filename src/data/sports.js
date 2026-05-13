@@ -2,7 +2,7 @@ const SPORTS = {
 
   basketball: {
     id:'basketball', name:'Basketball', icon:'🏀',
-    fitTags:['social_team','high_energy','competitive','low_budget'],
+    fitTags:['social_team','high_energy','competitive','low_budget','limited_time'],
     pitch:'Fast, social, and pickup courts are everywhere — no signup needed.',
     guide:{
       whyItFits:"Basketball is one of the most accessible sports anywhere. Courts are free, pickup culture is welcoming, and you can start completely solo and join a game whenever you're ready.",
@@ -22,7 +22,7 @@ const SPORTS = {
 
   soccer: {
     id:'soccer', name:'Soccer', icon:'⚽',
-    fitTags:['social_team','low_budget','no_equipment','high_energy'],
+    fitTags:['social_team','low_budget','no_equipment','high_energy','limited_time'],
     pitch:"The world's most accessible team sport — just show up and find a ball.",
     guide:{
       whyItFits:"Soccer is played everywhere, costs almost nothing to start, and has a massive pickup culture. If you want to be active with others without a big commitment, this is the easiest entry.",
@@ -42,7 +42,7 @@ const SPORTS = {
 
   tennis: {
     id:'tennis', name:'Tennis', icon:'🎾',
-    fitTags:['competitive','shy_solo','high_energy'],
+    fitTags:['competitive','shy_solo','high_energy','limited_time'],
     pitch:"Solo or with a partner — wall rallying is a full solo practice. Public courts are free.",
     guide:{
       whyItFits:"Tennis rewards coordination, quick reactions, and mental toughness. You can get a real workout completely alone with wall rallying before you ever need an opponent.",
@@ -122,7 +122,7 @@ const SPORTS = {
 
   track: {
     id:'track', name:'Running / Track', icon:'🏃',
-    fitTags:['shy_solo','low_budget','no_equipment','high_energy'],
+    fitTags:['shy_solo','low_budget','no_equipment','high_energy','limited_time'],
     pitch:"Running is the lowest-barrier sport that exists. Shoes and a path is all you need.",
     guide:{
       whyItFits:"Track and field asks for one thing: honest effort. No team, no equipment, no facility. You run, you improve, you measure it.",
@@ -202,7 +202,7 @@ const SPORTS = {
 
   yoga: {
     id:'yoga', name:'Yoga', icon:'🧘',
-    fitTags:['shy_solo','low_impact','low_budget'],
+    fitTags:['shy_solo','low_impact','low_budget','no_equipment','limited_time'],
     pitch:'Flexible, solo, calm — start in your living room with a free YouTube class.',
     guide:{
       whyItFits:"Yoga asks nothing of you except showing up. No competition, no team, no facility required. Your breath and your body are the whole game.",
@@ -222,7 +222,7 @@ const SPORTS = {
 
   cycling: {
     id:'cycling', name:'Cycling', icon:'🚴',
-    fitTags:['shy_solo','low_budget','high_energy'],
+    fitTags:['shy_solo','low_budget','high_energy','limited_time'],
     pitch:"Solo or group, your own pace, covers ground fast — and it's genuinely fun.",
     guide:{
       whyItFits:"Cycling is low-impact on joints but high-output cardiovascularly. You can go completely at your own pace and explore your surroundings.",
@@ -322,7 +322,7 @@ const SPORTS = {
 
   skateboarding: {
     id:'skateboarding', name:'Skateboarding', icon:'🛹',
-    fitTags:['shy_solo','high_energy'],
+    fitTags:['shy_solo','high_energy','limited_time'],
     pitch:'Solo, self-directed, creative, and endlessly deep once you get going.',
     guide:{
       whyItFits:"Skateboarding is one of the few sports with no coach, no team, and no schedule. You go when you want, work on what you want, and progress at your own pace.",
@@ -442,7 +442,7 @@ const SPORTS = {
 
   gym_training: {
     id:'gym_training', name:'Gym Training', icon:'🏋️',
-    fitTags:['shy_solo','high_energy'],
+    fitTags:['shy_solo','high_energy','limited_time'],
     pitch:'Structured, measurable, and every gym has what you need to start today.',
     guide:{
       whyItFits:"Weight training and gym-based fitness are among the most measurable activities you can do. You log your weights, you see progress week by week.",
@@ -462,7 +462,7 @@ const SPORTS = {
 
   calisthenics: {
     id:'calisthenics', name:'Calisthenics', icon:'💪',
-    fitTags:['shy_solo','no_equipment','low_budget','high_energy'],
+    fitTags:['shy_solo','no_equipment','low_budget','high_energy','limited_time'],
     pitch:'Your bodyweight is enough — practise at home, in a park, anywhere.',
     guide:{
       whyItFits:"Calisthenics requires nothing except your body and a surface. Push-ups, pull-ups, squats, and dips build real functional strength with no gym or gear.",
@@ -482,7 +482,7 @@ const SPORTS = {
 
   table_tennis: {
     id:'table_tennis', name:'Table Tennis', icon:'🏓',
-    fitTags:['social_team','competitive','low_budget'],
+    fitTags:['social_team','competitive','low_budget','limited_time'],
     pitch:'Fast, social, and you can practise anywhere with a table — one of the best reflexes workouts.',
     guide:{
       whyItFits:'Table tennis is deceptively deep. Speed, spin, and placement create a game that rewards both quick reflexes and tactical thinking.',

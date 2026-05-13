@@ -3,27 +3,27 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 const CLICKS_KEY = 'bob-rock-clicks-v2'
 
 const QUESTION_LINES = [
-  'social or solo. let\'s find out.',
-  'how hard do you want to push.',
-  'money matters. noted.',
-  'intensity check.',
-  'solo or squad.',
-  'competition. big question.',
+  'first-day honesty.',
+  'awkwardness check.',
+  'blockers matter.',
+  'what payoff do you want.',
+  'routine or scene.',
+  'what would make you proud.',
 ]
 
 const ANSWER_LINES = {
-  '0_yes': 'social. got it.',
-  '0_no':  'solo. noted.',
-  '1_yes': 'easy mode.',
-  '1_no':  'challenger detected.',
-  '2_yes': 'budget matters.',
-  '2_no':  'gear\'s not an issue.',
-  '3_yes': 'go hard.',
-  '3_no':  'something gentler.',
-  '4_yes': 'lone wolf.',
-  '4_no':  'team player.',
-  '5_yes': 'competitive. interesting.',
-  '5_no':  'just for fun.',
+  '0_yes': 'people help.',
+  '0_no':  'solo start. fair.',
+  '1_yes': 'low-key noted.',
+  '1_no':  'chaos accepted.',
+  '2_yes': 'keeping it realistic.',
+  '2_no':  'some setup is okay.',
+  '3_yes': 'sweat is data.',
+  '3_no':  'calm counts.',
+  '4_yes': 'repeatable wins.',
+  '4_no':  'scene matters.',
+  '5_yes': 'progress motive.',
+  '5_no':  'feeling good counts.',
 }
 
 const RETAKE_LINES = ['starting over.', 'round two.', 'bold.']

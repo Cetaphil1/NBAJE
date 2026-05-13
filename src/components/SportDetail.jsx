@@ -182,74 +182,46 @@ function ChecklistBlock({ items, sportId }) {
 }
 
 function NearbyPlaces({ sport, zip }) {
-  const [places, setPlaces] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
-
-  useEffect(() => {
-    if (!zip || !sport) return
-    setLoading(true); setError(null)
-    if (!window.claude?.complete) {
-      setLoading(false)
-      setPlaces([{
-        name: `Search for ${sport.name} near ${zip}`,
-        type: 'Google Maps',
-        address: zip,
-        description: `Click to find ${sport.name.toLowerCase()} venues, clubs, and courts near you.`,
-        distance: '—'
-      }])
-      return
-    }
-    window.claude.complete({
-      messages: [{
-        role: 'user',
-        content: `Generate 4 realistic local places for someone wanting to try "${sport.name}" near zip code "${zip}". Return ONLY a JSON array, no markdown. Each object: { "name": string, "type": string, "address": string, "description": string, "distance": string }`
-      }]
-    }).then(text => {
-      try {
-        const raw = text.replace(/```json|```/g, '').trim()
-        setPlaces(JSON.parse(raw))
-      } catch(e) { setError('Could not load nearby places.') }
-      setLoading(false)
-    }).catch(() => { setError('Could not load nearby places.'); setLoading(false) })
-  }, [zip, sport?.id])
-
-  const mapsUrl = p =>
-    `https://www.google.com/maps/search/${encodeURIComponent(p.name + ' ' + p.address)}`
-
-  if (loading) return (
-    <div style={{ padding:'20px', textAlign:'center' }}>
-      <div style={{ width:24, height:24, border:`2px solid ${T.border}`, borderTopColor:T.accent, borderRadius:'50%', animation:'spin 0.8s linear infinite', margin:'0 auto 10px' }} />
-      <p style={{ fontSize:'0.9rem', color:T.textMut }}>Finding places near {zip}…</p>
-    </div>
-  )
-  if (error) return <p style={{ fontSize:'0.9rem', color:T.textMut, padding:'8px 0' }}>{error}</p>
-  if (!places) return null
+  const searches = [
+    {
+      label: `${sport.name} near ${zip}`,
+      sub: 'Google Maps search for venues, courts, gyms, clubs, or open sessions.',
+      href: `https://www.google.com/maps/search/${encodeURIComponent(sport.name + ' near ' + zip)}`,
+      icon: '📍',
+    },
+    {
+      label: `Beginner ${sport.name} classes`,
+      sub: 'Good for coached first sessions where gear and rules are explained.',
+      href: `https://www.google.com/search?q=${encodeURIComponent('beginner ' + sport.name + ' classes near ' + zip)}`,
+      icon: '🎯',
+    },
+    {
+      label: `${sport.name} groups and meetups`,
+      sub: 'Useful if you want a casual group instead of a formal league.',
+      href: `https://www.google.com/search?q=${encodeURIComponent(sport.name + ' meetup club near ' + zip)}`,
+      icon: '👥',
+    },
+  ]
 
   return (
     <div style={{ display:'flex', flexDirection:'column', gap:10 }}>
-      {places.map((p, i) => (
-        <a key={i} href={mapsUrl(p)} target="_blank" rel="noopener noreferrer"
+      <p style={{ fontSize:'0.88rem', color:T.textMut, lineHeight:1.55 }}>
+        These are live search links, not generated venue claims. Check reviews, location, and beginner availability before going.
+      </p>
+      {searches.map((p, i) => (
+        <a key={i} href={p.href} target="_blank" rel="noopener noreferrer"
           style={{ display:'flex', gap:14, background:T.surfaceHi, borderRadius:12, padding:'14px 16px', border:`1px solid ${T.border}`, textDecoration:'none', transition:'border-color 0.15s' }}
           onMouseEnter={e => e.currentTarget.style.borderColor = T.borderHi}
           onMouseLeave={e => e.currentTarget.style.borderColor = T.border}>
-          <div style={{ width:42, height:42, borderRadius:10, background:T.surface, border:`1px solid ${T.border}`, display:'flex', alignItems:'center', justifyContent:'center', fontSize:'1.3rem', flexShrink:0 }}>📍</div>
+          <div style={{ width:42, height:42, borderRadius:10, background:T.surface, border:`1px solid ${T.border}`, display:'flex', alignItems:'center', justifyContent:'center', fontSize:'1.3rem', flexShrink:0 }}>{p.icon}</div>
           <div style={{ flex:1, minWidth:0 }}>
             <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:3 }}>
-              <p style={{ fontSize:'0.97rem', fontWeight:700, color:T.textPri }}>{p.name}</p>
-              <span style={{ fontSize:'0.72rem', fontWeight:700, color:T.textMut, background:T.surface, borderRadius:99, padding:'2px 8px', whiteSpace:'nowrap' }}>{p.type}</span>
-              <span style={{ fontSize:'0.75rem', color:T.textMut, marginLeft:'auto', flexShrink:0 }}>{p.distance}</span>
+              <p style={{ fontSize:'0.97rem', fontWeight:700, color:T.textPri }}>{p.label} <span style={{ color:T.textMut, fontWeight:500 }}>↗</span></p>
             </div>
-            <p style={{ fontSize:'0.8rem', color:T.textMut, marginBottom:4 }}>{p.address}</p>
-            <p style={{ fontSize:'0.88rem', color:T.textSec, lineHeight:1.5 }}>{p.description}</p>
+            <p style={{ fontSize:'0.88rem', color:T.textSec, lineHeight:1.5 }}>{p.sub}</p>
           </div>
         </a>
       ))}
-      <a href={`https://www.google.com/maps/search/${encodeURIComponent(sport.name + ' near ' + zip)}`}
-        target="_blank" rel="noopener noreferrer"
-        style={{ fontSize:'0.88rem', color:T.accent, fontWeight:600, textDecoration:'none', textAlign:'center', padding:'8px 0' }}>
-        View all on Google Maps →
-      </a>
     </div>
   )
 }
@@ -419,7 +391,7 @@ export default function SportDetail({ sportId, tags, onBack, onRetake }) {
         <div style={{ display:'flex', flexDirection:'column', gap:14, animation:'slideUp 0.25s ease' }}>
           <KeyCard icon="📍" question="What's your zip code?">
             <p style={{ fontSize:'0.9rem', color:T.textMut, lineHeight:1.55 }}>
-              We'll find {sport.name.toLowerCase()} spots near you — clubs, courts, gyms, and open venues.
+              We'll give you honest search links for {sport.name.toLowerCase()} spots near you — no made-up venues.
             </p>
             <div style={{ display:'flex', gap:10 }}>
               <input
@@ -467,7 +439,7 @@ export default function SportDetail({ sportId, tags, onBack, onRetake }) {
             </KeyCard>
           ) : (
             <KeyCard icon="📍" question="Find spots near you">
-              <p style={{ fontSize:'0.9rem', color:T.textMut }}>Enter your zip to find nearby {sport.name.toLowerCase()} venues, clubs, and courts.</p>
+              <p style={{ fontSize:'0.9rem', color:T.textMut }}>Enter your zip to search for nearby {sport.name.toLowerCase()} venues, clubs, and courts.</p>
               <div style={{ display:'flex', gap:10 }}>
                 <input
                   value={zipInput}

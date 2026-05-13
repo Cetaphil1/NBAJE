@@ -1,5 +1,16 @@
 import SPORTS from '../data/sports'
 
+export const TAG_LABELS = {
+  social_team: 'people around',
+  shy_solo: 'solo-friendly',
+  low_budget: 'cheap to start',
+  no_equipment: 'little gear',
+  high_energy: 'high-energy',
+  low_impact: 'low-pressure',
+  competitive: 'room to compete',
+  limited_time: 'quick sessions',
+}
+
 const KEYWORD_MAP = [
   [['cheap','free','budget','afford','broke','money','cost'],        'low_budget'],
   [['alone','solo','myself','introvert','shy','quiet','private'],    'shy_solo'],
@@ -25,14 +36,16 @@ export function parseSearch(query) {
 }
 
 export function scoreActivities(tags, directSport) {
+  const activeTags = [...new Set(tags)]
   return Object.values(SPORTS)
     .filter(s => s.category !== 'niche')
     .map(sport => {
-      let score = sport.fitTags.filter(t => tags.includes(t)).length
+      const matchTags = activeTags.filter(t => sport.fitTags.includes(t))
+      let score = matchTags.length
       if (sport.id === directSport) score += 10
-      return { sport: sport.id, score }
+      return { sport: sport.id, score, matchTags, directMatch: sport.id === directSport }
     })
-    .sort((a, b) => b.score - a.score)
+    .sort((a, b) => b.score - a.score || SPORTS[a.sport].name.localeCompare(SPORTS[b.sport].name))
 }
 
 export function getNicheSuggestions(tags, n = 4) {

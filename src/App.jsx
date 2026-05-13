@@ -1,36 +1,48 @@
-import { useState, useMemo, useRef } from 'react'
+import { useState, useMemo } from 'react'
 import QUIZ_QUESTIONS from './data/questions'
-import SPORTS from './data/sports'
 import { LS } from './logic/storage'
-import ShaderBackground from './components/ShaderBackground'
+import ShaderBackground from './Components/ShaderBackground'
 import HomeScreen from './components/HomeScreen'
 import QuizScreen from './components/QuizScreen'
 import ResultsPage from './components/ResultsScreen'
 import SportDetail from './components/SportDetail'
 import BobRock from './components/BobRock'
 import AboutModal from './components/AboutModal'
-import GlobeLoader from './components/GlobeLoader'
 
-async function fetchPersonalised(answers, allTags) {
-  if (!window.claude?.complete) return null
-  const summary = QUIZ_QUESTIONS.map((q, i) => {
-    const a = answers[i]
-    if (!a) return null
-    const opt = a.choice === 'yes' ? q.yes : q.no
-    return `Q: "${q.text}" → "${opt.label}"`
-  }).filter(Boolean).join('\n')
-  const tagList = allTags.join(', ') || 'no strong preference'
-  try {
-    const text = await window.claude.complete({
-      messages: [{
-        role: 'user',
-        content: `A user just completed a sport/activity discovery quiz. Here are their answers:\n\n${summary}\n\nTheir fit tags: ${tagList}\n\nGenerate a short personalised insight. Return ONLY valid JSON, no markdown:\n{\n  "headline": "one punchy sentence (max 10 words) describing what kind of mover they are",\n  "nudge": "one short encouraging sentence to motivate them",\n  "likelyEnjoy": ["3 short phrases about what they'll likely enjoy"]\n}`
-      }]
-    })
-    const raw = text.replace(/```json|```/g, '').trim()
-    return JSON.parse(raw)
-  } catch (e) {
-    return null
+function buildPersonalised(tags) {
+  const has = tag => tags.includes(tag)
+  if (has('social_team') && has('high_energy')) {
+    return {
+      headline: 'You need a reason to sweat with people.',
+      nudge: 'Start with a low-commitment session where leaving early would still count.',
+      likelyEnjoy: ['team energy', 'visible progress', 'a bit of chaos'],
+    }
+  }
+  if (has('shy_solo') && has('low_budget')) {
+    return {
+      headline: 'You want something private and easy to start.',
+      nudge: 'Pick the first step that requires the least explaining to anyone else.',
+      likelyEnjoy: ['solo momentum', 'cheap setup', 'no audience'],
+    }
+  }
+  if (has('low_impact')) {
+    return {
+      headline: 'You want movement without making it a whole thing.',
+      nudge: 'Choose the option that feels calm enough to repeat twice.',
+      likelyEnjoy: ['low pressure', 'steady rhythm', 'less judgment'],
+    }
+  }
+  if (has('competitive')) {
+    return {
+      headline: 'You probably need a scoreboard eventually.',
+      nudge: 'Begin casually, but choose something with a clear next level.',
+      likelyEnjoy: ['skill gaps', 'measurable wins', 'structured challenge'],
+    }
+  }
+  return {
+    headline: 'You are looking for a first experiment.',
+    nudge: 'Do one small version before deciding what kind of person you are.',
+    likelyEnjoy: ['low commitment', 'real next step', 'room to pivot'],
   }
 }
 
@@ -43,11 +55,7 @@ export default function App() {
   const [navDir,       setNavDir]      = useState('forward')
   const [bobTrigger,   setBobTrigger]  = useState(null)
   const [showAbout,    setShowAbout]   = useState(false)
-  const [showGlobe,    setShowGlobe]   = useState(false)
   const [personalised, setPersonalised]= useState(null)
-
-  const aiReadyRef  = useRef(false)
-  const aiResultRef = useRef(null)
 
   const savedResult = useMemo(() => LS.loadResult(), [])
 
@@ -71,15 +79,9 @@ export default function App() {
       setAnswers(next)
       setTags(allTags)
       LS.saveResult({ tags: allTags })
-      setShowGlobe(true)
-      setScreen('loading')
+      setPersonalised(buildPersonalised(allTags))
+      setScreen('results')
       window.scrollTo(0, 0)
-      aiReadyRef.current = false
-      aiResultRef.current = null
-      fetchPersonalised(next, allTags).then(r => {
-        aiResultRef.current = r
-        aiReadyRef.current = true
-      })
     } else {
       setNavDir('forward')
       setAnswers(next)
@@ -120,22 +122,6 @@ export default function App() {
       setTags(savedResult.tags || [])
       setScreen('detail')
       window.scrollTo(0, 0)
-    }
-  }
-
-  function handleGlobeDone() {
-    const finish = () => {
-      setPersonalised(aiResultRef.current)
-      setShowGlobe(false)
-      setScreen('results')
-      window.scrollTo(0, 0)
-    }
-    if (aiReadyRef.current) {
-      finish()
-    } else {
-      const check = setInterval(() => {
-        if (aiReadyRef.current) { clearInterval(check); finish() }
-      }, 100)
     }
   }
 
@@ -181,10 +167,9 @@ export default function App() {
         )}
       </div>
 
-      <GlobeLoader visible={showGlobe} onDone={handleGlobeDone} />
       <BobRock screen={screen} qIndex={qIndex} bobTrigger={bobTrigger} />
       {showAbout && <AboutModal onClose={() => setShowAbout(false)} />}
-      <footer className="app-footer">Presented by Sheldon</footer>
+      <footer className="app-footer">Sport Fit Quiz</footer>
     </>
   )
 }

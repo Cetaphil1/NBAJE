@@ -1,8 +1,31 @@
 import { useState } from 'react'
 import { SPORT_META } from '../data/sportMeta'
+import { TAG_LABELS } from '../logic/scoring'
 import { T } from '../tokens'
 
-export default function DiscoveryCard({ cat, sport, isTop, onClick }) {
+function MatchReason({ hit, color }) {
+  const labels = (hit?.matchTags || []).map(t => TAG_LABELS[t] || t.replace(/_/g, ' '))
+  if (!labels.length) {
+    return (
+      <div style={{ display:'flex', alignItems:'flex-start', gap:8, background:T.surfaceHi, borderRadius:10, padding:'10px 14px', border:`1px solid ${T.border}` }}>
+        <span style={{ color, fontWeight:700, flexShrink:0, marginTop:1 }}>?</span>
+        <p style={{ fontSize:'0.86rem', color:T.textSec, lineHeight:1.5 }}>
+          This is a broader suggestion, not a strong quiz match. Open it if the vibe sounds interesting.
+        </p>
+      </div>
+    )
+  }
+  return (
+    <div style={{ display:'flex', alignItems:'flex-start', gap:8, background:T.surfaceHi, borderRadius:10, padding:'10px 14px', border:`1px solid ${T.border}` }}>
+      <span style={{ color, fontWeight:700, flexShrink:0, marginTop:1 }}>✓</span>
+      <p style={{ fontSize:'0.86rem', color:T.textSec, lineHeight:1.5 }}>
+        Matched because you leaned toward <strong style={{ color:T.textPri }}>{labels.slice(0, 3).join(', ')}</strong>.
+      </p>
+    </div>
+  )
+}
+
+export default function DiscoveryCard({ cat, sport, hit, isTop, onClick }) {
   const [hov, setHov] = useState(false)
   const meta = SPORT_META?.[sport.id] || {}
   const [g1, g2] = meta.gradient || ['oklch(30% 0.12 272)', 'oklch(18% 0.06 272)']
@@ -30,9 +53,7 @@ export default function DiscoveryCard({ cat, sport, isTop, onClick }) {
       {/* Body */}
       <div style={{ padding:'16px 20px 20px', display:'flex', flexDirection:'column', gap:12 }}>
         <p style={{ fontSize:'0.95rem', color:T.textSec, lineHeight:1.6 }}>{sport.pitch}</p>
-        {meta.socialProof && (
-          <p style={{ fontSize:'0.8rem', color:T.textMut, fontStyle:'italic', lineHeight:1.5 }}>"{meta.socialProof}"</p>
-        )}
+        <MatchReason hit={hit} color={cat.color} />
         {meta.actionBridge && (
           <div style={{ display:'flex', alignItems:'flex-start', gap:8, background:T.surfaceHi, borderRadius:10, padding:'10px 14px', border:`1px solid ${T.border}` }}>
             <span style={{ color:cat.color, fontWeight:700, flexShrink:0, marginTop:1 }}>→</span>
