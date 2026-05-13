@@ -23,29 +23,29 @@ function buildWeeklyPlan(sport, level) {
   const sn = sport.name
   const plans = {
     beginner: [
-      { week:'Week 1', focus:'Get comfortable', tasks:[
-        { label:`Do a 15-min beginner ${sn} warm-up`,                ytQuery:`15 minute beginner ${sn} warm up` },
-        { label:`Watch a "${sn} basics" tutorial`,                    ytQuery:`${sn} basics for beginners 10 minutes` },
-        { label:`Practice 3 fundamental ${sn} drills for 20 min`,    ytQuery:`3 fundamental ${sn} drills beginner` },
-        { label:'Get or borrow any gear you need' },
+      { week:'Week 1', focus:'Find your footing', tasks:[
+        { label:`Watch one short "${sn} for total beginners" overview`, ytQuery:`${sn} for total beginners what to expect` },
+        { label:`Try 10-15 minutes of gentle ${sn} basics`,             ytQuery:`10 minute beginner ${sn} basics` },
+        { label:`Practice 1-2 simple ${sn} skills, then stop while it still feels fun`, ytQuery:`easy ${sn} skills for beginners` },
+        { label:'Write down what you need to borrow, rent, or buy before spending money' },
       ]},
-      { week:'Week 2', focus:'Build the habit', tasks:[
-        { label:`Run through a 20-min ${sn} skill drill`,            ytQuery:`${sn} skill drill 20 minutes` },
-        { label:`Watch a "${sn} mistakes to avoid" video`,           ytQuery:`top ${sn} mistakes beginners make` },
-        { label:'Find a local venue, club, or court near you' },
-        { label:'Go twice this week' },
+      { week:'Week 2', focus:'Make it real', tasks:[
+        { label:`Repeat one beginner ${sn} drill or movement for 15-20 minutes`, ytQuery:`beginner ${sn} drill 15 minutes` },
+        { label:`Watch a "${sn} beginner mistakes" video so the awkward parts feel normal`, ytQuery:`top ${sn} mistakes beginners make` },
+        { label:'Find one local venue, club, class, court, or route that welcomes beginners' },
+        { label:'Do one real session this week; a second one is a bonus' },
       ]},
-      { week:'Week 3', focus:'Level up', tasks:[
-        { label:`Drill one specific ${sn} technique for 15 min`,     ytQuery:`${sn} technique tutorial` },
-        { label:`Do a 30-min ${sn} workout follow-along`,            ytQuery:`30 minute ${sn} workout follow along` },
-        { label:'Introduce yourself to one other person at the venue' },
-        { label:'Track your sessions — even just a note in your phone' },
+      { week:'Week 3', focus:'Build confidence', tasks:[
+        { label:`Pick one ${sn} technique and give it 15 focused minutes`, ytQuery:`easy ${sn} technique tutorial beginner` },
+        { label:`Try a simple follow-along session if it fits your sport`, ytQuery:`beginner ${sn} follow along` },
+        { label:'Ask one coach, staff member, or regular a beginner question' },
+        { label:'Leave a quick note in your phone: what felt good, weird, or worth repeating' },
       ]},
-      { week:'Week 4', focus:'Commit or pivot', tasks:[
-        { label:'Do 3 sessions this week' },
-        { label:`Watch a "${sn} progression roadmap" video`,         ytQuery:`${sn} progression roadmap beginner` },
-        { label:'Reflect — are you enjoying it? What needs to change?' },
-        { label:'Sign up for a class, league, or next step if yes' },
+      { week:'Week 4', focus:'Choose the next step', tasks:[
+        { label:'Aim for two low-pressure sessions if your body feels good' },
+        { label:`Watch a beginner ${sn} progression video for ideas, not pressure`, ytQuery:`${sn} beginner progression plan` },
+        { label:'Decide what you want more of: coaching, people, solo practice, or a different pace' },
+        { label:'If it clicked, put one repeat session, class, or open play on your calendar' },
       ]},
     ],
     intermediate: [
@@ -255,9 +255,9 @@ function NearbyPlaces({ sport, zip }) {
 }
 
 const LEVEL_OPTIONS = [
-  { id:'beginner',     label:'Complete beginner',     desc:"I've never done this or barely tried it", icon:'🌱' },
-  { id:'intermediate', label:'Some experience',        desc:"I've tried it a few times but not consistently", icon:'🏃' },
-  { id:'advanced',     label:'Been at it a while',     desc:"I train regularly and want to level up", icon:'🔥' },
+  { id:'beginner',     label:'Brand new',        desc:"I've never tried this, or I only know the basics", icon:'🌱' },
+  { id:'intermediate', label:'Some reps in',     desc:"I've done it a few times and want more structure", icon:'🏃' },
+  { id:'advanced',     label:'Already training', desc:"I show up regularly and want a sharper next step", icon:'🔥' },
 ]
 
 export default function SportDetail({ sportId, tags, onBack, onRetake }) {
@@ -321,15 +321,15 @@ export default function SportDetail({ sportId, tags, onBack, onRetake }) {
             <span key={t} style={{ fontSize:'0.72rem', fontWeight:700, color:T.textSec, background:T.surfaceHi, border:`1px solid ${T.border}`, borderRadius:99, padding:'4px 10px', textTransform:'uppercase', letterSpacing:'0.06em' }}>{t.replace(/_/g,' ')}</span>
           ))}
         </div>
-        <KeyCard icon="🧭" question="No deep guide for this one — yet.">
+        <KeyCard icon="🧭" question="No full guide for this one yet.">
           <p style={{ fontSize:'0.95rem', color:T.textSec, lineHeight:1.6 }}>
-            We don't have a full plan for niche activities. Here are three honest first steps to figure out if it's for you.
+            Some niche activities need a real coach, club, or local scene. Start with these three checks before you buy gear or commit.
           </p>
           <div style={{ display:'flex', flexDirection:'column', gap:10, marginTop:8 }}>
             {[
-              { label:`Watch "${sport.name} for beginners"`, sub:'YouTube — 10 min of intro videos tells you a lot.', href:ytSearch, icon:'▶' },
-              { label:`Find a local ${sport.name.toLowerCase()} group`, sub:'Meetup — clubs often welcome curious first-timers.', href:meetupSearch, icon:'👥' },
-              { label:`Search for a beginner club near you`, sub:'Google — quickest way to find lessons or open sessions.', href:googleSearch, icon:'🔎' },
+              { label:`Watch "${sport.name} for beginners"`, sub:'YouTube — a few honest intro videos will show the vibe fast.', href:ytSearch, icon:'▶' },
+              { label:`Find a local ${sport.name.toLowerCase()} group`, sub:'Meetup — many niche scenes are friendlier than they look online.', href:meetupSearch, icon:'👥' },
+              { label:`Search for a beginner club near you`, sub:'Google — lessons, rental options, and open sessions usually show up first.', href:googleSearch, icon:'🔎' },
             ].map((step, i) => (
               <a key={i} href={step.href} target="_blank" rel="noopener noreferrer"
                 style={{ display:'flex', gap:14, background:T.surfaceHi, borderRadius:12, padding:'14px 16px', border:`1px solid ${T.border}`, textDecoration:'none', transition:'border-color 0.15s' }}
@@ -378,13 +378,13 @@ export default function SportDetail({ sportId, tags, onBack, onRetake }) {
           )}
           <div style={{ textAlign:'center', padding:'32px 0 8px' }}>
             <p style={{ fontSize:'1.1rem', color:T.textSec, marginBottom:24, lineHeight:1.6 }}>
-              Ready to make this real? Answer a couple quick questions and we'll build a personalised plan for you.
+              Want to try it without overthinking it? Answer a couple quick questions and we'll build a first-step plan that fits your starting point.
             </p>
             <button
               onClick={() => { setFlow('level'); save({ flow:'level' }) }}
               className="btn btn-primary"
               style={{ padding:'18px 52px', fontSize:'1.08rem' }}>
-              Get Started →
+              Build my plan →
             </button>
           </div>
         </div>
@@ -419,7 +419,7 @@ export default function SportDetail({ sportId, tags, onBack, onRetake }) {
         <div style={{ display:'flex', flexDirection:'column', gap:14, animation:'slideUp 0.25s ease' }}>
           <KeyCard icon="📍" question="What's your zip code?">
             <p style={{ fontSize:'0.9rem', color:T.textMut, lineHeight:1.55 }}>
-              We'll find {sport.name.toLowerCase()} spots near you — clubs, courts, gyms, and open venues.
+              We'll look for nearby places where a beginner can actually start: clubs, courts, gyms, classes, or open sessions.
             </p>
             <div style={{ display:'flex', gap:10 }}>
               <input
@@ -455,7 +455,7 @@ export default function SportDetail({ sportId, tags, onBack, onRetake }) {
             </div>
           )}
 
-          <KeyCard icon="📅" question="Your 4-week starter plan">
+          <KeyCard icon="📅" question="Your low-pressure 4-week starter plan">
             <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
               {weeklyPlan.map((wk, i) => <WeekBlock key={i} week={wk} sportId={sportId} />)}
             </div>
@@ -467,7 +467,7 @@ export default function SportDetail({ sportId, tags, onBack, onRetake }) {
             </KeyCard>
           ) : (
             <KeyCard icon="📍" question="Find spots near you">
-              <p style={{ fontSize:'0.9rem', color:T.textMut }}>Enter your zip to find nearby {sport.name.toLowerCase()} venues, clubs, and courts.</p>
+              <p style={{ fontSize:'0.9rem', color:T.textMut }}>Enter your zip to look for beginner-friendly places nearby.</p>
               <div style={{ display:'flex', gap:10 }}>
                 <input
                   value={zipInput}
@@ -486,7 +486,7 @@ export default function SportDetail({ sportId, tags, onBack, onRetake }) {
           )}
 
           {guide?.checklist && (
-            <KeyCard icon="✅" question="First step checklist">
+            <KeyCard icon="✅" question="First few moves">
               <ChecklistBlock items={guide.checklist} sportId={sportId} />
             </KeyCard>
           )}

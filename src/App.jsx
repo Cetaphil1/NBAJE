@@ -24,7 +24,7 @@ async function fetchPersonalised(answers, allTags) {
     const text = await window.claude.complete({
       messages: [{
         role: 'user',
-        content: `A user just completed a sport/activity discovery quiz. Here are their answers:\n\n${summary}\n\nTheir fit tags: ${tagList}\n\nGenerate a short personalised insight. Return ONLY valid JSON, no markdown:\n{\n  "headline": "one punchy sentence (max 10 words) describing what kind of mover they are",\n  "nudge": "one short encouraging sentence to motivate them",\n  "likelyEnjoy": ["3 short phrases about what they'll likely enjoy"]\n}`
+        content: `A user just completed a sport/activity discovery quiz. Here are their answers:\n\n${summary}\n\nTheir fit tags: ${tagList}\n\nGenerate a short personalized insight in a human, modern, encouraging voice. Avoid generic fitness clichés, overpromising, or sounding like a horoscope. Return ONLY valid JSON, no markdown:\n{\n  "headline": "one punchy sentence (max 10 words) describing what kind of mover they are",\n  "nudge": "one believable, specific sentence that makes trying something feel low-pressure",\n  "likelyEnjoy": ["3 short concrete phrases about what they'll likely enjoy"]\n}`
       }]
     })
     const raw = text.replace(/```json|```/g, '').trim()

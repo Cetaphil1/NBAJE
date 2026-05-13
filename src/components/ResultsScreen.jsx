@@ -17,11 +17,11 @@ const FILTER_CHIPS = [
 ]
 
 const DISC_CATS = [
-  { key:'bestFit',   label:'⭐ Best fit',    color:T.accent, dimColor:T.accentDim },
-  { key:'lowBudget', label:'💸 Best value',  color:T.blue,   dimColor:T.blueDim   },
-  { key:'solo',      label:'🧍 Try it solo', color:T.amber,  dimColor:T.amberDim  },
-  { key:'social',    label:'👥 Meet people', color:T.accent, dimColor:T.accentDim },
-  { key:'wildcard',  label:'🎲 Wildcard',    color:T.pink,   dimColor:T.pinkDim   },
+  { key:'bestFit',   label:'⭐ Best fit',          color:T.accent, dimColor:T.accentDim },
+  { key:'lowBudget', label:'💸 Easy on budget',    color:T.blue,   dimColor:T.blueDim   },
+  { key:'solo',      label:'🧍 Good solo start',   color:T.amber,  dimColor:T.amberDim  },
+  { key:'social',    label:'👥 Built-in people',   color:T.accent, dimColor:T.accentDim },
+  { key:'wildcard',  label:'🎲 Left-field pick',   color:T.pink,   dimColor:T.pinkDim   },
 ]
 
 function PersonalisedInsight({ data }) {
@@ -67,7 +67,7 @@ function NicheRail({ tags, onSelect }) {
       <div style={{ display:'flex', alignItems:'baseline', justifyContent:'space-between', marginBottom:6, gap:12, flexWrap:'wrap' }}>
         <div>
           <p style={{ fontSize:'0.72rem', fontWeight:700, letterSpacing:'0.12em', textTransform:'uppercase', color:T.pink, marginBottom:6 }}>Niche corner</p>
-          <h3 style={{ fontSize:'1.4rem', fontWeight:800, letterSpacing:'-0.02em', color:T.textPri }}>Or try something stranger.</h3>
+          <h3 style={{ fontSize:'1.4rem', fontWeight:800, letterSpacing:'-0.02em', color:T.textPri }}>Or take the scenic route.</h3>
         </div>
         <button onClick={() => setSeed(s => s + 1)}
           style={{ background:T.surface, border:`1px solid ${T.border}`, borderRadius:99, padding:'6px 14px', fontSize:'0.78rem', fontWeight:600, color:T.textSec, cursor:'pointer', fontFamily:'inherit', transition:'all 0.14s' }}
@@ -77,7 +77,7 @@ function NicheRail({ tags, onSelect }) {
         </button>
       </div>
       <p style={{ fontSize:'0.92rem', color:T.textMut, marginBottom:18, lineHeight:1.55 }}>
-        Sports we don't recommend by default — but plenty of people love. Worth a look.
+        Deep cuts, oddballs, and cult favorites. Not always the safest first match, but sometimes exactly your thing.
       </p>
       <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(200px, 1fr))', gap:10 }}>
         {picks.map(sport => (
@@ -107,9 +107,9 @@ export default function ResultsPage({ initialTags, personalised, onSelect, onBac
 
       <p style={{ fontSize:'0.8rem', fontWeight:700, letterSpacing:'0.12em', textTransform:'uppercase', color:T.accent, marginBottom:10 }}>Results</p>
       <h2 style={{ fontSize:'clamp(1.8rem, 5vw, 2.6rem)', fontWeight:800, letterSpacing:'-0.02em', color:T.textPri, marginBottom:6 }}>
-        Here are a few things<br/>worth trying.
+        Here are a few sports<br/>worth trying.
       </h2>
-      <p style={{ fontSize:'1rem', color:T.textMut, marginBottom: personalised ? 20 : 28 }}>Pick one and explore it. Not a final verdict — a good first experiment.</p>
+      <p style={{ fontSize:'1rem', color:T.textMut, marginBottom: personalised ? 20 : 28 }}>Pick one and explore it. This is a starting point, not a personality test verdict.</p>
 
       <PersonalisedInsight data={personalised} />
 
