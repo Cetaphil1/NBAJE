@@ -31,7 +31,10 @@ export default function DiscoveryCard({ cat, sport, isTop, onClick }) {
       <div style={{ padding:'16px 20px 20px', display:'flex', flexDirection:'column', gap:12 }}>
         <p style={{ fontSize:'0.95rem', color:T.textSec, lineHeight:1.6 }}>{sport.pitch}</p>
         {meta.socialProof && (
-          <p style={{ fontSize:'0.8rem', color:T.textMut, fontStyle:'italic', lineHeight:1.5 }}>"{meta.socialProof}"</p>
+          <div style={{ background:T.surfaceHi, borderRadius:10, padding:'10px 12px', border:`1px solid ${T.border}` }}>
+            <p style={{ fontSize:'0.68rem', fontWeight:800, textTransform:'uppercase', letterSpacing:'0.08em', color:T.textMut, marginBottom:4 }}>Beginner note</p>
+            <p style={{ fontSize:'0.82rem', color:T.textSec, lineHeight:1.5 }}>{meta.socialProof}</p>
+          </div>
         )}
         {meta.actionBridge && (
           <div style={{ display:'flex', alignItems:'flex-start', gap:8, background:T.surfaceHi, borderRadius:10, padding:'10px 14px', border:`1px solid ${T.border}` }}>
