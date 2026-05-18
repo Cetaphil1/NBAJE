@@ -21,33 +21,103 @@ function KeyCard({ icon, question, children, style: s = {} }) {
 
 function buildWeeklyPlan(sport, level) {
   const sn = sport.name
-  const plans = {
-    beginner: [
-      { week:'Week 1', focus:'Get comfortable', tasks:[
-        { label:`Do a 15-min beginner ${sn} warm-up`,                ytQuery:`15 minute beginner ${sn} warm up` },
-        { label:`Watch a "${sn} basics" tutorial`,                    ytQuery:`${sn} basics for beginners 10 minutes` },
-        { label:`Practice 3 fundamental ${sn} drills for 20 min`,    ytQuery:`3 fundamental ${sn} drills beginner` },
-        { label:'Get or borrow any gear you need' },
+  const firstStep = SPORT_META?.[sport.id]?.actionBridge || sport.guide?.checklist?.[0] || `Find one beginner-friendly way to try ${sn}`
+  const coachedFirstSports = new Set([
+    'boxing', 'wrestling', 'martial_arts', 'rowing', 'fencing', 'gymnastics',
+    'skiing', 'snowboarding', 'surfing', 'archery', 'cheer', 'climbing',
+  ])
+  const teamFirstSports = new Set([
+    'basketball', 'soccer', 'volleyball', 'baseball', 'football', 'pickleball',
+    'badminton', 'ultimate_frisbee', 'lacrosse', 'rugby', 'softball',
+    'table_tennis',
+  ])
+  const beginnerPlans = {
+    coached: [
+      { week:'Week 1', focus:'Find the right doorway', tasks:[
+        { label:`Ask one local ${sn} place which class or session is best for a true beginner` },
+        { label:`Watch a "${sn} first class" or "what to expect" video`, ytQuery:`${sn} first class what to expect beginner` },
+        { label:'Check the must-have gear, but wait before buying specialised kit' },
+        { label:`Try this first: ${firstStep}` },
       ]},
-      { week:'Week 2', focus:'Build the habit', tasks:[
-        { label:`Run through a 20-min ${sn} skill drill`,            ytQuery:`${sn} skill drill 20 minutes` },
-        { label:`Watch a "${sn} mistakes to avoid" video`,           ytQuery:`top ${sn} mistakes beginners make` },
-        { label:'Find a local venue, club, or court near you' },
-        { label:'Go twice this week' },
+      { week:'Week 2', focus:'Show up once', tasks:[
+        { label:'Attend one intro class, lesson, or open practice' },
+        { label:'Tell the coach or organiser you are new before it starts' },
+        { label:`Learn one safety habit or basic rule for ${sn}`, ytQuery:`${sn} safety basics beginner` },
+        { label:'Afterward, write down what felt fun, awkward, or confusing' },
       ]},
-      { week:'Week 3', focus:'Level up', tasks:[
-        { label:`Drill one specific ${sn} technique for 15 min`,     ytQuery:`${sn} technique tutorial` },
-        { label:`Do a 30-min ${sn} workout follow-along`,            ytQuery:`30 minute ${sn} workout follow along` },
-        { label:'Introduce yourself to one other person at the venue' },
-        { label:'Track your sessions — even just a note in your phone' },
+      { week:'Week 3', focus:'Repeat the basics', tasks:[
+        { label:'Go back for a second coached session' },
+        { label:'Ask for one small cue to practise before next time' },
+        { label:`Spend 10-15 minutes reviewing the basic ${sn} movement or terms`, ytQuery:`${sn} beginner basic movement terms` },
+        { label:'Introduce yourself to one person there so the next visit feels easier' },
       ]},
-      { week:'Week 4', focus:'Commit or pivot', tasks:[
-        { label:'Do 3 sessions this week' },
-        { label:`Watch a "${sn} progression roadmap" video`,         ytQuery:`${sn} progression roadmap beginner` },
-        { label:'Reflect — are you enjoying it? What needs to change?' },
-        { label:'Sign up for a class, league, or next step if yes' },
+      { week:'Week 4', focus:'Choose the next step', tasks:[
+        { label:'Attend one more session or book your next lesson' },
+        { label:'Compare how nervous you felt before session one vs now' },
+        { label:'Ask what a realistic beginner path looks like next month' },
+        { label:'Commit to the next two sessions, or pivot with no guilt' },
       ]},
     ],
+    team: [
+      { week:'Week 1', focus:'Learn the shape of the game', tasks:[
+        { label:`Watch a beginner-friendly ${sn} rules video`, ytQuery:`${sn} rules for beginners` },
+        { label:'Find one pickup game, open play, club night, or beginner league near you' },
+        { label:'Check what gear is actually required before buying anything' },
+        { label:`Try this first: ${firstStep}` },
+      ]},
+      { week:'Week 2', focus:'Join low-pressure play', tasks:[
+        { label:'Show up once, even if you mostly watch at first' },
+        { label:'Tell the organiser or one player you are new and want to learn' },
+        { label:`Practise one basic ${sn} skill for 15 minutes`, ytQuery:`${sn} basic skill drill beginner` },
+        { label:'Write down one rule or phrase you heard and look it up later' },
+      ]},
+      { week:'Week 3', focus:'Get a little less lost', tasks:[
+        { label:'Go back to the same group or venue once more' },
+        { label:'Ask one teammate for a simple positioning or technique tip' },
+        { label:`Watch a "${sn} beginner mistakes" video`, ytQuery:`${sn} beginner mistakes` },
+        { label:'Notice one thing that felt easier than last time' },
+      ]},
+      { week:'Week 4', focus:'Make it repeatable', tasks:[
+        { label:'Choose a regular game, open play, or league night that fits your life' },
+        { label:'Play or practise once this week without judging the result' },
+        { label:'Decide what would make the next month easier: gear, lessons, or a buddy' },
+        { label:'Sign up, save the event, or message the organiser if you want to continue' },
+      ]},
+    ],
+    solo: [
+      { week:'Week 1', focus:'Start smaller than you think', tasks:[
+        { label:`Watch a realistic beginner ${sn} intro`, ytQuery:`realistic beginner ${sn} intro` },
+        { label:'Pick one safe, low-friction place to try it' },
+        { label:'Gather only the gear you need for the first session' },
+        { label:`Try this first: ${firstStep}` },
+      ]},
+      { week:'Week 2', focus:'Repeat without overdoing it', tasks:[
+        { label:'Do one easy session and stop while you still feel in control' },
+        { label:`Learn one basic ${sn} technique or habit`, ytQuery:`${sn} basic technique beginner` },
+        { label:'If your body feels good, repeat once more this week' },
+        { label:'Log one sentence about what you enjoyed and what felt hard' },
+      ]},
+      { week:'Week 3', focus:'Add one tiny challenge', tasks:[
+        { label:'Choose one small goal for the session: smoother, longer, calmer, or cleaner' },
+        { label:`Watch one ${sn} technique breakdown for beginners`, ytQuery:`${sn} technique breakdown beginner` },
+        { label:'Practise for 20-30 minutes, or less if form starts falling apart' },
+        { label:'Optional: find a class, group, or community if solo practice feels stale' },
+      ]},
+      { week:'Week 4', focus:'Decide what keeps it alive', tasks:[
+        { label:'Do two relaxed sessions, or one coached/session-based next step' },
+        { label:'Look back at your first note and name one real improvement' },
+        { label:'Remove one friction point: route, gear, schedule, or confidence' },
+        { label:'Keep going if it gives you energy. Pivot if it does not.' },
+      ]},
+    ],
+  }
+  const beginnerPlan = coachedFirstSports.has(sport.id)
+    ? beginnerPlans.coached
+    : teamFirstSports.has(sport.id)
+      ? beginnerPlans.team
+      : beginnerPlans.solo
+  const plans = {
+    beginner: beginnerPlan,
     intermediate: [
       { week:'Week 1', focus:'Assess your baseline', tasks:[
         { label:`Do a full ${sn} session and note your weaknesses` },
