@@ -67,7 +67,7 @@ function NicheRail({ tags, onSelect }) {
       <div style={{ display:'flex', alignItems:'baseline', justifyContent:'space-between', marginBottom:6, gap:12, flexWrap:'wrap' }}>
         <div>
           <p style={{ fontSize:'0.72rem', fontWeight:700, letterSpacing:'0.12em', textTransform:'uppercase', color:T.pink, marginBottom:6 }}>Niche corner</p>
-          <h3 style={{ fontSize:'1.4rem', fontWeight:800, letterSpacing:'-0.02em', color:T.textPri }}>Or try something stranger.</h3>
+          <h3 style={{ fontSize:'1.4rem', fontWeight:800, letterSpacing:'-0.02em', color:T.textPri }}>Or take the weird door.</h3>
         </div>
         <button onClick={() => setSeed(s => s + 1)}
           style={{ background:T.surface, border:`1px solid ${T.border}`, borderRadius:99, padding:'6px 14px', fontSize:'0.78rem', fontWeight:600, color:T.textSec, cursor:'pointer', fontFamily:'inherit', transition:'all 0.14s' }}
@@ -77,7 +77,7 @@ function NicheRail({ tags, onSelect }) {
         </button>
       </div>
       <p style={{ fontSize:'0.92rem', color:T.textMut, marginBottom:18, lineHeight:1.55 }}>
-        Sports we don't recommend by default — but plenty of people love. Worth a look.
+        These are too specific for the main quiz, which is exactly why they are worth a look.
       </p>
       <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(200px, 1fr))', gap:10 }}>
         {picks.map(sport => (
@@ -107,9 +107,9 @@ export default function ResultsPage({ initialTags, personalised, onSelect, onBac
 
       <p style={{ fontSize:'0.8rem', fontWeight:700, letterSpacing:'0.12em', textTransform:'uppercase', color:T.accent, marginBottom:10 }}>Results</p>
       <h2 style={{ fontSize:'clamp(1.8rem, 5vw, 2.6rem)', fontWeight:800, letterSpacing:'-0.02em', color:T.textPri, marginBottom:6 }}>
-        Here are a few things<br/>worth trying.
+        A few things worth<br/>actually trying.
       </h2>
-      <p style={{ fontSize:'1rem', color:T.textMut, marginBottom: personalised ? 20 : 28 }}>Pick one and explore it. Not a final verdict — a good first experiment.</p>
+      <p style={{ fontSize:'1rem', color:T.textMut, marginBottom: personalised ? 20 : 28 }}>Pick one small experiment. No destiny talk, no forever decision.</p>
 
       <PersonalisedInsight data={personalised} />
 

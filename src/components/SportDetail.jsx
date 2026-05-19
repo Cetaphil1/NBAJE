@@ -21,31 +21,75 @@ function KeyCard({ icon, question, children, style: s = {} }) {
 
 function buildWeeklyPlan(sport, level) {
   const sn = sport.name
+  const checklist = sport.guide?.checklist || []
+  const firstStep = checklist[0] || `Find one realistic place to try ${sn}`
+  const firstPractice = checklist[1] || `Try one short beginner ${sn} session`
+  const secondPractice = checklist[2] || `Repeat the easiest ${sn} skill you learned`
+  const nextStep = checklist[3] || `Choose one next ${sn} class, group, or practice option`
+
+  const sessionNotes = {
+    basketball: 'Keep it to shooting, layups, and dribbling at first. Pickup can wait until you want it.',
+    soccer: 'Solo ball touches count. You do not need a full game to begin.',
+    tennis: 'A wall session is a real first session. Stop before your arm gets tired.',
+    volleyball: 'Start with passing and serving basics before joining faster games.',
+    baseball: 'Batting cages and easy catch are enough for week one. Power comes much later.',
+    football: 'Start with short throws and simple routes. You do not need a full team yet.',
+    track: 'Use walk breaks freely. The goal is finishing comfortable, not proving fitness.',
+    swimming: 'Rest as much as you need between lengths. Technique matters more than distance.',
+    boxing: 'Choose a coached beginner class. No sparring, no ego, no solo guessing.',
+    wrestling: 'This one needs a coach and a mat. Your first win is learning how to move safely.',
+    yoga: 'Stay with beginner videos or classes. If a pose feels sharp or weird, back off.',
+    cycling: 'Pick a flat, low-traffic route and ride at conversation pace.',
+    climbing: 'Ask staff which climbs are meant for new people. Downclimbing safely matters too.',
+    hiking: 'Choose easy, short, and well-marked. Save the bigger trail for later.',
+    dance: 'The first class will feel awkward. That is normal, and it wears off quickly.',
+    martial_arts: 'Trial classes are for learning the room, not proving toughness.',
+    skateboarding: 'Pushing, turning, and stopping are the whole assignment at first.',
+    pickleball: 'Open play is easier when you say you are new before the first serve.',
+    badminton: 'Rallies matter more than winning. Learn the serve and court lines slowly.',
+    ultimate_frisbee: 'Throwing and catching basics make pickup far less chaotic.',
+    rowing: 'Start on an indoor rower if possible and keep the stroke smooth, not hard.',
+    golf: 'Make clean contact the goal. Distance and score can wait.',
+    gym_training: 'Use light weights and leave feeling like you could have done more.',
+    calisthenics: 'Scale every move. Incline push-ups beat ugly full push-ups.',
+    table_tennis: 'Rally first, score later. Keeping the ball alive teaches plenty.',
+    lacrosse: 'Wall ball is useful before your first team practice.',
+    rugby: 'Ask about touch or tag options before contact training.',
+    fencing: 'Let the club handle gear and safety. Footwork is a good first focus.',
+    softball: 'One cage session or easy catch makes the first game less intimidating.',
+    gymnastics: 'Stick with coached basics. Adult beginner classes expect true beginners.',
+    skiing: 'Book a lesson and rent gear. Do not try to self-teach on a slope.',
+    snowboarding: 'Expect falling. Wrist guards and a lesson make day one much kinder.',
+    surfing: 'Use a surf school. Conditions and safety are part of the lesson.',
+    archery: 'Use club equipment until your coach says you are ready to buy.',
+    cheer: 'Ask about beginner or prep teams. The time commitment matters as much as the skills.',
+  }
+
   const plans = {
     beginner: [
-      { week:'Week 1', focus:'Get comfortable', tasks:[
-        { label:`Do a 15-min beginner ${sn} warm-up`,                ytQuery:`15 minute beginner ${sn} warm up` },
-        { label:`Watch a "${sn} basics" tutorial`,                    ytQuery:`${sn} basics for beginners 10 minutes` },
-        { label:`Practice 3 fundamental ${sn} drills for 20 min`,    ytQuery:`3 fundamental ${sn} drills beginner` },
-        { label:'Get or borrow any gear you need' },
+      { week:'Week 1', focus:'Make it small', tasks:[
+        { label:firstStep },
+        { label:`Watch one honest "${sn} for beginners" overview`,   ytQuery:`${sn} for beginners what to expect` },
+        { label:'Borrow, rent, or price the minimum gear before buying anything serious' },
+        { label:sessionNotes[sport.id] || 'Keep the first attempt short enough that you want to come back.' },
       ]},
-      { week:'Week 2', focus:'Build the habit', tasks:[
-        { label:`Run through a 20-min ${sn} skill drill`,            ytQuery:`${sn} skill drill 20 minutes` },
-        { label:`Watch a "${sn} mistakes to avoid" video`,           ytQuery:`top ${sn} mistakes beginners make` },
-        { label:'Find a local venue, club, or court near you' },
-        { label:'Go twice this week' },
+      { week:'Week 2', focus:'Try it once', tasks:[
+        { label:firstPractice },
+        { label:'Keep the first real session low-pressure: one class, one short visit, or one easy practice' },
+        { label:`Look up one beginner mistake in ${sn} so you know what to avoid`, ytQuery:`beginner ${sn} mistakes to avoid` },
+        { label:'Write down what felt fun, confusing, or intimidating right after' },
       ]},
-      { week:'Week 3', focus:'Level up', tasks:[
-        { label:`Drill one specific ${sn} technique for 15 min`,     ytQuery:`${sn} technique tutorial` },
-        { label:`Do a 30-min ${sn} workout follow-along`,            ytQuery:`30 minute ${sn} workout follow along` },
-        { label:'Introduce yourself to one other person at the venue' },
-        { label:'Track your sessions — even just a note in your phone' },
+      { week:'Week 3', focus:'Return once', tasks:[
+        { label:secondPractice },
+        { label:'Ask a coach, staff member, or regular one beginner question' },
+        { label:`Pick one tiny ${sn} skill to repeat until it feels less awkward`, ytQuery:`easy ${sn} beginner drill` },
+        { label:'Go back one more time before you decide how you feel about it' },
       ]},
       { week:'Week 4', focus:'Commit or pivot', tasks:[
-        { label:'Do 3 sessions this week' },
-        { label:`Watch a "${sn} progression roadmap" video`,         ytQuery:`${sn} progression roadmap beginner` },
-        { label:'Reflect — are you enjoying it? What needs to change?' },
-        { label:'Sign up for a class, league, or next step if yes' },
+        { label:nextStep },
+        { label:`Watch a simple ${sn} progression roadmap`,          ytQuery:`${sn} beginner progression roadmap` },
+        { label:'Decide what would make this easier to repeat: better timing, a class, a friend, or different gear' },
+        { label:'If you liked it, schedule the next session. If not, pivot without guilt.' },
       ]},
     ],
     intermediate: [
@@ -321,15 +365,15 @@ export default function SportDetail({ sportId, tags, onBack, onRetake }) {
             <span key={t} style={{ fontSize:'0.72rem', fontWeight:700, color:T.textSec, background:T.surfaceHi, border:`1px solid ${T.border}`, borderRadius:99, padding:'4px 10px', textTransform:'uppercase', letterSpacing:'0.06em' }}>{t.replace(/_/g,' ')}</span>
           ))}
         </div>
-        <KeyCard icon="🧭" question="No deep guide for this one — yet.">
+        <KeyCard icon="🧭" question="A lighter guide for this one.">
           <p style={{ fontSize:'0.95rem', color:T.textSec, lineHeight:1.6 }}>
-            We don't have a full plan for niche activities. Here are three honest first steps to figure out if it's for you.
+            This one is niche enough that the best first move is reconnaissance, not a big commitment.
           </p>
           <div style={{ display:'flex', flexDirection:'column', gap:10, marginTop:8 }}>
             {[
-              { label:`Watch "${sport.name} for beginners"`, sub:'YouTube — 10 min of intro videos tells you a lot.', href:ytSearch, icon:'▶' },
-              { label:`Find a local ${sport.name.toLowerCase()} group`, sub:'Meetup — clubs often welcome curious first-timers.', href:meetupSearch, icon:'👥' },
-              { label:`Search for a beginner club near you`, sub:'Google — quickest way to find lessons or open sessions.', href:googleSearch, icon:'🔎' },
+              { label:`Watch "${sport.name} for beginners"`, sub:'Ten minutes of real footage will tell you more than a polished description.', href:ytSearch, icon:'▶' },
+              { label:`Find a local ${sport.name.toLowerCase()} group`, sub:'Clubs and meetups usually know how curious first-timers should start.', href:meetupSearch, icon:'👥' },
+              { label:`Search for a beginner club near you`, sub:'Look for lessons, open sessions, rentals, and safety requirements before buying gear.', href:googleSearch, icon:'🔎' },
             ].map((step, i) => (
               <a key={i} href={step.href} target="_blank" rel="noopener noreferrer"
                 style={{ display:'flex', gap:14, background:T.surfaceHi, borderRadius:12, padding:'14px 16px', border:`1px solid ${T.border}`, textDecoration:'none', transition:'border-color 0.15s' }}
@@ -378,7 +422,7 @@ export default function SportDetail({ sportId, tags, onBack, onRetake }) {
           )}
           <div style={{ textAlign:'center', padding:'32px 0 8px' }}>
             <p style={{ fontSize:'1.1rem', color:T.textSec, marginBottom:24, lineHeight:1.6 }}>
-              Ready to make this real? Answer a couple quick questions and we'll build a personalised plan for you.
+              Ready to make this real? Answer a couple quick questions and we'll build a starter plan that respects where you are.
             </p>
             <button
               onClick={() => { setFlow('level'); save({ flow:'level' }) }}
