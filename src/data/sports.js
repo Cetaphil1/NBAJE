@@ -3,13 +3,13 @@ const SPORTS = {
   basketball: {
     id:'basketball', name:'Basketball', icon:'🏀',
     fitTags:['social_team','high_energy','competitive','low_budget'],
-    pitch:'Fast, social, and pickup courts are everywhere — no signup needed.',
+    pitch:'A ball, a hoop, and a little nerve — start with free throws, stay for pickup.',
     guide:{
-      whyItFits:"Basketball is one of the most accessible sports anywhere. Courts are free, pickup culture is welcoming, and you can start completely solo and join a game whenever you're ready.",
+      whyItFits:"Basketball gives you a solo doorway into a social sport. You can build touch on an empty court, then step into pickup when the rhythm feels less mysterious.",
       howToStart:"Find a public court at a nearby park. Practice dribbling with both hands and shooting free throws. Once comfortable, show up when others are playing and ask to join.",
       equipment:[{item:'Basketball (size 7 adults / 6 youth)',tier:'need'},{item:'Court shoes with ankle support',tier:'need'},{item:'Shorts and breathable shirt',tier:'have'}],
       adaptive:{
-        low_budget:"Most courts are free. A used ball costs $10–20, or just show up at a busy court and join someone else's game.",
+        low_budget:"Most courts are free. A used ball costs $10–20, and busy courts often have shared balls already in play.",
         no_equipment:"Head to any park court and ask to join. Someone always has a ball.",
         shy_solo:"Public courts are completely normal to use alone. Dribble and shoot by yourself — no pressure to join anything.",
         social_team:"Show up at a busy court on a weekend and ask \"got next?\" — that's genuinely how pickup basketball works.",
@@ -23,16 +23,16 @@ const SPORTS = {
   soccer: {
     id:'soccer', name:'Soccer', icon:'⚽',
     fitTags:['social_team','low_budget','no_equipment','high_energy'],
-    pitch:"The world's most accessible team sport — just show up and find a ball.",
+    pitch:'Simple gear, endless touches, and a team game you can ease into at park speed.',
     guide:{
-      whyItFits:"Soccer is played everywhere, costs almost nothing to start, and has a massive pickup culture. If you want to be active with others without a big commitment, this is the easiest entry.",
+      whyItFits:"Soccer is easy to sample because the first skill is just getting comfortable with the ball. A park, a wall, and a few touches can tell you quickly whether the game pulls you in.",
       howToStart:"Find a park with a pitch. Start by juggling — just keeping the ball airborne with your feet. Then find a pickup game or search for a casual kickaround group.",
       equipment:[{item:'Soccer ball (size 5)',tier:'need'},{item:'Cleats or flat trainers',tier:'need'},{item:'Shin guards',tier:'nice'}],
       adaptive:{
         low_budget:"A ball costs $10–15. Most pitches are free. Many pickup games use shared balls — you don't even need your own.",
         no_equipment:'Show up to a pickup game and join a side. Balls are always shared.',
         shy_solo:'Juggling and wall passes alone in any park is a real 20-minute training session.',
-        social_team:'Search Facebook Groups or Meetup for "casual soccer [your city]" — groups are everywhere.',
+        social_team:'Search Facebook Groups or Meetup for "casual soccer [your city]" — casual groups are common in many areas.',
         limited_time:'20 minutes of juggling and wall passing builds more skill than most expect.',
         competitive:'Most cities have recreational adult leagues with beginner divisions.',
       },
@@ -43,7 +43,7 @@ const SPORTS = {
   tennis: {
     id:'tennis', name:'Tennis', icon:'🎾',
     fitTags:['competitive','shy_solo','high_energy'],
-    pitch:"Solo or with a partner — wall rallying is a full solo practice. Public courts are free.",
+    pitch:'Wall rallies give you honest reps before you ever need to find a partner.',
     guide:{
       whyItFits:"Tennis rewards coordination, quick reactions, and mental toughness. You can get a real workout completely alone with wall rallying before you ever need an opponent.",
       howToStart:"Find a public court. Spend your first sessions hitting against the wall. Get your grip and swing comfortable before worrying about playing someone.",
@@ -63,16 +63,16 @@ const SPORTS = {
   volleyball: {
     id:'volleyball', name:'Volleyball', icon:'🏐',
     fitTags:['social_team','high_energy'],
-    pitch:'Fast team play — beach courts are free and open games are easy to join.',
+    pitch:'Quick rallies, loud points, and a team rhythm you learn one touch at a time.',
     guide:{
-      whyItFits:"Volleyball is fast, technical, and deeply social. Beach volleyball lowers the barrier even further — just show up at a public court.",
+      whyItFits:"Volleyball is social without needing much small talk: rotate in, call the ball, try again. Beach courts and open gyms make it easy to test the vibe before joining a league.",
       howToStart:"Find an open gym night or a beach court. Focus on the pass (bump) first — it's the foundation of everything.",
       equipment:[{item:'Volleyball',tier:'need'},{item:'Knee pads (indoor)',tier:'nice'},{item:'Court shoes (indoor)',tier:'need'}],
       adaptive:{
         low_budget:'Beach courts are free. Indoor open gym nights cost $3–5. Equipment is almost always shared.',
-        no_equipment:'Open gym nights and beach courts always have balls. Just show up.',
+        no_equipment:'Open gym nights and beach courts usually have balls. Ask before buying one.',
         shy_solo:'Wall setting drills give you a solo practice option to build touch.',
-        social_team:'Search Meetup for "beginner volleyball [your city]" — groups are active and welcoming.',
+        social_team:'Search Meetup for "beginner volleyball [your city]" and look for open gym or no-tryout language.',
         limited_time:'Open gym sessions run 1–2 hours but you can leave whenever.',
         competitive:'Recreational leagues run at multiple skill levels in most cities.',
       },
@@ -83,7 +83,7 @@ const SPORTS = {
   baseball: {
     id:'baseball', name:'Baseball', icon:'⚾',
     fitTags:['social_team','competitive'],
-    pitch:'Precision and patience — batting cages let you start completely solo.',
+    pitch:'Quiet focus with a satisfying sound when the timing finally clicks.',
     guide:{
       whyItFits:'Baseball rewards focus and precision. Every swing, throw, and fielding decision requires complete attention. Great for people who like individual skill within a team context.',
       howToStart:'Find a batting cage — many parks have them for $1–2 per token. Throw a tennis ball against a wall to build glove reflexes.',
@@ -103,10 +103,10 @@ const SPORTS = {
   football: {
     id:'football', name:'Flag Football', icon:'🏈',
     fitTags:['social_team','high_energy','competitive'],
-    pitch:'Flag football needs almost no gear and leagues run year-round everywhere.',
+    pitch:'Routes, quick decisions, and team energy without the full-contact gear wall.',
     guide:{
-      whyItFits:"Flag football has the strategy and teamwork of tackle football without the contact or equipment cost. Leagues are everywhere and beginner-friendly.",
-      howToStart:"Start by practising throwing a spiral. Find a flag football league — most parks departments run them year-round.",
+      whyItFits:"Flag football keeps the strategy and teamwork of football while lowering the contact and equipment barrier. It is a good fit if you like plays, roles, and short bursts of effort.",
+      howToStart:"Start by practising short throws and simple routes. Then check your parks department, rec centre, or Meetup for flag football sessions.",
       equipment:[{item:'Football',tier:'need'},{item:'Cleats or flat trainers',tier:'need'},{item:'Flag belt set',tier:'nice'}],
       adaptive:{
         low_budget:'Flag football needs a ball ($20) and trainers. Skip all pads. Many leagues provide flags.',
@@ -123,7 +123,7 @@ const SPORTS = {
   track: {
     id:'track', name:'Running / Track', icon:'🏃',
     fitTags:['shy_solo','low_budget','no_equipment','high_energy'],
-    pitch:"Running is the lowest-barrier sport that exists. Shoes and a path is all you need.",
+    pitch:'A repeatable loop, an easy pace, and progress you can feel without overthinking it.',
     guide:{
       whyItFits:"Track and field asks for one thing: honest effort. No team, no equipment, no facility. You run, you improve, you measure it.",
       howToStart:"Start with a 20-minute easy jog three times a week. Don't worry about pace. Focus on breathing and not stopping.",
@@ -132,9 +132,9 @@ const SPORTS = {
         low_budget:'Running is free. A decent pair of shoes: $30–60 on sale or second-hand.',
         no_equipment:"You need shoes and that's it.",
         shy_solo:'Running alone is completely normal. Most runners prefer it.',
-        social_team:'Running clubs are among the most welcoming groups in sport. Search "running club [your city]".',
+        social_team:'Search "running club [your city]" and look for no-drop, couch-to-5K, or beginner pace groups.',
         limited_time:'A 20-minute run three times a week is a legitimate training programme.',
-        competitive:'Local 5K races are everywhere and completely beginner-friendly.',
+        competitive:'Local 5K races are common and usually friendly to first-timers who mix running and walking.',
       },
       checklist:['Complete a 20-minute easy run','Download a free run-tracking app','Find your nearest track or park path','Look up a local 5K to sign up for']
     }
@@ -143,18 +143,18 @@ const SPORTS = {
   swimming: {
     id:'swimming', name:'Swimming', icon:'🏊',
     fitTags:['shy_solo','low_impact','high_energy'],
-    pitch:'Full-body, low-impact, and completely solo — lane swim is available almost everywhere.',
+    pitch:'Low-impact work with a quiet lane, steady breathing, and no one in your headphones.',
     guide:{
-      whyItFits:"Swimming is the most joint-friendly high-intensity sport available. Technique matters more than strength and improvements are immediately measurable.",
+      whyItFits:"Swimming lets you work hard without pounding your joints. Technique matters more than brute strength, and progress shows up in calmer breathing and smoother lengths.",
       howToStart:'Book a lane swim session. Start with freestyle — focus only on breathing rhythm (every 3 strokes).',
       equipment:[{item:'Fitted swimsuit',tier:'need'},{item:'Goggles',tier:'need'},{item:'Swim cap',tier:'nice'}],
       adaptive:{
         low_budget:'Public pools: $3–6 per session. Suit and goggles: $15–25 total.',
         no_equipment:"A swimsuit and goggles is all you need.",
         shy_solo:"Lane swimming is one of the most solitary sports — you're in your own lane, focused entirely on yourself.",
-        social_team:'Masters Swimming programmes are adult lap groups at all levels — welcoming to beginners.',
+        social_team:'Masters Swimming programmes are adult lap groups at many levels; ask whether they have a beginner lane.',
         limited_time:"20 minutes: 4×25m with 30-second rest. That's a full first session.",
-        competitive:'USMS (Masters) meets are beginner-friendly. Enter open events and chase your own time.',
+        competitive:'USMS (Masters) meets have open events where you can chase your own time.',
       },
       checklist:['Find your nearest pool with lane swim','Book a session and swim 4×25m','Focus on breathing rhythm — every 3 strokes','Look up Masters Swimming in your area']
     }
@@ -163,9 +163,9 @@ const SPORTS = {
   boxing: {
     id:'boxing', name:'Boxing', icon:'🥊',
     fitTags:['shy_solo','competitive','high_energy'],
-    pitch:'Bag work is a complete solo workout. No sparring required to get started.',
+    pitch:'Footwork, bags, and focus first — sparring can wait until a coach says so.',
     guide:{
-      whyItFits:"Boxing develops coordination, fitness, and mental composure faster than almost any other sport. Most gyms are genuinely welcoming to beginners.",
+      whyItFits:"Boxing blends coordination, conditioning, and composure in a very direct way. A good gym will keep beginners on stance, hands, bags, and pads before contact ever enters the picture.",
       howToStart:"Find a boxing gym — don't try to learn alone. Spend the first month on stance, jab, cross, and footwork. Don't spar until your coach says you're ready.",
       equipment:[{item:'Hand wraps',tier:'need'},{item:'Boxing gloves 12–16oz',tier:'need'},{item:'Mouthguard',tier:'later'},{item:'Boxing shoes or high-tops',tier:'nice'}],
       adaptive:{
@@ -183,7 +183,7 @@ const SPORTS = {
   wrestling: {
     id:'wrestling', name:'Wrestling', icon:'🤼',
     fitTags:['competitive','high_energy'],
-    pitch:'The oldest sport — demands and rewards everything you have.',
+    pitch:'Technical, physical, and honest — best learned with a coach and a mat.',
     guide:{
       whyItFits:"Wrestling rewards mental toughness, technical precision, and commitment. If you want a sport that pushes every limit, this is it.",
       howToStart:"Find a wrestling club or school programme — you cannot learn this safely without a coach and a mat.",
@@ -203,7 +203,7 @@ const SPORTS = {
   yoga: {
     id:'yoga', name:'Yoga', icon:'🧘',
     fitTags:['shy_solo','low_impact','low_budget'],
-    pitch:'Flexible, solo, calm — start in your living room with a free YouTube class.',
+    pitch:'Quiet practice you can start at home, even if touching your toes is nowhere close.',
     guide:{
       whyItFits:"Yoga asks nothing of you except showing up. No competition, no team, no facility required. Your breath and your body are the whole game.",
       howToStart:"Find a free YouTube class (Yoga with Adriene is excellent for beginners) and do it in your living room. No studio needed for months.",
@@ -212,7 +212,7 @@ const SPORTS = {
         low_budget:"Free YouTube classes are genuinely excellent. A mat costs $10–20. That's your full startup cost.",
         no_equipment:'You can practise on carpet without a mat to start.',
         shy_solo:'This is one of the most private sports you can do. Just you and a YouTube video.',
-        social_team:'Studio classes are social and welcoming — most have beginner sessions.',
+        social_team:'Studio classes can be social; look for foundations, gentle, or first-timer sessions.',
         limited_time:'A 20-minute session is a complete practice. Start there.',
         competitive:"Yoga is not competitive. If you want progression, track your flexibility over months.",
       },
@@ -223,7 +223,7 @@ const SPORTS = {
   cycling: {
     id:'cycling', name:'Cycling', icon:'🚴',
     fitTags:['shy_solo','low_budget','high_energy'],
-    pitch:"Solo or group, your own pace, covers ground fast — and it's genuinely fun.",
+    pitch:'A small loop can become a ritual: fresh air, momentum, and your own pace.',
     guide:{
       whyItFits:"Cycling is low-impact on joints but high-output cardiovascularly. You can go completely at your own pace and explore your surroundings.",
       howToStart:'Borrow or find a used bike. Pick a flat route for your first ride. Focus on comfort and consistency before speed.',
@@ -243,16 +243,16 @@ const SPORTS = {
   climbing: {
     id:'climbing', name:'Climbing', icon:'🧗',
     fitTags:['shy_solo','social_team','competitive','high_energy'],
-    pitch:'Problem-solving meets physical challenge — indoor gyms make it immediately accessible.',
+    pitch:'A physical puzzle on a wall, with rented shoes and routes built for first-timers.',
     guide:{
-      whyItFits:"Climbing is uniquely cerebral and physical. You solve problems with your body. Indoor climbing gyms are welcoming, gear is rented, and the community is unusually supportive.",
-      howToStart:"Visit an indoor climbing gym. Rent shoes and a harness. Start on bouldering (no ropes) — it's the lowest-barrier entry point.",
+      whyItFits:"Climbing is uniquely cerebral and physical. You solve problems with your body, rent the key gear, and learn routes graded from gentle to intimidating.",
+      howToStart:"Visit an indoor climbing gym. Rent shoes and a harness. Start on bouldering (no ropes) because you can try short problems without managing rope systems.",
       equipment:[{item:'Climbing shoes (rent to start)',tier:'rent'},{item:'Chalk bag',tier:'nice'},{item:'Harness (for roped climbing)',tier:'later'}],
       adaptive:{
         low_budget:'Day passes at indoor gyms: $15–25 including rental. Membership pays off within 2–3 visits.',
-        no_equipment:'Gyms rent everything. Just show up.',
+        no_equipment:'Gyms rent shoes and harnesses, so you can try a session before owning anything.',
         shy_solo:'Bouldering is completely solo — no partner needed, no ropes, just you and the wall.',
-        social_team:'Climbing gyms have an unusually welcoming community. People actively help each other.',
+        social_team:'Climbing gyms make it normal to trade route ideas with strangers between attempts.',
         limited_time:'A 45-minute bouldering session is a complete workout.',
         competitive:'Climbing competitions run at indoor gyms at every level including total beginners.',
       },
@@ -263,10 +263,10 @@ const SPORTS = {
   hiking: {
     id:'hiking', name:'Hiking', icon:'🥾',
     fitTags:['shy_solo','low_budget','no_equipment','low_impact'],
-    pitch:"Walk further than you normally would — outside. That's genuinely the whole thing.",
+    pitch:'Walk somewhere with a little more sky, a little more dirt, and a real finish line.',
     guide:{
-      whyItFits:"Hiking requires nothing except the will to start. It's accessible at every fitness level and the mental health benefits are well-documented.",
-      howToStart:'Find a local trail on AllTrails (free app). Pick something rated "easy" and under 5 miles. Just go.',
+      whyItFits:"Hiking turns movement into a small adventure. You can choose a trail that matches your energy, keep the pace conversational, and still finish feeling like you went somewhere.",
+      howToStart:'Find a local trail on AllTrails (free app). Pick something rated "easy" and under 3 miles for the first outing.',
       equipment:[{item:'Comfortable walking shoes or trainers',tier:'need'},{item:'Water bottle',tier:'need'},{item:'Sunscreen',tier:'need'},{item:'Hiking boots',tier:'later'}],
       adaptive:{
         low_budget:'Hiking costs nothing. Most trail parks are free. Good trainers you already own are fine.',
@@ -283,7 +283,7 @@ const SPORTS = {
   dance: {
     id:'dance', name:'Dance', icon:'💃',
     fitTags:['social_team','high_energy','low_impact'],
-    pitch:'Every style is different — pick one that fits your vibe and start moving.',
+    pitch:'Music makes the effort feel different. Pick a style, let the first class be messy.',
     guide:{
       whyItFits:'Dance is movement with music and often community. Styles range from completely solo (hip-hop, contemporary) to highly social (salsa, swing). Pick your vibe.',
       howToStart:'Find a beginner class in the style that interests you most. Salsa, swing, and hip-hop all have a strong beginner class culture.',
@@ -303,7 +303,7 @@ const SPORTS = {
   martial_arts: {
     id:'martial_arts', name:'Martial Arts', icon:'🥋',
     fitTags:['shy_solo','competitive','high_energy'],
-    pitch:'Structure, discipline, and a clear skill progression — one of the best beginner setups in sport.',
+    pitch:'Clear rituals, coached basics, and a progression path you can actually see.',
     guide:{
       whyItFits:'Martial arts offer a rare combination: solo skill development, clear progression (belts/grades), and a supportive community. BJJ, judo, karate, and muay thai all have strong beginner programmes.',
       howToStart:'Pick one style and find a local club. Brazilian jiu-jitsu (BJJ) and karate have particularly good beginner cultures. Attend a trial class.',
@@ -323,10 +323,10 @@ const SPORTS = {
   skateboarding: {
     id:'skateboarding', name:'Skateboarding', icon:'🛹',
     fitTags:['shy_solo','high_energy'],
-    pitch:'Solo, self-directed, creative, and endlessly deep once you get going.',
+    pitch:'Tiny wins on flat ground first; style and tricks come after you can stop.',
     guide:{
       whyItFits:"Skateboarding is one of the few sports with no coach, no team, and no schedule. You go when you want, work on what you want, and progress at your own pace.",
-      howToStart:"Get a complete board (not a toy). Find a smooth surface. Learn to push, turn, and stop before anything else. Skate parks are welcoming once you have basics.",
+      howToStart:"Get a complete board (not a toy). Find a smooth surface. Learn to push, turn, and stop before anything else. Watch the skate park first, then enter when the basics feel steady.",
       equipment:[{item:'Complete skateboard ($60–100)',tier:'need'},{item:'Helmet',tier:'need'},{item:'Wrist guards and knee pads',tier:'need'},{item:'Flat-soled shoes',tier:'need'}],
       adaptive:{
         low_budget:'A complete beginner board: $60–80. Avoid cheap toy store boards — they make learning harder.',
@@ -343,7 +343,7 @@ const SPORTS = {
   pickleball: {
     id:'pickleball', name:'Pickleball', icon:'🏓',
     fitTags:['social_team','low_impact','competitive'],
-    pitch:"The fastest-growing sport in the US — easy to pick up, hard to master, very social.",
+    pitch:'Short games, rotating partners, and just enough rules to make rallies interesting.',
     guide:{
       whyItFits:"Pickleball is low-impact on joints, fast enough to be exciting, and social by design. Open play sessions mean you can show up alone and have a full game within minutes.",
       howToStart:'Find an open play session at a local court. Most parks have converted tennis courts. Borrow a paddle at first.',
@@ -363,9 +363,9 @@ const SPORTS = {
   badminton: {
     id:'badminton', name:'Badminton', icon:'🏸',
     fitTags:['social_team','competitive','low_budget'],
-    pitch:"Fast reflexes, small space, easy to find a game — surprisingly intense once you play well.",
+    pitch:'Light racket, fast rallies, and a drop-in culture that gets you playing quickly.',
     guide:{
-      whyItFits:'Badminton is deceptively demanding at high levels but forgiving enough to be fun from day one. Drop-in community sessions are common.',
+      whyItFits:'Badminton is forgiving enough to rally on day one and demanding enough to stay interesting. Drop-in community sessions make it easier to find opponents without joining a league first.',
       howToStart:'Find a community hall or gym that runs badminton drop-in nights. Bring a racket or borrow one.',
       equipment:[{item:'Badminton racket ($15–25)',tier:'need'},{item:'Non-marking court shoes',tier:'need'},{item:'Shuttlecocks',tier:'need'}],
       adaptive:{
@@ -383,16 +383,16 @@ const SPORTS = {
   ultimate_frisbee: {
     id:'ultimate_frisbee', name:'Ultimate Frisbee', icon:'🥏',
     fitTags:['social_team','low_budget','no_equipment','high_energy'],
-    pitch:"Team sport with one of the strongest beginner communities — a disc and a field is all you need.",
+    pitch:'A running team sport where people usually teach the new thrower instead of rolling their eyes.',
     guide:{
-      whyItFits:'Ultimate frisbee combines the running of soccer with the tactics of basketball. The community is famously welcoming and self-refereed — sportsmanship is built in.',
+      whyItFits:'Ultimate frisbee combines the running of soccer with the spacing and cuts of basketball. Because the game is self-refereed, beginner-friendly communication is part of the culture.',
       howToStart:"Find a local ultimate club or pickup game. Most cities have a club that runs beginner sessions. A disc costs $10.",
       equipment:[{item:'Ultimate frisbee disc ($10)',tier:'need'},{item:'Cleats or flat trainers',tier:'need'},{item:'Mouth guard (optional)',tier:'nice'}],
       adaptive:{
         low_budget:'A disc costs $10. Many clubs provide discs. Most pitches are free.',
-        no_equipment:'Clubs usually have spare discs for new players. Just show up.',
+        no_equipment:'Clubs usually have spare discs for new players; message ahead if you are unsure.',
         shy_solo:'Hard to practice alone but throwing against a target or fence works.',
-        social_team:'One of the most welcoming team sport communities anywhere. The "spirit of the game" culture is real.',
+        social_team:'The "spirit of the game" culture makes teaching and fair play part of the session.',
         limited_time:'A pickup game takes 30–60 minutes. Sessions are flexible.',
         competitive:'Club leagues and tournaments run at city, regional, and national levels.',
       },
@@ -403,14 +403,14 @@ const SPORTS = {
   rowing: {
     id:'rowing', name:'Rowing', icon:'🚣',
     fitTags:['social_team','high_energy','low_impact'],
-    pitch:'Full body, low-impact, and meditative — rowing clubs welcome absolute beginners.',
+    pitch:'Rhythm, legs, lungs, and water if you want it — the indoor rower is a solid first door.',
     guide:{
-      whyItFits:"Rowing works 86% of your muscles and is entirely low-impact on joints. Club rowing has a strong learn-to-row culture — most clubs run beginner programmes for adults.",
+      whyItFits:"Rowing is leg-driven, low-impact, and satisfyingly rhythmic. Indoor rowing lets you learn the movement first, while many clubs offer learn-to-row programs when you are ready for water.",
       howToStart:"Find a local rowing club and ask about their learn-to-row programme. Indoor rowing (ergs) at a gym is a zero-barrier first step.",
       equipment:[{item:'Athletic clothes',tier:'need'},{item:'Rowing gloves (optional)',tier:'nice'},{item:'Club membership',tier:'need'}],
       adaptive:{
         low_budget:'Indoor erg machines are at most gyms — no club membership needed to start. Concept2 rowing app is free.',
-        no_equipment:'Most rowing clubs provide everything on the water. Just show up.',
+        no_equipment:'Most rowing clubs provide boats and oars. Ask what clothing and shoes they prefer.',
         shy_solo:'Indoor rowing (erg) is completely solo. Many gyms have them.',
         social_team:'Rowing clubs are strong social communities — crew boats require teamwork.',
         limited_time:'A 20-minute erg piece is a full workout.',
@@ -423,7 +423,7 @@ const SPORTS = {
   golf: {
     id:'golf', name:'Golf', icon:'⛳',
     fitTags:['shy_solo','competitive','low_impact'],
-    pitch:"Patient, precise, and you can play alone at your own pace — driving ranges are everywhere.",
+    pitch:'One clean strike can carry a whole bucket. Start at the range, not the course.',
     guide:{
       whyItFits:"Golf rewards patience and precision. A driving range lets you practise completely solo for as long as you want. Courses are available at every budget level.",
       howToStart:"Go to a driving range. Rent clubs if you don't have them. Focus on making contact — nothing else matters on day one.",
@@ -443,7 +443,7 @@ const SPORTS = {
   gym_training: {
     id:'gym_training', name:'Gym Training', icon:'🏋️',
     fitTags:['shy_solo','high_energy'],
-    pitch:'Structured, measurable, and every gym has what you need to start today.',
+    pitch:'A plan turns the gym from intimidating room into a measurable weekly ritual.',
     guide:{
       whyItFits:"Weight training and gym-based fitness are among the most measurable activities you can do. You log your weights, you see progress week by week.",
       howToStart:'Sign up for a gym. On day one, do a simple full-body circuit: squat, press, row, hinge. 3 sets each. Keep it simple.',
@@ -463,7 +463,7 @@ const SPORTS = {
   calisthenics: {
     id:'calisthenics', name:'Calisthenics', icon:'💪',
     fitTags:['shy_solo','no_equipment','low_budget','high_energy'],
-    pitch:'Your bodyweight is enough — practise at home, in a park, anywhere.',
+    pitch:'No commute, no machines — just scalable strength work wherever you have floor space.',
     guide:{
       whyItFits:"Calisthenics requires nothing except your body and a surface. Push-ups, pull-ups, squats, and dips build real functional strength with no gym or gear.",
       howToStart:'Start with a basic bodyweight circuit: 3×10 push-ups, 3×10 squats, 3×10 dips (on a chair), 30-second plank. Do it daily.',
@@ -483,9 +483,9 @@ const SPORTS = {
   table_tennis: {
     id:'table_tennis', name:'Table Tennis', icon:'🏓',
     fitTags:['social_team','competitive','low_budget'],
-    pitch:'Fast, social, and you can practise anywhere with a table — one of the best reflexes workouts.',
+    pitch:'Small table, quick reads, sneaky spin — easy to try and surprisingly tactical.',
     guide:{
-      whyItFits:'Table tennis is deceptively deep. Speed, spin, and placement create a game that rewards both quick reflexes and tactical thinking.',
+      whyItFits:'Table tennis gets deep quickly. Speed, spin, and placement create a game that rewards both quick reflexes and tactical thinking.',
       howToStart:'Find a table at a community centre, pub, or park. Borrow a paddle. Just rally — keep the ball on the table for as long as possible.',
       equipment:[{item:'Table tennis paddle ($15–25)',tier:'need'},{item:'Table tennis balls (pack of 6)',tier:'need'}],
       adaptive:{
@@ -503,7 +503,7 @@ const SPORTS = {
   lacrosse: {
     id:'lacrosse', name:'Lacrosse', icon:'🥍',
     fitTags:['social_team','high_energy','competitive'],
-    pitch:'Fast-growing, physically demanding, strong team culture — leagues are expanding quickly.',
+    pitch:'Fast feet, stick skills, and wall-ball reps before you ever join the full field.',
     guide:{
       whyItFits:'Lacrosse combines the running of soccer with stick skills and tactical depth. Box lacrosse (indoor) is a more accessible entry point than field lacrosse.',
       howToStart:'Find a local lacrosse club or recreational league. Many run beginner programmes. Stick skills can be practised alone against a wall.',
@@ -523,9 +523,9 @@ const SPORTS = {
   rugby: {
     id:'rugby', name:'Rugby', icon:'🏉',
     fitTags:['social_team','high_energy','competitive'],
-    pitch:"High contact, high camaraderie — one of the most welcoming team sports you'll find.",
+    pitch:'Big contact if you want it, tag options if you do not, and a club culture that notices newcomers.',
     guide:{
-      whyItFits:"Rugby's culture of respect and inclusivity is genuine. Tag rugby (non-contact) is a great entry point. Club rugby is one of the strongest social sports cultures in the world.",
+      whyItFits:"Rugby has a strong club culture, but you do not have to start with full contact. Tag rugby and beginner sessions let you learn spacing, passing, and support lines first.",
       howToStart:'Find a local rugby club and ask about their beginner or tag rugby programme. Show up on a Saturday.',
       equipment:[{item:'Rugby boots / cleats',tier:'need'},{item:'Mouthguard',tier:'need'},{item:'Shorts and jersey',tier:'have'}],
       adaptive:{
@@ -543,7 +543,7 @@ const SPORTS = {
   fencing: {
     id:'fencing', name:'Fencing', icon:'🤺',
     fitTags:['shy_solo','competitive'],
-    pitch:'Strategy, reaction speed, and a surprisingly accessible entry — clubs welcome beginners warmly.',
+    pitch:'Swordplay with rules, footwork, and borrowed kit for your first lessons.',
     guide:{
       whyItFits:'Fencing is chess at speed. It rewards tactical thinking, reflexes, and composure under pressure. Clubs almost universally provide all equipment to beginners.',
       howToStart:'Find a local fencing club and attend a beginner class. Clubs provide all equipment for lessons.',
@@ -563,9 +563,9 @@ const SPORTS = {
   softball: {
     id:'softball', name:'Softball', icon:'🥎',
     fitTags:['social_team','competitive'],
-    pitch:'More beginner-friendly than baseball — co-ed recreational leagues are everywhere.',
+    pitch:'A relaxed team night with real competition hiding inside each at-bat.',
     guide:{
-      whyItFits:"Softball is one of the most popular recreational sports for adults. Co-ed leagues are social, competitive enough to be fun, and genuinely welcoming to beginners.",
+      whyItFits:"Softball is built for adult recreation: social enough to meet people, competitive enough to care, and forgiving enough that rusty players can still contribute.",
       howToStart:"Search your city's parks department for adult softball leagues. Many don't require you to have a team — they'll place you on one.",
       equipment:[{item:'Softball glove',tier:'need'},{item:'Bat (often provided by league)',tier:'nice'},{item:'Cleats',tier:'nice'}],
       adaptive:{
@@ -583,7 +583,7 @@ const SPORTS = {
   gymnastics: {
     id:'gymnastics', name:'Gymnastics', icon:'🤸',
     fitTags:['high_energy','shy_solo','competitive'],
-    pitch:'Strength, flexibility, and discipline — adult beginner classes are more common than you think.',
+    pitch:'Learn rolls, shapes, and body control safely before the flashy stuff enters the room.',
     guide:{
       whyItFits:'Gymnastics builds functional strength and body control that transfers to every other sport. Adult beginner classes exist in most cities and are more common than people expect.',
       howToStart:'Find a gymnastics club that offers adult classes. Many do. Start with floor work and basic rolls — no apparatus needed at first.',
@@ -603,7 +603,7 @@ const SPORTS = {
   skiing: {
     id:'skiing', name:'Skiing', icon:'⛷️',
     fitTags:['high_energy','social_team'],
-    pitch:'Mountain runs, cold air, and a steep learning curve that pays off fast.',
+    pitch:'Cold air, green runs, and the very useful skill of stopping on purpose.',
     guide:{
       whyItFits:'Skiing is exhilarating and progress is rapid once you start. Resorts are social environments and beginner lessons are very well structured.',
       howToStart:'Book a beginner lesson at a ski resort — do not self-teach. Rentals cover everything. One full lesson day gives you more than weeks of trial and error.',
@@ -623,7 +623,7 @@ const SPORTS = {
   snowboarding: {
     id:'snowboarding', name:'Snowboarding', icon:'🏂',
     fitTags:['high_energy','shy_solo'],
-    pitch:'Steeper first-day curve than skiing — but the culture and flow are worth it.',
+    pitch:'Expect a humbling first session; the payoff is a sideways flow that feels unlike anything else.',
     guide:{
       whyItFits:"Snowboarding has a distinct culture, creative freedom, and a flow state that's genuinely unique. Day one involves falling. Day two is dramatically better.",
       howToStart:'Book a beginner snowboard lesson. Wrist guards are essential. Commit past day one before deciding.',
@@ -643,9 +643,9 @@ const SPORTS = {
   surfing: {
     id:'surfing', name:'Surfing', icon:'🏄',
     fitTags:['high_energy','shy_solo'],
-    pitch:'Wave reading, balance, and one of the most addictive flow states in sport.',
+    pitch:'Foam board first, ocean ego last. The early win is reading one friendly wave.',
     guide:{
-      whyItFits:'Surfing combines physical challenge, mental focus, and a unique connection to the ocean. A surf school lesson gets most beginners to their first stand in 2 hours.',
+      whyItFits:'Surfing combines physical challenge, timing, and respect for the ocean. A surf school lesson gives beginners safer waves, softer boards, and a coach who knows when to send you.',
       howToStart:'Book a lesson at a surf school — they provide foam boards and choose safe beginner waves. Do not self-teach in open ocean.',
       equipment:[{item:'Surfboard (foam board)',tier:'rent'},{item:'Wetsuit (cold water)',tier:'rent'},{item:'Surf leash',tier:'need'},{item:'Water-resistant sunscreen',tier:'need'}],
       adaptive:{
@@ -663,14 +663,14 @@ const SPORTS = {
   archery: {
     id:'archery', name:'Archery', icon:'🏹',
     fitTags:['shy_solo','competitive','low_impact'],
-    pitch:'Quiet, precise, and meditative — clubs provide all equipment for beginners.',
+    pitch:'Stillness with a scorecard: breathe, anchor, release, learn from one arrow.',
     guide:{
-      whyItFits:'Archery is one of the most accessible precision sports. Calm, technically demanding, and satisfying to improve at. Most clubs provide everything for your first sessions.',
+      whyItFits:'Archery is calm, technical, and satisfying to improve at because every arrow gives feedback. Most clubs provide equipment for first sessions, so you can learn before buying gear.',
       howToStart:"Find a local archery club and ask about beginner sessions. Equipment is provided — don't buy anything yet.",
       equipment:[{item:'Recurve bow',tier:'club'},{item:'Arrows',tier:'club'},{item:'Arm guard and finger tab',tier:'club'},{item:'Own bow (after 2–3 months)',tier:'later'}],
       adaptive:{
         low_budget:"Clubs provide all equipment. Session fee: $10–20. Don't buy anything until you're committed.",
-        no_equipment:'Everything is provided. Just show up.',
+        no_equipment:'Clubs provide the bow, arrows, arm guard, and finger tab for intro sessions.',
         shy_solo:'Deeply individual. You focus on your own targets and progress.',
         social_team:'Archery clubs have a strong community. Club nights and competitions are social.',
         limited_time:'A session runs 60–90 minutes. Indoor ranges are weather-independent.',
@@ -683,7 +683,7 @@ const SPORTS = {
   cheer: {
     id:'cheer', name:'Cheerleading', icon:'📣',
     fitTags:['social_team','high_energy','competitive'],
-    pitch:'Athletic, team-driven, and more physically demanding than it looks.',
+    pitch:'Jumps, stunts, dance, and team timing — high-energy sport with a real schedule.',
     guide:{
       whyItFits:'Competitive cheerleading is a full sport — tumbling, stunting, jumping, and dancing at high intensity. The team culture is exceptionally strong and inclusive.',
       howToStart:'Find a local All-Star cheer gym and ask about beginner programmes. No prior experience required for entry-level teams.',
@@ -721,11 +721,11 @@ const NICHE_SPORTS = {
   scuba:            { id:'scuba',            name:'Scuba Diving',               icon:'🤿',   fitTags:['low_impact'],                                    pitch:'Breathing underwater with a tank, exploring reefs and wrecks. Open Water cert takes a weekend.' },
   freediving:       { id:'freediving',       name:'Freediving',                 icon:'🌊',   fitTags:['shy_solo','low_impact'],                         pitch:'Diving on a single breath. More mental than physical — calm wins over strong.' },
   water_polo:       { id:'water_polo',       name:'Water Polo',                 icon:'🤽',   fitTags:['social_team','high_energy','competitive'],       pitch:'Swim, tread water, throw a ball into a goal — brutal cardio in a pool.' },
-  dragon_boat:      { id:'dragon_boat',      name:'Dragon Boat Racing',         icon:'🐉',   fitTags:['social_team','high_energy'],                     pitch:'Twenty paddlers in a long boat moving as one to a drumbeat. Beginner-friendly clubs welcome anyone.' },
+  dragon_boat:      { id:'dragon_boat',      name:'Dragon Boat Racing',         icon:'🐉',   fitTags:['social_team','high_energy'],                     pitch:'Twenty paddlers in a long boat moving as one to a drumbeat. Clubs often teach timing before power.' },
   xc_skiing:        { id:'xc_skiing',        name:'Cross-country Skiing',       icon:'🎿',   fitTags:['shy_solo','high_energy','low_impact'],           pitch:'Skiing across flat or rolling terrain — basically running in snow with sticks.' },
   ice_skating:      { id:'ice_skating',      name:'Ice Skating',                icon:'⛸️',   fitTags:['low_impact','social_team'],                      pitch:'Gliding on ice. Public sessions at most rinks let you rent skates and just go.' },
-  figure_skating:   { id:'figure_skating',   name:'Figure Skating',             icon:'⛸️',   fitTags:['shy_solo','competitive','low_impact'],           pitch:'Spinning, jumping, and dancing on ice. Adult learn-to-skate programs exist in most cities.' },
-  curling:          { id:'curling',          name:'Curling',                    icon:'🥌',   fitTags:['social_team','low_impact','competitive'],        pitch:'Sliding granite stones on ice with brooms. Strangely tactical. Most clubs run beginner leagues.' },
+  figure_skating:   { id:'figure_skating',   name:'Figure Skating',             icon:'⛸️',   fitTags:['shy_solo','competitive','low_impact'],           pitch:'Spinning, jumping, and dancing on ice. Adult learn-to-skate classes are the sensible first door.' },
+  curling:          { id:'curling',          name:'Curling',                    icon:'🥌',   fitTags:['social_team','low_impact','competitive'],        pitch:'Sliding granite stones on ice with brooms. Strangely tactical, slower-paced, and very club-shaped.' },
   ice_hockey:       { id:'ice_hockey',       name:'Ice Hockey',                 icon:'🏒',   fitTags:['social_team','high_energy','competitive'],       pitch:'Skating with sticks chasing a puck. Adult beginner leagues exist — though the gear list is long.' },
   snowshoeing:      { id:'snowshoeing',      name:'Snowshoeing',                icon:'🥾',   fitTags:['shy_solo','low_impact','low_budget'],            pitch:'Walking on snow with oversized footwear. Hiking, but where deep snow would normally stop you.' },
   judo:             { id:'judo',             name:'Judo',                       icon:'🥋',   fitTags:['shy_solo','competitive'],                        pitch:'A grappling martial art focused on throws. Beginners spend their first weeks learning to fall safely.' },
@@ -740,25 +740,25 @@ const NICHE_SPORTS = {
   mma:              { id:'mma',              name:'MMA',                        icon:'🥊',   fitTags:['high_energy','competitive'],                     pitch:'Mixed martial arts — striking and grappling. Most gyms run no-spar fundamentals classes.' },
   kendo:            { id:'kendo',            name:'Kendo',                      icon:'⚔️',   fitTags:['shy_solo','competitive'],                        pitch:'Japanese sword fighting with bamboo swords and armor. Very disciplined, very loud.' },
   bmx:              { id:'bmx',              name:'BMX',                        icon:'🚴',   fitTags:['shy_solo','high_energy'],                        pitch:'Tricks and racing on a small, tough bike. Skateparks usually welcome BMX too.' },
-  mountain_biking:  { id:'mountain_biking',  name:'Mountain Biking',            icon:'🚵',   fitTags:['shy_solo','high_energy'],                        pitch:'Trail riding on a sturdy bike. Most cities have beginner trails and rental fleets.' },
+  mountain_biking:  { id:'mountain_biking',  name:'Mountain Biking',            icon:'🚵',   fitTags:['shy_solo','high_energy'],                        pitch:'Trail riding on a sturdy bike. Start with green routes and rentals before buying the dream setup.' },
   roller_derby:     { id:'roller_derby',     name:'Roller Derby',               icon:'🛼',   fitTags:['social_team','high_energy','competitive'],       pitch:'Full-contact roller skating on a banked or flat track. Most leagues run "fresh meat" beginner programs.' },
-  inline_skating:   { id:'inline_skating',   name:'Inline Skating',             icon:'🛼',   fitTags:['shy_solo','low_impact'],                         pitch:'Rollerblades. Bike paths and parks are perfect. Easy to start, hard to master.' },
+  inline_skating:   { id:'inline_skating',   name:'Inline Skating',             icon:'🛼',   fitTags:['shy_solo','low_impact'],                         pitch:'Rollerblades on paths and quiet parks. The first skill is stopping without bargaining with gravity.' },
   longboarding:     { id:'longboarding',     name:'Longboarding',               icon:'🛹',   fitTags:['shy_solo','low_impact'],                         pitch:'A long skateboard for cruising and carving. Less about tricks, more about flow.' },
-  disc_golf:        { id:'disc_golf',        name:'Disc Golf',                  icon:'🥏',   fitTags:['shy_solo','low_budget','low_impact','social_team'], pitch:'Golf with frisbees. Most courses are free public parks. One of the cheapest sports anywhere.' },
+  disc_golf:        { id:'disc_golf',        name:'Disc Golf',                  icon:'🥏',   fitTags:['shy_solo','low_budget','low_impact','social_team'], pitch:'Golf with discs, usually in public parks. One starter disc is enough to learn the shapes.' },
   horseback:        { id:'horseback',        name:'Horseback Riding',           icon:'🐎',   fitTags:['shy_solo','low_impact'],                         pitch:'Riding a horse, taught from the basics. Lesson barns provide everything for first sessions.' },
   polo:             { id:'polo',             name:'Polo',                       icon:'🐎',   fitTags:['social_team','competitive'],                     pitch:'Hockey on horseback with mallets. Some clubs run beginner polo schools with horses provided.' },
   darts:            { id:'darts',            name:'Darts',                      icon:'🎯',   fitTags:['low_budget','low_impact','social_team','competitive'], pitch:'A board on a wall and three darts. Pubs, local leagues, and world championships — all of it.' },
   lawn_bowls:       { id:'lawn_bowls',       name:'Lawn Bowls',                 icon:'🎱',   fitTags:['low_impact','social_team'],                      pitch:'Roll heavy biased balls toward a target on a manicured green. Quietly competitive, often delightful.' },
-  petanque:         { id:'petanque',         name:'Pétanque',                   icon:'🥎',   fitTags:['low_impact','social_team','low_budget'],         pitch:'French boules. Toss metal balls toward a small jack. Public squares everywhere in summer.' },
+  petanque:         { id:'petanque',         name:'Pétanque',                   icon:'🥎',   fitTags:['low_impact','social_team','low_budget'],         pitch:'French boules. Toss metal balls toward a small jack and let patience do more than power.' },
   cornhole:         { id:'cornhole',         name:'Cornhole',                   icon:'🌽',   fitTags:['low_budget','social_team','low_impact'],         pitch:'Toss bean bags into a hole on an angled board. Easy to set up in a backyard or park.' },
-  bouldering:       { id:'bouldering',       name:'Bouldering',                 icon:'🧗',   fitTags:['shy_solo','high_energy'],                        pitch:'Climbing short, hard problems on padded floors with no rope. The most accessible climbing.' },
+  bouldering:       { id:'bouldering',       name:'Bouldering',                 icon:'🧗',   fitTags:['shy_solo','high_energy'],                        pitch:'Climbing short problems over padded floors with no rope. Rent shoes, try easy colors, rest often.' },
   slacklining:      { id:'slacklining',      name:'Slacklining',                icon:'🪢',   fitTags:['shy_solo','low_budget'],                         pitch:'Walking on a flat webbed line strung between two trees. Surprisingly hard, surprisingly addictive.' },
   trampoline:       { id:'trampoline',       name:'Trampolining',               icon:'🤾',   fitTags:['high_energy','low_impact'],                      pitch:'Bouncing — but structured. Adult trampoline classes teach real somersaults and twists.' },
-  triathlon:        { id:'triathlon',        name:'Triathlon',                  icon:'🏊',   fitTags:['shy_solo','competitive','high_energy'],          pitch:'Swim, bike, run — back to back. Sprint distance is genuinely beginner-friendly.' },
+  triathlon:        { id:'triathlon',        name:'Triathlon',                  icon:'🏊',   fitTags:['shy_solo','competitive','high_energy'],          pitch:'Swim, bike, run — back to back. Sprint distance is the realistic first version.' },
   orienteering:     { id:'orienteering',     name:'Orienteering',               icon:'🧭',   fitTags:['shy_solo','low_budget'],                         pitch:'Running through forests with a map and compass, finding flagged checkpoints. A puzzle and a workout.' },
   cricket:          { id:'cricket',          name:'Cricket',                    icon:'🏏',   fitTags:['social_team','competitive'],                     pitch:'Bat, ball, two stumps, lots of rules. Soft-ball indoor cricket is a quick first taste.' },
-  field_hockey:     { id:'field_hockey',     name:'Field Hockey',               icon:'🏑',   fitTags:['social_team','high_energy','competitive'],       pitch:'Hockey on grass with curved sticks and a hard ball. Big in many countries, growing in others.' },
-  floorball:        { id:'floorball',        name:'Floorball',                  icon:'🏑',   fitTags:['social_team','high_energy'],                     pitch:'Indoor hockey with light plastic sticks and a wiffle ball. Fast and beginner-friendly.' },
+  field_hockey:     { id:'field_hockey',     name:'Field Hockey',               icon:'🏑',   fitTags:['social_team','high_energy','competitive'],       pitch:'Hockey on turf or grass with curved sticks and quick passing. Beginner clubs teach spacing early.' },
+  floorball:        { id:'floorball',        name:'Floorball',                  icon:'🏑',   fitTags:['social_team','high_energy'],                     pitch:'Indoor hockey with light plastic sticks and a wiffle ball. Fast play without ice or heavy pads.' },
   netball:          { id:'netball',          name:'Netball',                    icon:'🏐',   fitTags:['social_team','low_impact','competitive'],        pitch:'No-contact basketball cousin played mostly outside the US. Local leagues welcome new players.' },
   kabaddi:          { id:'kabaddi',          name:'Kabaddi',                    icon:'🤼',   fitTags:['social_team','high_energy'],                     pitch:'A South Asian tag-and-wrestle game. One person raids while holding their breath, chanting "kabaddi".' },
   sport_stacking:   { id:'sport_stacking',   name:'Sport Stacking',             icon:'🥤',   fitTags:['shy_solo','low_budget','low_impact'],            pitch:'Stacking and unstacking cups in patterns as fast as possible. Yes, there are world championships.' },

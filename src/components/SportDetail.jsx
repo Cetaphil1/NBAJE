@@ -19,34 +19,94 @@ function KeyCard({ icon, question, children, style: s = {} }) {
   )
 }
 
-function buildWeeklyPlan(sport, level) {
+function getChecklistTask(sport, index) {
+  const label = sport.guide?.checklist?.[index]
+  return label ? { label } : null
+}
+
+function getGearTask(sport) {
+  const gear = sport.guide?.equipment || []
+  const essentials = gear
+    .filter(eq => !eq.tier || ['need','rent','club'].includes(eq.tier))
+    .slice(0, 3)
+    .map(eq => eq.item || eq)
+
+  if (!essentials.length) return { label:'Check what, if anything, you need before spending money.' }
+
+  const hasBorrowedGear = gear.some(eq => ['rent','club'].includes(eq.tier))
+  return {
+    label: hasBorrowedGear
+      ? `Confirm rentals or loaner gear before buying anything. First-session items: ${essentials.join(', ')}.`
+      : `Sort the first-session setup: ${essentials.join(', ')}.`
+  }
+}
+
+function getMatchedAdaptiveTask(sport, tags = []) {
+  const adaptive = sport.guide?.adaptive
+  if (!adaptive) return null
+
+  const keys = ['low_budget','no_equipment','shy_solo','limited_time','social_team','competitive']
+  const key = keys.find(k => tags.includes(k) && adaptive[k])
+  return key ? { label: adaptive[key] } : null
+}
+
+function getConnectionTask(sport) {
+  if (sport.fitTags?.includes('social_team')) {
+    return { label:'Ask an organizer, coach, or friendly regular what beginners usually miss.' }
+  }
+
+  if (sport.fitTags?.includes('shy_solo')) {
+    return { label:'Choose one repeatable place, route, or setup so your next session has less friction.' }
+  }
+
+  return { label:'Ask one experienced person or staff member for a beginner tip.' }
+}
+
+function getNextStepTask(sport) {
+  if (sport.fitTags?.includes('social_team')) {
+    return { label:'If it felt good, ask about the next beginner class, open play, or league option.' }
+  }
+
+  if (sport.fitTags?.includes('competitive')) {
+    return { label:'If you want a target, ask when a low-pressure event or assessment would make sense.' }
+  }
+
+  return { label:'If it felt good, choose one weekly slot and make it boringly easy to repeat.' }
+}
+
+function cleanTasks(tasks) {
+  return tasks.filter(Boolean)
+}
+
+function buildWeeklyPlan(sport, level, tags = []) {
   const sn = sport.name
+  const guide = sport.guide || {}
   const plans = {
     beginner: [
-      { week:'Week 1', focus:'Get comfortable', tasks:[
-        { label:`Do a 15-min beginner ${sn} warm-up`,                ytQuery:`15 minute beginner ${sn} warm up` },
-        { label:`Watch a "${sn} basics" tutorial`,                    ytQuery:`${sn} basics for beginners 10 minutes` },
-        { label:`Practice 3 fundamental ${sn} drills for 20 min`,    ytQuery:`3 fundamental ${sn} drills beginner` },
-        { label:'Get or borrow any gear you need' },
-      ]},
-      { week:'Week 2', focus:'Build the habit', tasks:[
-        { label:`Run through a 20-min ${sn} skill drill`,            ytQuery:`${sn} skill drill 20 minutes` },
-        { label:`Watch a "${sn} mistakes to avoid" video`,           ytQuery:`top ${sn} mistakes beginners make` },
-        { label:'Find a local venue, club, or court near you' },
-        { label:'Go twice this week' },
-      ]},
-      { week:'Week 3', focus:'Level up', tasks:[
-        { label:`Drill one specific ${sn} technique for 15 min`,     ytQuery:`${sn} technique tutorial` },
-        { label:`Do a 30-min ${sn} workout follow-along`,            ytQuery:`30 minute ${sn} workout follow along` },
-        { label:'Introduce yourself to one other person at the venue' },
-        { label:'Track your sessions — even just a note in your phone' },
-      ]},
-      { week:'Week 4', focus:'Commit or pivot', tasks:[
-        { label:'Do 3 sessions this week' },
-        { label:`Watch a "${sn} progression roadmap" video`,         ytQuery:`${sn} progression roadmap beginner` },
-        { label:'Reflect — are you enjoying it? What needs to change?' },
-        { label:'Sign up for a class, league, or next step if yes' },
-      ]},
+      { week:'Week 1', focus:'Make it real', tasks:cleanTasks([
+        { label:guide.howToStart || `Find one low-pressure way to try ${sn}.` },
+        getChecklistTask(sport, 0),
+        getGearTask(sport),
+        getMatchedAdaptiveTask(sport, tags) || { label:'Keep the first attempt easy enough that you would repeat it.' },
+      ])},
+      { week:'Week 2', focus:'Repeat the basics', tasks:cleanTasks([
+        getChecklistTask(sport, 1) || { label:`Practise one basic ${sn} skill for 15-20 minutes.` },
+        { label:`Watch one beginner ${sn} technique video, then try only one cue.`, ytQuery:`${sn} beginner technique` },
+        { label:'Schedule one return session while the first one is still fresh.' },
+        { label:'Write down what felt fun, awkward, and confusing.' },
+      ])},
+      { week:'Week 3', focus:'Add a little guidance', tasks:cleanTasks([
+        getChecklistTask(sport, 2),
+        getConnectionTask(sport),
+        { label:`Do one short ${sn} session focused on control, not intensity.`, ytQuery:`beginner ${sn} control drills` },
+        { label:'Keep the commitment modest: one or two sessions is enough this week.' },
+      ])},
+      { week:'Week 4', focus:'Decide what sticks', tasks:cleanTasks([
+        getChecklistTask(sport, 3) || { label:'Repeat your best session from Week 2 or Week 3.' },
+        { label:'Notice the honest signal: did you want to come back after the hard part?' },
+        getNextStepTask(sport),
+        { label:`If yes, save one beginner ${sn} resource for next month.`, ytQuery:`${sn} beginner progression plan` },
+      ])},
     ],
     intermediate: [
       { week:'Week 1', focus:'Assess your baseline', tasks:[
@@ -298,7 +358,7 @@ export default function SportDetail({ sportId, tags, onBack, onRetake }) {
   if (!sport) return null
 
   const [g1, g2] = meta.gradient || ['oklch(26% 0.10 272)', 'oklch(14% 0.05 272)']
-  const weeklyPlan = level ? buildWeeklyPlan(sport, level) : []
+  const weeklyPlan = level ? buildWeeklyPlan(sport, level, tags) : []
 
   // Niche sports — stripped-down view
   if (isNiche) {
