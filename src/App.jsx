@@ -2,14 +2,14 @@ import { useState, useMemo, useRef } from 'react'
 import QUIZ_QUESTIONS from './data/questions'
 import SPORTS from './data/sports'
 import { LS } from './logic/storage'
-import ShaderBackground from './components/ShaderBackground'
+import ShaderBackground from './Components/ShaderBackground'
 import HomeScreen from './components/HomeScreen'
 import QuizScreen from './components/QuizScreen'
 import ResultsPage from './components/ResultsScreen'
 import SportDetail from './components/SportDetail'
 import BobRock from './components/BobRock'
 import AboutModal from './components/AboutModal'
-import GlobeLoader from './components/GlobeLoader'
+import GlobeLoader from './Components/GlobeLoader'
 
 async function fetchPersonalised(answers, allTags) {
   if (!window.claude?.complete) return null
