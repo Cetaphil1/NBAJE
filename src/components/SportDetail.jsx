@@ -21,31 +21,51 @@ function KeyCard({ icon, question, children, style: s = {} }) {
 
 function buildWeeklyPlan(sport, level) {
   const sn = sport.name
+  const checklist = sport.guide?.checklist || []
+  const firstPlace = checklist[0] || `Find one beginner-friendly ${sn} option near you`
+  const firstPractice = checklist[1] || `Try 10-15 minutes of basic ${sn} movement or skills`
+  const secondPractice = checklist[2] || `Do one low-pressure ${sn} session`
+  const coachedFirst = [
+    'boxing',
+    'wrestling',
+    'martial_arts',
+    'rugby',
+    'fencing',
+    'gymnastics',
+    'skiing',
+    'snowboarding',
+    'surfing',
+    'archery',
+    'cheer',
+  ].includes(sport.id)
+  const socialFirst = sport.fitTags.includes('social_team') && !sport.fitTags.includes('shy_solo')
+  const firstSession = coachedFirst
+    ? `Book or observe one beginner session; tell the coach you are brand new`
+    : socialFirst
+      ? `Watch one casual session first, then join a low-stakes round if it feels right`
+      : `Do one short solo session and stop while it still feels doable`
+
   const plans = {
     beginner: [
-      { week:'Week 1', focus:'Get comfortable', tasks:[
-        { label:`Do a 15-min beginner ${sn} warm-up`,                ytQuery:`15 minute beginner ${sn} warm up` },
-        { label:`Watch a "${sn} basics" tutorial`,                    ytQuery:`${sn} basics for beginners 10 minutes` },
-        { label:`Practice 3 fundamental ${sn} drills for 20 min`,    ytQuery:`3 fundamental ${sn} drills beginner` },
-        { label:'Get or borrow any gear you need' },
+      { week:'Week 1', focus:'Make it unintimidating', tasks:[
+        { label:firstPlace },
+        { label:`Watch a "first ${sn} session" video so the room feels familiar`, ytQuery:`first ${sn} session beginner what to expect` },
+        { label:'Get only the must-have gear; borrow or rent anything uncertain' },
       ]},
-      { week:'Week 2', focus:'Build the habit', tasks:[
-        { label:`Run through a 20-min ${sn} skill drill`,            ytQuery:`${sn} skill drill 20 minutes` },
-        { label:`Watch a "${sn} mistakes to avoid" video`,           ytQuery:`top ${sn} mistakes beginners make` },
-        { label:'Find a local venue, club, or court near you' },
-        { label:'Go twice this week' },
+      { week:'Week 2', focus:'Try the smallest real version', tasks:[
+        { label:firstPractice },
+        { label:firstSession },
+        { label:'Write down what felt good, awkward, and confusing while it is fresh' },
       ]},
-      { week:'Week 3', focus:'Level up', tasks:[
-        { label:`Drill one specific ${sn} technique for 15 min`,     ytQuery:`${sn} technique tutorial` },
-        { label:`Do a 30-min ${sn} workout follow-along`,            ytQuery:`30 minute ${sn} workout follow along` },
-        { label:'Introduce yourself to one other person at the venue' },
-        { label:'Track your sessions — even just a note in your phone' },
+      { week:'Week 3', focus:'Repeat without overreaching', tasks:[
+        { label:secondPractice },
+        { label:`Pick one beginner skill and practise it for 10-20 minutes`, ytQuery:`${sn} beginner fundamentals drill` },
+        { label:coachedFirst || socialFirst ? 'Ask one coach, staff member, or regular what beginners should focus on next' : 'Make one note in your phone about what improved since Week 1' },
       ]},
-      { week:'Week 4', focus:'Commit or pivot', tasks:[
-        { label:'Do 3 sessions this week' },
-        { label:`Watch a "${sn} progression roadmap" video`,         ytQuery:`${sn} progression roadmap beginner` },
-        { label:'Reflect — are you enjoying it? What needs to change?' },
-        { label:'Sign up for a class, league, or next step if yes' },
+      { week:'Week 4', focus:'Decide what deserves another month', tasks:[
+        { label:'Do one more session at a pace you would actually repeat' },
+        { label:`Look up the next honest step: class, clinic, league, trail, or home routine`, ytQuery:`${sn} beginner next steps` },
+        { label:'Choose: keep going, change the setup, or pivot with no guilt' },
       ]},
     ],
     intermediate: [
