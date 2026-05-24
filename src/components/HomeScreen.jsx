@@ -10,7 +10,7 @@ export default function HomeScreen({ onStart, savedResult, onContinue, onAbout }
           Find your next<br/>thing to try.
         </h1>
         <p style={{ fontSize:'1.1rem', color:T.textSec, lineHeight:1.7, marginBottom:44, maxWidth:380, margin:'0 auto 44px' }}>
-          Six quick questions. Honest, low-stakes suggestions. A concrete first step to actually do it.
+          Six quick questions. Low-stakes suggestions. A first step you might actually do this week.
         </p>
         <div style={{ display:'flex', flexDirection:'column', gap:14, alignItems:'center' }}>
           <button
@@ -35,7 +35,7 @@ export default function HomeScreen({ onStart, savedResult, onContinue, onAbout }
           )}
         </div>
         <p style={{ fontSize:'0.8rem', color:T.textMut, marginTop:40, lineHeight:1.6 }}>
-          35+ activities · Low-stakes suggestions · Not a final answer
+          35+ activities · Small experiments · No pressure to become a whole new person
         </p>
         <button
           onClick={onAbout}
