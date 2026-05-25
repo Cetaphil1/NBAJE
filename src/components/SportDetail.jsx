@@ -21,31 +21,53 @@ function KeyCard({ icon, question, children, style: s = {} }) {
 
 function buildWeeklyPlan(sport, level) {
   const sn = sport.name
+  const guide = sport.guide || {}
+  const checklist = guide.checklist || []
+  const meta = SPORT_META?.[sport.id] || {}
+  const coachedFirst = new Set([
+    'boxing', 'wrestling', 'martial_arts', 'skiing', 'snowboarding', 'surfing',
+    'gymnastics', 'cheer', 'rowing', 'fencing', 'archery', 'rugby', 'lacrosse',
+  ])
+  const soloFriendly = sport.fitTags.includes('shy_solo') && !coachedFirst.has(sport.id)
+  const firstTry = meta.actionBridge || guide.howToStart || `Find one beginner-friendly way to try ${sn}.`
+  const placeStep = checklist.find(item => /find|book|search|attend|visit|download|sign up|get|borrow/i.test(item))
+    || `Find a beginner-friendly ${sn.toLowerCase()} venue, class, club, or practice spot.`
+  const skillStep = checklist.find(item => /practi[cs]e|learn|focus|complete|try|take|rally|swim|ride|throw|hit|run|walk/i.test(item))
+    || `Practise one basic ${sn.toLowerCase()} skill for 10-20 easy minutes.`
+  const socialStep = sport.fitTags.includes('social_team')
+    ? `Ask one organiser, coach, or regular where brand-new ${sn.toLowerCase()} players should start.`
+    : soloFriendly
+      ? `Do one low-pressure solo session and stop while you still want to come back.`
+      : `Ask a coach or staff member what a safe second session should look like.`
+  const repeatStep = coachedFirst.has(sport.id)
+    ? `Book or attend one more coached beginner session before judging whether ${sn.toLowerCase()} is for you.`
+    : `Repeat your easiest session once, changing only one thing: location, duration, or the drill.`
+
   const plans = {
     beginner: [
-      { week:'Week 1', focus:'Get comfortable', tasks:[
-        { label:`Do a 15-min beginner ${sn} warm-up`,                ytQuery:`15 minute beginner ${sn} warm up` },
-        { label:`Watch a "${sn} basics" tutorial`,                    ytQuery:`${sn} basics for beginners 10 minutes` },
-        { label:`Practice 3 fundamental ${sn} drills for 20 min`,    ytQuery:`3 fundamental ${sn} drills beginner` },
-        { label:'Get or borrow any gear you need' },
+      { week:'Week 1', focus:'Make it real, not perfect', tasks:[
+        { label:firstTry },
+        { label:placeStep },
+        { label:`Watch one short "${sn} basics" video so the first session feels less mysterious`, ytQuery:`${sn} basics for absolute beginners` },
+        { label:'Write down what felt fun, awkward, or easier than expected' },
       ]},
-      { week:'Week 2', focus:'Build the habit', tasks:[
-        { label:`Run through a 20-min ${sn} skill drill`,            ytQuery:`${sn} skill drill 20 minutes` },
-        { label:`Watch a "${sn} mistakes to avoid" video`,           ytQuery:`top ${sn} mistakes beginners make` },
-        { label:'Find a local venue, club, or court near you' },
-        { label:'Go twice this week' },
+      { week:'Week 2', focus:'Repeat the smallest version', tasks:[
+        { label:repeatStep },
+        { label:skillStep },
+        { label:'Notice the one thing that made you tense, confused, or tired fastest' },
+        { label:`Look up one beginner mistake in ${sn} and pick just one to avoid next time`, ytQuery:`beginner ${sn} mistakes to avoid` },
       ]},
-      { week:'Week 3', focus:'Level up', tasks:[
-        { label:`Drill one specific ${sn} technique for 15 min`,     ytQuery:`${sn} technique tutorial` },
-        { label:`Do a 30-min ${sn} workout follow-along`,            ytQuery:`30 minute ${sn} workout follow along` },
-        { label:'Introduce yourself to one other person at the venue' },
-        { label:'Track your sessions — even just a note in your phone' },
+      { week:'Week 3', focus:'Add one human touch', tasks:[
+        { label:socialStep },
+        { label:`Practise one specific ${sn} skill for 15 minutes`, ytQuery:`beginner ${sn} one skill drill` },
+        { label:'Save the venue, class, route, or group that felt least intimidating' },
+        { label:'Track your sessions in one sentence, not a spreadsheet' },
       ]},
-      { week:'Week 4', focus:'Commit or pivot', tasks:[
-        { label:'Do 3 sessions this week' },
-        { label:`Watch a "${sn} progression roadmap" video`,         ytQuery:`${sn} progression roadmap beginner` },
-        { label:'Reflect — are you enjoying it? What needs to change?' },
-        { label:'Sign up for a class, league, or next step if yes' },
+      { week:'Week 4', focus:'Decide what kind of yes this is', tasks:[
+        { label:'Do one more session at a pace you could imagine repeating' },
+        { label:`Watch a realistic ${sn} progression video and ignore anything aimed at advanced athletes`, ytQuery:`realistic ${sn} progression beginner` },
+        { label:'Decide: keep going, change the format, or park it with no guilt' },
+        { label:'If it still has a spark, book the next class, open play, route, or practice slot' },
       ]},
     ],
     intermediate: [

@@ -22,7 +22,7 @@ export default function DiscoveryCard({ cat, sport, isTop, onClick }) {
           <span style={{ fontSize: isTop ? '2.8rem' : '2.2rem', lineHeight:1, filter:'drop-shadow(0 2px 8px rgba(0,0,0,0.3))' }}>{sport.icon}</span>
           <div>
             <div style={{ fontSize: isTop ? '1.5rem' : '1.2rem', fontWeight:800, color:'#fff', letterSpacing:'-0.02em', lineHeight:1.1 }}>{sport.name}</div>
-            {isTop && <div style={{ fontSize:'0.8rem', color:'rgba(255,255,255,0.6)', marginTop:3 }}>Top match this session</div>}
+            {isTop && <div style={{ fontSize:'0.8rem', color:'rgba(255,255,255,0.6)', marginTop:3 }}>Best read from your answers</div>}
           </div>
         </div>
       </div>
@@ -40,7 +40,7 @@ export default function DiscoveryCard({ cat, sport, isTop, onClick }) {
           </div>
         )}
         <div style={{ color:cat.color, fontSize:'0.9rem', fontWeight:700, display:'flex', alignItems:'center', gap:4, marginTop:4 }}>
-          Explore <span style={{ transform: hov ? 'translateX(4px)' : 'none', transition:'transform 0.15s', display:'inline-block' }}>→</span>
+          See first steps <span style={{ transform: hov ? 'translateX(4px)' : 'none', transition:'transform 0.15s', display:'inline-block' }}>→</span>
         </div>
       </div>
     </div>
