@@ -107,9 +107,9 @@ export default function ResultsPage({ initialTags, personalised, onSelect, onBac
 
       <p style={{ fontSize:'0.8rem', fontWeight:700, letterSpacing:'0.12em', textTransform:'uppercase', color:T.accent, marginBottom:10 }}>Results</p>
       <h2 style={{ fontSize:'clamp(1.8rem, 5vw, 2.6rem)', fontWeight:800, letterSpacing:'-0.02em', color:T.textPri, marginBottom:6 }}>
-        Here are a few things<br/>worth trying.
+        Your short list is ready.
       </h2>
-      <p style={{ fontSize:'1rem', color:T.textMut, marginBottom: personalised ? 20 : 28 }}>Pick one and explore it. Not a final verdict — a good first experiment.</p>
+      <p style={{ fontSize:'1rem', color:T.textMut, marginBottom: personalised ? 20 : 28 }}>Pick one and treat it like an experiment, not a personality test.</p>
 
       <PersonalisedInsight data={personalised} />
 
