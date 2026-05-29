@@ -22,7 +22,7 @@ export default function DiscoveryCard({ cat, sport, isTop, onClick }) {
           <span style={{ fontSize: isTop ? '2.8rem' : '2.2rem', lineHeight:1, filter:'drop-shadow(0 2px 8px rgba(0,0,0,0.3))' }}>{sport.icon}</span>
           <div>
             <div style={{ fontSize: isTop ? '1.5rem' : '1.2rem', fontWeight:800, color:'#fff', letterSpacing:'-0.02em', lineHeight:1.1 }}>{sport.name}</div>
-            {isTop && <div style={{ fontSize:'0.8rem', color:'rgba(255,255,255,0.6)', marginTop:3 }}>Top match this session</div>}
+            {isTop && <div style={{ fontSize:'0.8rem', color:'rgba(255,255,255,0.68)', marginTop:3 }}>Your strongest signal right now</div>}
           </div>
         </div>
       </div>
@@ -31,16 +31,22 @@ export default function DiscoveryCard({ cat, sport, isTop, onClick }) {
       <div style={{ padding:'16px 20px 20px', display:'flex', flexDirection:'column', gap:12 }}>
         <p style={{ fontSize:'0.95rem', color:T.textSec, lineHeight:1.6 }}>{sport.pitch}</p>
         {meta.socialProof && (
-          <p style={{ fontSize:'0.8rem', color:T.textMut, fontStyle:'italic', lineHeight:1.5 }}>"{meta.socialProof}"</p>
+          <div style={{ background:'oklch(16% 0.025 272 / 0.52)', border:`1px solid ${T.border}`, borderRadius:10, padding:'10px 12px' }}>
+            <p style={{ fontSize:'0.68rem', fontWeight:800, color:T.textMut, textTransform:'uppercase', letterSpacing:'0.08em', marginBottom:4 }}>Why it might click</p>
+            <p style={{ fontSize:'0.84rem', color:T.textSec, lineHeight:1.5 }}>{meta.socialProof}</p>
+          </div>
         )}
         {meta.actionBridge && (
           <div style={{ display:'flex', alignItems:'flex-start', gap:8, background:T.surfaceHi, borderRadius:10, padding:'10px 14px', border:`1px solid ${T.border}` }}>
             <span style={{ color:cat.color, fontWeight:700, flexShrink:0, marginTop:1 }}>→</span>
-            <p style={{ fontSize:'0.88rem', color:T.textSec, lineHeight:1.5 }}>{meta.actionBridge}</p>
+            <div>
+              <p style={{ fontSize:'0.68rem', fontWeight:800, color:T.textMut, textTransform:'uppercase', letterSpacing:'0.08em', marginBottom:3 }}>First tiny move</p>
+              <p style={{ fontSize:'0.88rem', color:T.textSec, lineHeight:1.5 }}>{meta.actionBridge}</p>
+            </div>
           </div>
         )}
         <div style={{ color:cat.color, fontSize:'0.9rem', fontWeight:700, display:'flex', alignItems:'center', gap:4, marginTop:4 }}>
-          Explore <span style={{ transform: hov ? 'translateX(4px)' : 'none', transition:'transform 0.15s', display:'inline-block' }}>→</span>
+          Build a starter plan <span style={{ transform: hov ? 'translateX(4px)' : 'none', transition:'transform 0.15s', display:'inline-block' }}>→</span>
         </div>
       </div>
     </div>
