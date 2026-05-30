@@ -23,29 +23,29 @@ function buildWeeklyPlan(sport, level) {
   const sn = sport.name
   const plans = {
     beginner: [
-      { week:'Week 1', focus:'Get comfortable', tasks:[
-        { label:`Do a 15-min beginner ${sn} warm-up`,                ytQuery:`15 minute beginner ${sn} warm up` },
-        { label:`Watch a "${sn} basics" tutorial`,                    ytQuery:`${sn} basics for beginners 10 minutes` },
-        { label:`Practice 3 fundamental ${sn} drills for 20 min`,    ytQuery:`3 fundamental ${sn} drills beginner` },
-        { label:'Get or borrow any gear you need' },
+      { week:'Week 1', focus:'Make it real', tasks:[
+        { label:`Watch one honest "${sn} for beginners" walkthrough`, ytQuery:`${sn} for beginners what to expect first time` },
+        { label:'Find the closest place you could try it, even if you do not go yet' },
+        { label:'Sort the minimum gear only: borrow, rent, or use what you already own' },
+        { label:`Try one tiny ${sn} skill for 10-15 minutes and stop while it still feels fun`, ytQuery:`easy first ${sn} drill beginner` },
       ]},
-      { week:'Week 2', focus:'Build the habit', tasks:[
-        { label:`Run through a 20-min ${sn} skill drill`,            ytQuery:`${sn} skill drill 20 minutes` },
-        { label:`Watch a "${sn} mistakes to avoid" video`,           ytQuery:`top ${sn} mistakes beginners make` },
-        { label:'Find a local venue, club, or court near you' },
-        { label:'Go twice this week' },
+      { week:'Week 2', focus:'Try without overcommitting', tasks:[
+        { label:'Do one short solo practice or beginner class' },
+        { label:`Watch a "${sn} first session mistakes" video`,       ytQuery:`${sn} first session beginner mistakes` },
+        { label:'Notice what felt awkward, confusing, or surprisingly good' },
+        { label:'If your body is sore or your nerves are high, take an extra day. That still counts.' },
       ]},
-      { week:'Week 3', focus:'Level up', tasks:[
-        { label:`Drill one specific ${sn} technique for 15 min`,     ytQuery:`${sn} technique tutorial` },
-        { label:`Do a 30-min ${sn} workout follow-along`,            ytQuery:`30 minute ${sn} workout follow along` },
-        { label:'Introduce yourself to one other person at the venue' },
-        { label:'Track your sessions — even just a note in your phone' },
+      { week:'Week 3', focus:'Get a little feedback', tasks:[
+        { label:`Pick one basic ${sn} skill and repeat it slowly`,    ytQuery:`basic ${sn} technique beginner slow practice` },
+        { label:'Ask a coach, staff member, or experienced player one beginner question' },
+        { label:'Write down one thing that improved, no matter how small' },
+        { label:'Decide whether you prefer learning solo, in a class, or with other people' },
       ]},
-      { week:'Week 4', focus:'Commit or pivot', tasks:[
-        { label:'Do 3 sessions this week' },
-        { label:`Watch a "${sn} progression roadmap" video`,         ytQuery:`${sn} progression roadmap beginner` },
-        { label:'Reflect — are you enjoying it? What needs to change?' },
-        { label:'Sign up for a class, league, or next step if yes' },
+      { week:'Week 4', focus:'Choose the next step', tasks:[
+        { label:'Do one more session before judging the whole sport' },
+        { label:`Look up the normal beginner path for ${sn}`,         ytQuery:`${sn} beginner progression what to learn next` },
+        { label:'Be honest: did it give you energy, calm, confidence, or curiosity?' },
+        { label:'If yes, book the next class, drop-in, or practice. If no, pivot without guilt.' },
       ]},
     ],
     intermediate: [
@@ -321,9 +321,9 @@ export default function SportDetail({ sportId, tags, onBack, onRetake }) {
             <span key={t} style={{ fontSize:'0.72rem', fontWeight:700, color:T.textSec, background:T.surfaceHi, border:`1px solid ${T.border}`, borderRadius:99, padding:'4px 10px', textTransform:'uppercase', letterSpacing:'0.06em' }}>{t.replace(/_/g,' ')}</span>
           ))}
         </div>
-        <KeyCard icon="🧭" question="No deep guide for this one — yet.">
+        <KeyCard icon="🧭" question="This one is off the main map.">
           <p style={{ fontSize:'0.95rem', color:T.textSec, lineHeight:1.6 }}>
-            We don't have a full plan for niche activities. Here are three honest first steps to figure out if it's for you.
+            We do not have a full plan for every niche activity yet, but you can still test the spark without overcommitting.
           </p>
           <div style={{ display:'flex', flexDirection:'column', gap:10, marginTop:8 }}>
             {[
@@ -378,13 +378,13 @@ export default function SportDetail({ sportId, tags, onBack, onRetake }) {
           )}
           <div style={{ textAlign:'center', padding:'32px 0 8px' }}>
             <p style={{ fontSize:'1.1rem', color:T.textSec, marginBottom:24, lineHeight:1.6 }}>
-              Ready to make this real? Answer a couple quick questions and we'll build a personalised plan for you.
+              Want to try it without winging it? Answer a couple quick questions and we'll shape a realistic first plan.
             </p>
             <button
               onClick={() => { setFlow('level'); save({ flow:'level' }) }}
               className="btn btn-primary"
               style={{ padding:'18px 52px', fontSize:'1.08rem' }}>
-              Get Started →
+              Build My Plan →
             </button>
           </div>
         </div>
