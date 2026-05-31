@@ -17,11 +17,11 @@ const FILTER_CHIPS = [
 ]
 
 const DISC_CATS = [
-  { key:'bestFit',   label:'⭐ Best fit',    color:T.accent, dimColor:T.accentDim },
-  { key:'lowBudget', label:'💸 Best value',  color:T.blue,   dimColor:T.blueDim   },
-  { key:'solo',      label:'🧍 Try it solo', color:T.amber,  dimColor:T.amberDim  },
-  { key:'social',    label:'👥 Meet people', color:T.accent, dimColor:T.accentDim },
-  { key:'wildcard',  label:'🎲 Wildcard',    color:T.pink,   dimColor:T.pinkDim   },
+  { key:'bestFit',   label:'⭐ Strong match',      color:T.accent, dimColor:T.accentDim },
+  { key:'lowBudget', label:'💸 Easy first step',   color:T.blue,   dimColor:T.blueDim   },
+  { key:'solo',      label:'🧍 Your own lane',     color:T.amber,  dimColor:T.amberDim  },
+  { key:'social',    label:'👥 People-friendly',   color:T.accent, dimColor:T.accentDim },
+  { key:'wildcard',  label:'🎲 Worth a curveball', color:T.pink,   dimColor:T.pinkDim   },
 ]
 
 function PersonalisedInsight({ data }) {
@@ -107,9 +107,9 @@ export default function ResultsPage({ initialTags, personalised, onSelect, onBac
 
       <p style={{ fontSize:'0.8rem', fontWeight:700, letterSpacing:'0.12em', textTransform:'uppercase', color:T.accent, marginBottom:10 }}>Results</p>
       <h2 style={{ fontSize:'clamp(1.8rem, 5vw, 2.6rem)', fontWeight:800, letterSpacing:'-0.02em', color:T.textPri, marginBottom:6 }}>
-        Here are a few things<br/>worth trying.
+        A few places to start<br/>without overthinking it.
       </h2>
-      <p style={{ fontSize:'1rem', color:T.textMut, marginBottom: personalised ? 20 : 28 }}>Pick one and explore it. Not a final verdict — a good first experiment.</p>
+      <p style={{ fontSize:'1rem', color:T.textMut, marginBottom: personalised ? 20 : 28 }}>Pick the one that makes you curious. This is a first experiment, not a life decision.</p>
 
       <PersonalisedInsight data={personalised} />
 
