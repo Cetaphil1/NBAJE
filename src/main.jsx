@@ -1,10 +1,17 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import './index.css'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './tokens.css';
+import './landing.css';
+import './survey.css';
+import SurveyApp from './survey';
+import IcebergScene from './iceberg';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-)
+const surveyMount = document.getElementById('survey-mount');
+if (surveyMount) {
+  ReactDOM.createRoot(surveyMount).render(<SurveyApp />);
+}
+
+const icebergMount = document.getElementById('iceberg-mount');
+if (icebergMount) {
+  ReactDOM.createRoot(icebergMount).render(<IcebergScene />);
+}

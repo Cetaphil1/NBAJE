@@ -1,16 +1,650 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sport Fit Quiz</title>
-    <meta name="description" content="Answer 6 quick questions and discover which sport or activity matches your preferences — plus a concrete first step to get started." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fit Beyond Interest — A research project on college major fit</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Survey runtime mount — visible only when location.hash starts with #/survey -->
+  <div id="survey-mount"></div>
+
+  <!-- Landing site — hidden when survey is in foreground -->
+  <div id="landing-root">
+
+  <!-- ════════════════════ TOP NAV ════════════════════ -->
+  <header class="topnav">
+    <div class="topnav__inner">
+      <a href="#top" class="brand">
+        <span class="mark"></span>
+        <span>
+          Fit Beyond Interest
+          <small>Major-fit research · pilot v2.1</small>
+        </span>
+      </a>
+
+      <nav class="topnav__links">
+        <a href="#comparison">The Model</a>
+        <a href="#engineering">Case Study</a>
+        <a href="#iceberg">Iceberg</a>
+        <a href="#constructs">Constructs</a>
+        <a href="#pilot">Pilot Plan</a>
+        <a href="#models">Prediction</a>
+      </nav>
+
+      <div class="topnav__cta">
+        <span class="topnav__meta">
+          <span class="pulse"></span>
+          Pilot Open · n=5
+        </span>
+        <a href="#/survey" class="btn btn--primary">
+          Take the Survey
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ════════════════════ HERO ════════════════════ -->
+  <section class="hero" id="top">
+    <div class="hero__bg" aria-hidden="true"></div>
+    <div class="hero__grid" aria-hidden="true"></div>
+
+    <div class="wrap hero__inner">
+      <div>
+        <div class="hero__eyebrow">
+          <span class="chip">v2.1</span>
+          Behavioral &amp; psychological predictors of major fit
+        </div>
+
+        <h1>
+          Fit <span class="accent">Beyond</span><br />
+          Interest.
+        </h1>
+
+        <p class="hero__sub">
+          Why liking a major is not the same as fitting a major.
+        </p>
+
+        <p class="hero__body">
+          Most major quizzes ask what students enjoy. But students can like engineering, business, medicine, or computer science and still switch out — because the real environment doesn't match how they handle workload, stress, motivation, or belonging.
+        </p>
+
+        <div class="hero__ctas">
+          <a href="#comparison" class="btn btn--primary">
+            Explore the model
+            <span class="arrow">→</span>
+          </a>
+          <a href="#/survey" class="btn">
+            Take the survey
+          </a>
+        </div>
+      </div>
+
+      <!-- Hero diagnostic panel -->
+      <aside class="hero-panel" aria-label="Sample fit profile">
+        <div class="hero-panel__head">
+          <span>Person × Major fit profile</span>
+          <span class="live"><span class="d"></span>Sample</span>
+        </div>
+
+        <div class="fit-radar">
+          <div class="fit-row"><span class="lbl">Interest</span><span class="bar"><i style="width: 90%"></i></span><span class="v">4.6</span></div>
+          <div class="fit-row warn"><span class="lbl">Environment</span><span class="bar"><i style="width: 48%"></i></span><span class="v">2.4</span></div>
+          <div class="fit-row"><span class="lbl">Engagement</span><span class="bar"><i style="width: 64%"></i></span><span class="v">3.2</span></div>
+          <div class="fit-row warn"><span class="lbl">Motivation</span><span class="bar"><i style="width: 52%"></i></span><span class="v">2.6</span></div>
+          <div class="fit-row danger"><span class="lbl">Burnout</span><span class="bar"><i style="width: 82%"></i></span><span class="v">4.1</span></div>
+          <div class="fit-row warn"><span class="lbl">Belonging</span><span class="bar"><i style="width: 44%"></i></span><span class="v">2.2</span></div>
+          <div class="fit-row danger"><span class="lbl">Switch risk</span><span class="bar"><i style="width: 76%"></i></span><span class="v">3.8</span></div>
+        </div>
+
+        <div class="hero-panel__foot">
+          <span>↑ Interest alone hides the rest</span>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ════════════════════ 02 · OLD QUIZ VS DEEPER FIT ════════════════════ -->
+  <section class="section" id="comparison">
+    <div class="wrap">
+      <div class="section__head">
+        <div class="section__meta">
+          <span class="num">02</span>
+          <span class="dot"></span>
+          The Core Comparison
+        </div>
+        <h2 class="h1">A quiz can tell you what you like.<br />It can't tell you if you'll stay.</h2>
+        <p class="body-l">Most major-fit tools collapse a complex decision into one signal. The Fit Beyond Interest model unpacks it into the layers that actually predict persistence.</p>
+      </div>
+
+      <div class="compare">
+        <!-- OLD QUIZ -->
+        <article class="compare__col compare__col--old">
+          <div class="compare__tag">Old quiz model</div>
+          <h3 class="compare__title">What do you like?</h3>
+          <p class="body" style="margin: 0 0 24px;">A single interest signal in. A major recommendation out. The rest of the picture is left to chance.</p>
+
+          <div class="oldflow">
+            <span class="step">Interest survey</span>
+            <span class="arr">→</span>
+            <span class="step">Top match</span>
+            <span class="arr">→</span>
+            <span class="result">Recommended major</span>
+          </div>
+
+          <div style="margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--stroke);">
+            <span class="badge badge--red">Missing</span>
+            <p class="body" style="margin: 12px 0 0; font-size: 13.5px;">workload tolerance · stress response · motivation quality · belonging · burnout · advising</p>
+          </div>
+        </article>
+
+        <!-- DEEPER FIT -->
+        <article class="compare__col compare__col--new">
+          <div class="compare__tag">Deeper fit model</div>
+          <h3 class="compare__title">Can you thrive in the real environment?</h3>
+          <p class="body" style="margin: 0 0 24px; color: var(--ink-2);">Seven layered signals that compound into persistence — or into a quiet decision to switch out.</p>
+
+          <div class="flow">
+            <div class="flow__node"><span class="idx">01</span><span class="pip"></span>Interest in the subject</div>
+            <div class="flow__node"><span class="idx">02</span><span class="pip"></span>Environment fit</div>
+            <div class="flow__node"><span class="idx">03</span><span class="pip"></span>Behavioral engagement</div>
+            <div class="flow__node"><span class="idx">04</span><span class="pip"></span>Motivation quality</div>
+            <div class="flow__node"><span class="idx">05</span><span class="pip"></span>Burnout &amp; resilience</div>
+            <div class="flow__node"><span class="idx">06</span><span class="pip"></span>Satisfaction</div>
+            <div class="flow__node"><span class="idx">07</span><span class="pip"></span>Persistence</div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ 03 · ENGINEERING EXAMPLE ════════════════════ -->
+  <section class="section section--dark" id="engineering">
+    <div class="wrap">
+      <div class="section__head">
+        <div class="section__meta">
+          <span class="num">03</span>
+          <span class="dot" style="background: var(--yellow); box-shadow: 0 0 12px var(--yellow);"></span>
+          A Case in Point
+        </div>
+        <h2 class="h1">A student likes engineering.<br />The major still grinds them down.</h2>
+        <p class="body-l">Liking the subject and surviving the day-to-day are two different problems. Here's how the gap shows up.</p>
+      </div>
+
+      <div class="split">
+        <!-- LEFT: WHAT PULLED THEM IN -->
+        <div class="split__col split__col--like">
+          <h3 class="split__title">
+            <span class="badge badge--blue">Interest profile</span>
+          </h3>
+          <p class="split__sub">What pulled them in</p>
+          <div class="chips">
+            <span class="chip"><span class="dot"></span>Likes math</span>
+            <span class="chip"><span class="dot"></span>Likes building things</span>
+            <span class="chip"><span class="dot"></span>Likes technology</span>
+            <span class="chip"><span class="dot"></span>Likes problem-solving</span>
+            <span class="chip"><span class="dot"></span>Strong in AP physics</span>
+            <span class="chip"><span class="dot"></span>"Engineering sounds right"</span>
+          </div>
+
+          <div style="margin-top: 32px; display: flex; align-items: center; gap: 10px;">
+            <span class="badge badge--blue">Quiz verdict</span>
+            <span class="body" style="font-size: 13.5px;">→ Engineering, high match</span>
+          </div>
+        </div>
+
+        <!-- RIGHT: WHAT THEY ACTUALLY MEET -->
+        <div class="split__col split__col--real">
+          <h3 class="split__title">
+            <span class="badge badge--yellow">Real environment</span>
+          </h3>
+          <p class="split__sub">What they actually meet</p>
+          <div class="chips">
+            <span class="chip chip--warn"><span class="dot"></span>60-hour weeks</span>
+            <span class="chip chip--warn"><span class="dot"></span>Weed-out calc &amp; physics</span>
+            <span class="chip chip--warn"><span class="dot"></span>Problem-set marathons</span>
+            <span class="chip chip--warn"><span class="dot"></span>Cold, competitive culture</span>
+            <span class="chip chip--warn"><span class="dot"></span>Abstract theory before practice</span>
+            <span class="chip chip--risk"><span class="dot"></span>"Not a real engineer" doubt</span>
+            <span class="chip chip--risk"><span class="dot"></span>Burnout by sophomore year</span>
+            <span class="chip chip--risk"><span class="dot"></span>Quietly considers switching</span>
+          </div>
+
+          <div style="margin-top: 32px; display: flex; align-items: center; gap: 10px;">
+            <span class="badge badge--red">Real outcome</span>
+            <span class="body" style="font-size: 13.5px;">→ Likes engineering. Switches to applied math.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="conclusion">
+        <div class="conclusion__icon">!</div>
+        <p class="conclusion__text">
+          High interest doesn't guarantee sustainable fit. <em>The environment has to match the student — not just the subject.</em>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ 04 · ICEBERG ════════════════════ -->
+  <section class="section" id="iceberg">
+    <div class="wrap">
+      <div class="section__head">
+        <div class="section__meta">
+          <span class="num">04</span>
+          <span class="dot" style="background: var(--purple); box-shadow: 0 0 12px var(--purple);"></span>
+          The Model · Visual
+        </div>
+        <h2 class="h1">One signal above the waterline.<br />Eight below.</h2>
+        <p class="body-l">Interest is the visible part of major fit. The rest of the iceberg is what actually decides whether a student stays — and most quizzes never look down there.</p>
+      </div>
+
+      <div class="iceberg-wrap">
+        <div class="iceberg-frame" id="iceberg-mount" role="img" aria-label="Animated iceberg showing interest above the waterline and eight deeper traits below."></div>
+
+        <aside class="iceberg-side">
+          <div class="card">
+            <div class="card__label"><span class="pip"></span>Above the waterline</div>
+            <h4 class="h3" style="margin-bottom: 8px;">Interest</h4>
+            <p class="body" style="margin: 0;">Subject attraction. The only thing surface-level quizzes see — and a weak predictor of persistence on its own.</p>
+          </div>
+
+          <div class="card card--hot" id="iceberg-discover">
+            <div class="card__label">
+              <span class="pip purple"></span>
+              <span>Below the waterline · 8 signals</span>
+              <span style="margin-left: auto; font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-3); letter-spacing: 0.1em;">
+                <span id="iceberg-count">0</span> / 8 revealed
+              </span>
+            </div>
+
+            <div class="legend">
+              <div class="legend__item legend__item--locked" data-key="workload-fit"><span class="pip" style="background: var(--blue);"></span><span class="legend__name">Workload fit</span></div>
+              <div class="legend__item legend__item--locked" data-key="stress-tolerance"><span class="pip" style="background: var(--purple);"></span><span class="legend__name">Stress tolerance</span></div>
+              <div class="legend__item legend__item--locked" data-key="motivation-quality"><span class="pip" style="background: var(--purple);"></span><span class="legend__name">Motivation quality</span></div>
+              <div class="legend__item legend__item--locked" data-key="behavioral-engagement"><span class="pip" style="background: var(--blue-bright);"></span><span class="legend__name">Behavioral engagement</span></div>
+              <div class="legend__item legend__item--locked" data-key="belonging"><span class="pip" style="background: var(--pink);"></span><span class="legend__name">Belonging</span></div>
+              <div class="legend__item legend__item--locked" data-key="identity-fit"><span class="pip" style="background: var(--pink);"></span><span class="legend__name">Identity fit</span></div>
+              <div class="legend__item legend__item--locked" data-key="resilience"><span class="pip" style="background: var(--green);"></span><span class="legend__name">Resilience</span></div>
+              <div class="legend__item legend__item--locked" data-key="switch-risk"><span class="pip" style="background: var(--yellow);"></span><span class="legend__name">Switch risk</span></div>
+            </div>
+
+            <button type="button" id="iceberg-reveal-all" class="iceberg-reveal-all">
+              <span>Reveal all eight</span>
+              <span class="arrow">→</span>
+            </button>
+          </div>
+
+          <div class="card" style="display: flex; align-items: center; gap: 16px;">
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); letter-spacing: 0.12em; text-transform: uppercase; flex: 0 0 auto;">Try it</div>
+            <p class="body" style="margin: 0; font-size: 13.5px;">Tap each <strong style="color: var(--ink);">below-water dot</strong> in the animation to reveal what it stands for. The labels stay locked until you click them.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ 05 · CONSTRUCTS ════════════════════ -->
+  <section class="section section--dark" id="constructs">
+    <div class="wrap">
+      <div class="section__head">
+        <div class="section__meta">
+          <span class="num">05</span>
+          <span class="dot" style="background: var(--pink); box-shadow: 0 0 12px var(--pink);"></span>
+          The Instrument
+        </div>
+        <h2 class="h1">Eleven constructs. One question:<br />can you actually thrive here?</h2>
+        <p class="body-l">The Fit Beyond Interest survey measures eleven dimensions of person–major fit, drawn from established psychology and education research and adapted for undergraduate students. Each construct uses validated Likert items from the v2.1 instrument.</p>
+      </div>
+
+      <div class="constructs">
+        <article class="construct c-interest">
+          <span class="construct__edge"></span>
+          <div class="construct__head"><span class="construct__num">01 / Interest</span><span class="badge badge--blue">Surface</span></div>
+          <h3 class="construct__title">Interest in the subject</h3>
+          <p class="construct__body">Whether the subject itself genuinely pulls you in — what you found stimulating before college and what you still find engaging now.</p>
+          <div class="construct__foot"><span class="construct__items">6 items</span><span class="construct__scale">Agree · 1–5</span></div>
+        </article>
+
+        <article class="construct c-environment">
+          <span class="construct__edge"></span>
+          <div class="construct__head"><span class="construct__num">02 / Environment</span><span class="badge badge--purple">Context</span></div>
+          <h3 class="construct__title">Environment fit</h3>
+          <p class="construct__body">Whether your major's culture rewards how you naturally think — what's valued, what's rewarded, and whether your strengths land.</p>
+          <div class="construct__foot"><span class="construct__items">5 items</span><span class="construct__scale">Agree · 1–5</span></div>
+        </article>
+
+        <article class="construct c-behavior">
+          <span class="construct__edge"></span>
+          <div class="construct__head"><span class="construct__num">03 / Behavior</span><span class="badge badge--blue">Action</span></div>
+          <h3 class="construct__title">Behavioral engagement</h3>
+          <p class="construct__body">How often you actually engage with the field outside of class — reading, building, talking about it, going deeper voluntarily.</p>
+          <div class="construct__foot"><span class="construct__items">7 items</span><span class="construct__scale">Frequency · 1–5</span></div>
+        </article>
+
+        <article class="construct c-motivation">
+          <span class="construct__edge"></span>
+          <div class="construct__head"><span class="construct__num">04 / Motivation</span><span class="badge badge--purple">Drive</span></div>
+          <h3 class="construct__title">Motivation quality</h3>
+          <p class="construct__body">What's actually driving you — genuine curiosity, or external pressure and habit. Quality of motivation predicts long-term persistence.</p>
+          <div class="construct__foot"><span class="construct__items">3 items</span><span class="construct__scale">Agree · 1–5</span></div>
+        </article>
+
+        <article class="construct c-burnout">
+          <span class="construct__edge"></span>
+          <div class="construct__head"><span class="construct__num">05 / Burnout</span><span class="badge badge--red">Risk</span></div>
+          <h3 class="construct__title">Burnout exhaustion</h3>
+          <p class="construct__body">How drained the workload leaves you over a semester — emotional exhaustion, stress impact on performance, and questioning whether to continue.</p>
+          <div class="construct__foot"><span class="construct__items">3 items</span><span class="construct__scale">Agree · 1–5</span></div>
+        </article>
+
+        <article class="construct c-resilience">
+          <span class="construct__edge"></span>
+          <div class="construct__head"><span class="construct__num">06 / Resilience</span><span class="badge badge--green">Buffer</span></div>
+          <h3 class="construct__title">Resilience</h3>
+          <p class="construct__body">Whether you stay motivated and engaged when work gets hard — and whether you can hold a healthy balance through demanding stretches.</p>
+          <div class="construct__foot"><span class="construct__items">3 items</span><span class="construct__scale">Agree · 1–5</span></div>
+        </article>
+
+        <article class="construct c-satisfaction">
+          <span class="construct__edge"></span>
+          <div class="construct__head"><span class="construct__num">07 / Satisfaction</span><span class="badge badge--pink">Affect</span></div>
+          <h3 class="construct__title">Major satisfaction</h3>
+          <p class="construct__body">Your emotional read on the day-to-day experience — whether coursework feels rewarding and whether you'd choose it again today.</p>
+          <div class="construct__foot"><span class="construct__items">3 items</span><span class="construct__scale">Agree · 1–5</span></div>
+        </article>
+
+        <article class="construct c-persistence">
+          <span class="construct__edge"></span>
+          <div class="construct__head"><span class="construct__num">08 / Persistence</span><span class="badge badge--yellow">Outcome</span></div>
+          <h3 class="construct__title">Persistence &amp; switch risk</h3>
+          <p class="construct__body">Whether you'd still choose this major today, and how often stress or dissatisfaction has you reconsidering. The primary outcome the model is trying to predict.</p>
+          <div class="construct__foot"><span class="construct__items">2 items</span><span class="construct__scale">Mixed · 1–5</span></div>
+        </article>
+
+        <article class="construct c-belonging">
+          <span class="construct__edge"></span>
+          <div class="construct__head"><span class="construct__num">09 / Belonging</span><span class="badge badge--pink">Social</span></div>
+          <h3 class="construct__title">Belonging</h3>
+          <p class="construct__body">Feeling at home among other students in the field — one of the strongest single predictors of staying in any major.</p>
+          <div class="construct__foot"><span class="construct__items">1 item</span><span class="construct__scale">Agree · 1–5</span></div>
+        </article>
+
+        <article class="construct c-advising">
+          <span class="construct__edge"></span>
+          <div class="construct__head"><span class="construct__num">10 / Advising</span><span class="badge badge--blue">Support</span></div>
+          <h3 class="construct__title">Academic advising</h3>
+          <p class="construct__body">How much real guidance you've gotten from advisors when making major-related decisions. Optional — with a "haven't met yet" branch.</p>
+          <div class="construct__foot"><span class="construct__items">1 item</span><span class="construct__scale">Agree · 1–5 + N/A</span></div>
+        </article>
+
+        <article class="construct c-globalfit">
+          <span class="construct__edge"></span>
+          <div class="construct__head"><span class="construct__num">11 / Global Fit</span><span class="badge badge--green">Criterion</span></div>
+          <h3 class="construct__title">Global fit rating</h3>
+          <p class="construct__body">A single overall rating of how well your major fits your interests, strengths, and long-term goals. The criterion variable for validating the deeper model.</p>
+          <div class="construct__foot"><span class="construct__items">1 item</span><span class="construct__scale">Fit · 1–5</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ 06 · PILOT PLAN ════════════════════ -->
+  <section class="section" id="pilot">
+    <div class="wrap">
+      <div class="section__head">
+        <div class="section__meta">
+          <span class="num">06</span>
+          <span class="dot" style="background: var(--green); box-shadow: 0 0 12px var(--green);"></span>
+          Where the study is
+        </div>
+        <h2 class="h1">A small, careful pilot.<br />Then a real test.</h2>
+        <p class="body-l">The instrument is in its second cleaned version after a 5-person cognitive walkthrough. Next: a broader undergraduate sample, then a head-to-head between the interest-only model and the deeper model.</p>
+      </div>
+
+      <ol class="timeline" aria-label="Pilot study timeline">
+        <li class="milestone milestone--done">
+          <span class="milestone__dot"></span>
+          <span class="milestone__tag">Done · 2025</span>
+          <span class="milestone__title">Draft v1</span>
+          <span class="milestone__desc">First instrument built from a literature review of interest, fit, burnout, and persistence research.</span>
+        </li>
+
+        <li class="milestone milestone--done">
+          <span class="milestone__dot"></span>
+          <span class="milestone__tag">Done · 2025</span>
+          <span class="milestone__title">Cleaned v2.1</span>
+          <span class="milestone__desc">Items revised. Burnout separated from resilience. Interest history reframed. Three attention checks added.</span>
+        </li>
+
+        <li class="milestone milestone--now">
+          <span class="milestone__dot"></span>
+          <span class="milestone__tag">In progress · Now</span>
+          <span class="milestone__title">5-person cognitive pilot</span>
+          <span class="milestone__desc">Five undergraduates walk through the form aloud. We catch unclear, repetitive, or hard-to-answer items.</span>
+        </li>
+
+        <li class="milestone milestone--future">
+          <span class="milestone__dot"></span>
+          <span class="milestone__tag">Next</span>
+          <span class="milestone__title">Revise items</span>
+          <span class="milestone__desc">Items flagged in cognitive interviews get rewritten or dropped. Pilot-only debrief questions removed.</span>
+        </li>
+
+        <li class="milestone milestone--future">
+          <span class="milestone__dot"></span>
+          <span class="milestone__tag">Then</span>
+          <span class="milestone__title">Larger collection</span>
+          <span class="milestone__desc">Open the cleaned instrument to a broader undergraduate sample for statistical analysis.</span>
+        </li>
+
+        <li class="milestone milestone--future">
+          <span class="milestone__dot"></span>
+          <span class="milestone__tag">Final</span>
+          <span class="milestone__title">Compare models</span>
+          <span class="milestone__desc">Test whether the deeper, multi-construct model predicts persistence better than interest alone.</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ════════════════════ 07 · PREDICTION MODELS ════════════════════ -->
+  <section class="section section--dark" id="models">
+    <div class="wrap">
+      <div class="section__head">
+        <div class="section__meta">
+          <span class="num">07</span>
+          <span class="dot" style="background: var(--blue-bright); box-shadow: 0 0 12px var(--blue-bright);"></span>
+          Why It Matters
+        </div>
+        <h2 class="h1">Two ways to predict<br />whether a student stays.</h2>
+        <p class="body-l">The whole point of the pilot is to set up a fair test: does adding behavioral, environmental, and psychological signals actually beat using interest alone?</p>
+      </div>
+
+      <div class="models">
+        <!-- MODEL 1 -->
+        <article class="model">
+          <div class="model__name">Model 1 · Baseline</div>
+          <h3 class="model__title">Interest only</h3>
+
+          <div class="model__diagram">
+            <span class="model__node input">Interest</span>
+            <span class="model__arrow">→</span>
+            <span class="model__node output">Persistence?</span>
+          </div>
+
+          <ul class="model__bullets">
+            <li>One signal in</li>
+            <li>Mirrors what most online major quizzes do today</li>
+            <li>Easy to compute, easy to explain</li>
+          </ul>
+
+          <p class="model__caveat">Predicts only the surface. Misses the students who like the subject but can't sustain the environment.</p>
+        </article>
+
+        <!-- MODEL 2 -->
+        <article class="model model--two">
+          <div class="model__name">Model 2 · Deeper fit</div>
+          <h3 class="model__title">Interest + psychology + behavior + environment</h3>
+
+          <div class="model__diagram">
+            <span class="model__node input">Interest</span>
+            <span class="model__node input purple">Env. fit</span>
+            <span class="model__node input">Engagement</span>
+            <span class="model__node input purple">Motivation</span>
+            <span class="model__node input red">Burnout</span>
+            <span class="model__node input green">Resilience</span>
+            <span class="model__node input pink">Satisfaction</span>
+            <span class="model__node input pink">Belonging</span>
+            <span class="model__arrow">→</span>
+            <span class="model__node output">Persistence + Switch risk</span>
+          </div>
+
+          <ul class="model__bullets">
+            <li>Eleven validated constructs as inputs</li>
+            <li>Same person, same outcome — much richer picture</li>
+            <li>Designed to surface the students at quiet risk of switching</li>
+            <li>Validated against a single global-fit criterion item</li>
+          </ul>
+
+          <p class="model__caveat">More complete, not magical. The model can't make a student stay — it can only tell us which signals matter and where support might land.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ 08 · FINAL CTA ════════════════════ -->
+  <section class="cta" id="final-cta">
+    <div class="cta__bg" aria-hidden="true"></div>
+    <div class="cta__inner">
+      <div class="section__meta" style="justify-content: center; margin-bottom: 16px;">
+        <span class="num">08</span>
+        <span class="dot"></span>
+        Contribute to the pilot
+      </div>
+
+      <h2>Help test a better way to understand major fit.</h2>
+      <p>The pilot survey takes about 12–15 minutes. Your responses will be used to refine the instrument before the larger study. Completely voluntary, undergraduate students only, anonymous unless you opt into a follow-up.</p>
+
+      <div class="cta__buttons">
+        <a href="#/survey" class="btn btn--primary" style="padding: 14px 22px; font-size: 15px;">
+          Take the Survey
+          <span class="arrow">→</span>
+        </a>
+        <a href="#comparison" class="btn btn--ghost">Read the model again</a>
+      </div>
+
+      <div class="cta__fineprint">
+        <span>~13 min</span>
+        <span class="sep">·</span>
+        <span>11 constructs</span>
+        <span class="sep">·</span>
+        <span>undergrads only</span>
+        <span class="sep">·</span>
+        <span>anonymous</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ FOOTER ════════════════════ -->
+  <footer class="site-footer">
+    <div class="wrap site-footer__inner">
+      <div>
+        <div class="brand" style="margin-bottom: 10px;">
+          <span class="mark"></span>
+          <span>Fit Beyond Interest</span>
+        </div>
+        <p style="margin: 0; max-width: 420px; line-height: 1.5;">A student research project on the behavioral and psychological predictors of college major fit, satisfaction, and persistence.</p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 6px; text-align: right;">
+        <span class="meta">Instrument · pilot v2.1</span>
+        <span class="meta" style="color: var(--ink-4);">Last updated · 2026</span>
+        <span class="meta" style="color: var(--ink-4);">Built for cognitive testing</span>
+      </div>
+    </div>
+  </footer>
+
+  </div><!-- /#landing-root -->
+
+  <!-- Route: show landing vs survey by hash -->
+  <script>
+    (function () {
+      const landing = document.getElementById('landing-root');
+      const surveyMount = document.getElementById('survey-mount');
+      function applyRoute() {
+        const inSurvey = (window.location.hash || '').startsWith('#/survey');
+        if (inSurvey) {
+          landing.style.display = 'none';
+          surveyMount.style.display = 'block';
+        } else {
+          landing.style.display = '';
+          surveyMount.style.display = 'none';
+        }
+      }
+      window.addEventListener('hashchange', applyRoute);
+      applyRoute();
+    })();
+  </script>
+
+  <!-- Iceberg discovery interaction -->
+  <script>
+    (function () {
+      const countEl = document.getElementById('iceberg-count');
+      const revealAllBtn = document.getElementById('iceberg-reveal-all');
+      const card = document.getElementById('iceberg-discover');
+      if (!countEl || !card) return;
+
+      const items = card.querySelectorAll('.legend__item');
+      const total = items.length;
+
+      function recount() {
+        const found = card.querySelectorAll('.legend__item:not(.legend__item--locked)').length;
+        countEl.textContent = String(found);
+        if (found === total && revealAllBtn) revealAllBtn.style.display = 'none';
+      }
+
+      window.addEventListener('iceberg:discover', (e) => {
+        const key = e.detail && e.detail.key;
+        if (!key) return;
+        const item = card.querySelector(`.legend__item[data-key="${key}"]`);
+        if (item && item.classList.contains('legend__item--locked')) {
+          item.classList.remove('legend__item--locked');
+          item.classList.add('legend__item--just-revealed');
+          setTimeout(() => item.classList.remove('legend__item--just-revealed'), 600);
+        }
+        recount();
+      });
+
+      if (revealAllBtn) {
+        revealAllBtn.addEventListener('click', () => {
+          window.dispatchEvent(new CustomEvent('iceberg:revealAll'));
+        });
+      }
+    })();
+  </script>
+
+  <!-- Scroll-reveal for cards -->
+  <script>
+    (function () {
+      const io = new IntersectionObserver((entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        }
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.construct, .milestone, .compare__col, .split__col, .model').forEach(el => {
+        el.classList.add('reveal');
+        io.observe(el);
+      });
+    })();
+  </script>
+
+  <script type="module" src="/src/main.jsx"></script>
+</body>
 </html>
