@@ -406,7 +406,7 @@ function StartScreen({ onBegin, hasInProgress, onResume, onReset }) {
   );
 }
 
-function DoneScreen({ answers, onRestart }) {
+function DoneScreen({ answers }) {
   const totalAnswered = useMemo(() => {
     let n = 0;
     for (const s of SD.sections) {
@@ -486,7 +486,7 @@ function DoneScreen({ answers, onRestart }) {
           Download responses (JSON)
           <span className="arrow">↓</span>
         </button>
-        <a href="#/" className="btn" onClick={() => setTimeout(onRestart, 50)}>
+        <a href="#/" className="btn">
           Back to the explainer
         </a>
       </div>
@@ -542,10 +542,12 @@ function SurveyApp() {
   const visible = hash.startsWith("#/survey");
 
   const initial = loadState();
+  const initialAnswerCount = Object.keys(initial?.answers || {}).length;
   const [phase, setPhase] = useState(() => {
     if (!initial) return "intro";
-    if (initial.phase === "running" && Object.keys(initial.answers || {}).length > 0) return "running";
+    if (initial.phase === "running" && initialAnswerCount > 0) return "running";
     if (initial.phase === "done") return "done";
+    if (initialAnswerCount > 0) return "start";
     return "intro";
   });
   const [sectionIdx, setSectionIdx] = useState(initial?.sectionIdx || 0);
@@ -629,12 +631,6 @@ function SurveyApp() {
     setSectionIdx(0);
     setPhase("intro");
   };
-  const restart = () => {
-    clearState();
-    setAnswers({});
-    setSectionIdx(0);
-    setPhase("intro");
-  };
   const goToStart = () => {
     setSectionIdx(0);
     setPhase("start");
@@ -648,7 +644,7 @@ function SurveyApp() {
     window.location.hash = "#/";
   };
 
-  const hasInProgress = !!(initial && initial.phase === "running" && Object.keys(initial.answers || {}).length > 0);
+  const hasInProgress = Object.keys(answers).length > 0;
 
   if (phase === "intro") {
     return (
@@ -706,7 +702,7 @@ function SurveyApp() {
             <div className="survey-progress"><i style={{ width: "100%" }} /></div>
           </div>
         </div>
-        <DoneScreen answers={answers} onRestart={restart} />
+        <DoneScreen answers={answers} />
       </div>
     );
   }
